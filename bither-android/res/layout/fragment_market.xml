@@ -35,6 +35,8 @@
                 android:divider="@color/list_cell_divider"
                 android:dividerHeight="1px"
                 android:drawSelectorOnTop="false"
+                android:cacheColorHint="@android:color/transparent"
+                android:listSelector="@android:color/transparent"
                 android:fadingEdgeLength="0dp"
                 android:scrollbars="none"/>
 

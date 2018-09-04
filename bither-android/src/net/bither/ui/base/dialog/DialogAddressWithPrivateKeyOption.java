@@ -47,11 +47,11 @@ public class DialogAddressWithPrivateKeyOption extends DialogWithActions {
         actions.add(new Action(R.string.address_option_view_on_blockchain_info, new Runnable() {
             @Override
             public void run() {
-                UIUtil.gotoBrower(activity, BitherUrl.BLOCKCHAIN_INFO_ADDRESS_URL + address
+                UIUtil.gotoBrower(activity, BitherUrl.BCHAIN_INFO_ADDRESS_URL + address
                         .getAddress());
             }
         }));
-        String defaultCountry = Locale.getDefault().getCountry();
+        /*String defaultCountry = Locale.getDefault().getCountry();
         if (Utils.compareString(defaultCountry, "CN") || Utils.compareString(defaultCountry,
                 "cn")) {
             actions.add(new Action(R.string.address_option_view_on_btc, new Runnable() {
@@ -61,7 +61,7 @@ public class DialogAddressWithPrivateKeyOption extends DialogWithActions {
                             .getAddress());
                 }
             }));
-        }
+        }*/
         actions.add(new Action(R.string.private_key_management, new Runnable() {
             @Override
             public void run() {

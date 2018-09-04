@@ -130,20 +130,13 @@ public class BitherSetting {
     public static String getMarketName(BitherjSettings.MarketType marketType) {
         String name = "";
         switch (marketType) {
-            case BITSTAMP:
+            case COINMARKETCAP:
                 name = BitherApplication.mContext
-                        .getString(R.string.market_name_bitstamp);
-                break;
-            case BITFINEX:
-                name = BitherApplication.mContext
-                        .getString(R.string.market_name_bitfinex);
-                break;
-            case COINBASE:
-                name = BitherApplication.mContext.getString(R.string.market_name_coinbase);
+                        .getString(R.string.market_name_coinmarketcap);
                 break;
             default:
                 name = BitherApplication.mContext
-                        .getString(R.string.market_name_bitstamp);
+                        .getString(R.string.market_name_coinmarketcap);
                 break;
         }
         return name;

@@ -40,6 +40,10 @@ import net.bither.fragment.Refreshable;
 import net.bither.fragment.Selectable;
 import net.bither.fragment.Unselectable;
 import net.bither.model.Market;
+import net.bither.model.MarketTicket;
+import net.bither.net.OkHttpHelper;
+import net.bither.net.RequestCallback;
+import net.bither.net.UrlManager;
 import net.bither.ui.base.MarketFragmentListItemView;
 import net.bither.ui.base.MarketListHeader;
 import net.bither.ui.base.MarketTickerChangedObserver;
@@ -49,8 +53,10 @@ import net.bither.util.MarketUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Response;
+
 public class MarketFragment extends Fragment implements Refreshable,
-        Selectable, Unselectable, OnItemClickListener {
+        Selectable, Unselectable {
     private View v;
     private List<Market> markets;
     private MarketListHeader header;
@@ -60,18 +66,16 @@ public class MarketFragment extends Fragment implements Refreshable,
 
     private SelectedThread selectedThread;
 
-    private IntentFilter broadcastIntentFilter = new IntentFilter(
-            BroadcastUtil.ACTION_MARKET);
+    private IntentFilter broadcastIntentFilter = new IntentFilter(BroadcastUtil.ACTION_MARKET);
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            header.onMarketTickerChanged();
+            //刷新频率 1分钟
+            getExchangeMarketTicker();
             int itemCount = lv.getChildCount();
-            for (int i = 0;
-                 i < itemCount;
-                 i++) {
+            for (int i = 0; i < itemCount; i++) {
                 View v = lv.getChildAt(i);
                 if (v instanceof MarketTickerChangedObserver) {
                     MarketTickerChangedObserver o = (MarketTickerChangedObserver) v;
@@ -86,18 +90,31 @@ public class MarketFragment extends Fragment implements Refreshable,
         super.onCreate(savedInstanceState);
         markets = new ArrayList<Market>(MarketUtil.getMarkets());
         mAdaper = new MarketFragmentListAdapter(getActivity(), markets);
+        getExchangeMarketTicker();
     }
+    //TODO 获取新的ticket
+    private void getExchangeMarketTicker(){
+        // 获取ticket
+        OkHttpHelper.getInstance().get(UrlManager.TICKER_CNY_URL, new RequestCallback<MarketTicket>(getActivity()) {
 
+            @Override
+            public void onSuccess(Response response, MarketTicket marketTicket) {
+                MarketUtil.setMarketTicket(marketTicket);
+
+                mAdaper.notifyDataSetChanged();
+                header.onMarketTickerChanged();
+            }
+        });
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater
-                .inflate(R.layout.fragment_market, container, false);
+        v = inflater.inflate(R.layout.fragment_market, container, false);
         header = (MarketListHeader) v.findViewById(R.id.v_header);
         lv = (ListView) v.findViewById(R.id.lv);
         ivMarketPriceAnimIcon = (ImageView) v.findViewById(R.id.iv_market_price_anim_icon);
         lv.setAdapter(mAdaper);
-        lv.setOnItemClickListener(this);
+        lv.setEnabled(false);
         return v;
     }
 
@@ -114,8 +131,7 @@ public class MarketFragment extends Fragment implements Refreshable,
                 av.onResume();
             }
         }
-        getActivity()
-                .registerReceiver(broadcastReceiver, broadcastIntentFilter);
+        getActivity().registerReceiver(broadcastReceiver, broadcastIntentFilter);
     }
 
     @Override
@@ -134,12 +150,6 @@ public class MarketFragment extends Fragment implements Refreshable,
         getActivity().unregisterReceiver(broadcastReceiver);
         super.onPause();
     }
-
-    @Override
-    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        header.setMarket(markets.get(arg2));
-    }
-
     @Override
     public void onSelected() {
         if (lv != null) {
@@ -213,6 +223,11 @@ public class MarketFragment extends Fragment implements Refreshable,
         refresh();
     }
 
+    @Override
+    public void showProgressBar() {
+
+    }
+
     public void refresh() {
         if (mAdaper != null) {
             mAdaper.notifyDataSetChanged();
@@ -221,28 +236,23 @@ public class MarketFragment extends Fragment implements Refreshable,
 
     @Override
     public void onUnselected() {
-        if(header != null) {
-            header.reset();
+        if (header != null) {
         }
     }
 
     public void notifPriceAlert(BitherjSettings.MarketType marketType) {
-        Market market = MarketUtil.getMarket(marketType);
+        final Market market = MarketUtil.getMarket(marketType);
         header.setMarket(market);
     }
 
     private class SelectedThread extends Thread {
         @Override
         public void run() {
-            for (int i = 0;
-                 i < 20;
-                 i++) {
+            for (int i = 0; i < 20; i++) {
                 if (lv != null) {
                     header.onResume();
                     int listItemCount = lv.getChildCount();
-                    for (int j = 0;
-                         j < listItemCount;
-                         j++) {
+                    for (int j = 0; j < listItemCount; j++) {
                         View v = lv.getChildAt(i);
                         if (v instanceof MarketFragmentListItemView) {
                             MarketFragmentListItemView av = (MarketFragmentListItemView) v;

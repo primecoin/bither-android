@@ -38,7 +38,7 @@
                             android:orientation="vertical"
                             android:paddingBottom="6dp"
                             android:paddingTop="10dp">
-
+                            <!--修改密码-->
                             <Button
                                 android:id="@+id/btn_edit_password"
                                 android:layout_width="match_parent"
@@ -53,35 +53,32 @@
                                 android:textSize="18sp"/>
 
                             <include layout="@layout/layout_vertical_seperator"/>
-
+                            <!--PIN码-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_pin_code"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
-
+                             <!--二维码精度-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_qr_code_quality"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
-
-                            <net.bither.ui.base.SettingSelectorView
-                                android:id="@+id/ssv_import_private_key"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
-
+                            <!--导入BIP38私钥-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_import_bip38_key"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
-
+                            <!--消息签名-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_message_signing"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
+                            <!--签名Hash   隐藏-->
                             <LinearLayout
                                 android:id="@+id/ll_sign_hash"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -125,6 +122,7 @@
                         android:id="@+id/iv_logo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:src="@drawable/setting_footer_logo"/>
@@ -134,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="3dp"
+                        android:visibility="gone"
                         android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 

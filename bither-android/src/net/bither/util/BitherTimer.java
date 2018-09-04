@@ -26,14 +26,20 @@ import net.bither.activity.hot.MarketDetailActivity;
 import net.bither.bitherj.BitherjSettings.MarketType;
 import net.bither.bitherj.api.GetExchangeTickerApi;
 import net.bither.bitherj.utils.Utils;
+import net.bither.model.MarketTicket;
 import net.bither.model.PriceAlert;
 import net.bither.model.Ticker;
+import net.bither.net.OkHttpHelper;
+import net.bither.net.RequestCallback;
+import net.bither.net.UrlManager;
 import net.bither.preference.AppSharedPreference;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.List;
+
+import okhttp3.Response;
 
 public class BitherTimer {
     private Thread thread = null;
@@ -92,7 +98,6 @@ public class BitherTimer {
             e.printStackTrace();
         }
     }
-
     private void comparePriceAlert(List<Ticker> tickerList) {
         LogUtil.d("price", "comparePriceAlert:" + tickerList.size());
         List<PriceAlert> priceAlertList = PriceAlert.getPriceAlertList();

@@ -66,11 +66,11 @@ public class DialogHDMAddressOptions extends DialogWithActions {
         acitons.add(new Action(R.string.address_option_view_on_blockchain_info, new Runnable() {
             @Override
             public void run() {
-                UIUtil.gotoBrower(activity, BitherUrl.BLOCKCHAIN_INFO_ADDRESS_URL + address
+                UIUtil.gotoBrower(activity, BitherUrl.BCHAIN_INFO_ADDRESS_URL + address
                         .getAddress());
             }
         }));
-        String defaultCountry = Locale.getDefault().getCountry();
+       /* String defaultCountry = Locale.getDefault().getCountry();
         if (Utils.compareString(defaultCountry, "CN") || Utils.compareString(defaultCountry,
                 "cn")) {
             acitons.add(new Action(R.string.address_option_view_on_btc, new Runnable() {
@@ -80,7 +80,7 @@ public class DialogHDMAddressOptions extends DialogWithActions {
                             .getAddress());
                 }
             }));
-        }
+        }*/
         Action moveToTrashAction = new Action(R.string.trash_private_key, new Runnable() {
             @Override
             public void run() {

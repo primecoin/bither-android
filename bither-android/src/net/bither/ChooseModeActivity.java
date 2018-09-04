@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -74,6 +75,7 @@ public class ChooseModeActivity extends BaseActivity {
     private static final int AnimHideDuration = 600;
     private static final int AnimGrowDuration = 500;
     private static final int ColdCheckInterval = 700;
+    private static final int START_MESSAGE=0x11;
 
     private View vColdBg;
     private View vWarmBg;
@@ -100,18 +102,20 @@ public class ChooseModeActivity extends BaseActivity {
             AppSharedPreference.getInstance().setAppMode(BitherjSettings.AppMode.HOT);
         }
         if (URandom.urandomFile.exists()) {
-            if (UpgradeUtil.needUpgrade()) {
+           /* if (UpgradeUtil.needUpgrade()) {
                 upgrade();
-            } else {
+            } else {*/
                 setVersionCode();
-                if (isShowAd()) {
+                initActivity();
+                /*去除广告功能*/
+               /* if (isShowAd()) {
                     Intent intent = new Intent(ChooseModeActivity.this, AdActivity.class);
                     startActivityForResult(intent, 1);
                 } else {
                     initActivity();
                     downloadAd();
-                }
-            }
+                }*/
+//            }
         } else {
             DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(ChooseModeActivity.this, getString(R.string.urandom_not_exists), new Runnable() {
                 @Override
@@ -171,6 +175,7 @@ public class ChooseModeActivity extends BaseActivity {
         }
     }
 
+    /*应用更新*/
     private void upgrade() {
         new Thread(new Runnable() {
             @Override
@@ -209,6 +214,11 @@ public class ChooseModeActivity extends BaseActivity {
                         dialogUpgrade.dismiss();
                     }
                     break;
+                case START_MESSAGE:
+                    BitherjSettings.AppMode appMode= (BitherjSettings.AppMode) msg.obj;
+                    gotoActivity(appMode);
+                    finish();
+                    break;
                 default:
                     break;
             }
@@ -242,8 +252,11 @@ public class ChooseModeActivity extends BaseActivity {
                     dowloadSpvBlock();
                     configureWarmWait();
                 } else {
-                    gotoActivity(appMode);
-                    finish();
+                    findViewById(R.id.ll_start).setVisibility(View.VISIBLE);
+                    Message message=new Message();
+                    message.what=START_MESSAGE;
+                    message.obj=appMode;
+                    upgradeHandler.sendMessageDelayed(message,2000);
                     return;
                 }
             }

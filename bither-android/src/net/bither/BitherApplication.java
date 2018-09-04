@@ -206,7 +206,7 @@ public class BitherApplication extends Application {
         int updateCode = appSharedPreference.getUpdateCode();
 
         if (updateCode == -1){
-            appSharedPreference.setTransactionFeeMode(BitherjSettings.TransactionFeeMode.TwentyX);
+            appSharedPreference.setTransactionFeeMode(BitherjSettings.TransactionFeeMode.Normal);
 
             appSharedPreference.setUpdateCode(FEE_UPDATE_CODE);
         }

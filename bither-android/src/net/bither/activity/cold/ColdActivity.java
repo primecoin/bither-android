@@ -32,6 +32,7 @@ import net.bither.BitherApplication;
 import net.bither.BitherSetting;
 import net.bither.NotificationAndroidImpl;
 import net.bither.R;
+import net.bither.activity.hot.AddHotAddressPrivateKeyActivity;
 import net.bither.adapter.cold.ColdFragmentPagerAdapter;
 import net.bither.bitherj.core.Address;
 import net.bither.bitherj.core.AddressManager;
@@ -184,7 +185,14 @@ public class ColdActivity extends BaseFragmentActivity {
                             R.string.private_key_count_limit);
                     return;
                 }
-                Intent intent = new Intent(ColdActivity.this, AddColdAddressActivity.class);
+//                Intent intent = new Intent(ColdActivity.this, AddColdAddressActivity.class);
+                if (AddressManager.isPrivateLimit()) {
+                    DropdownMessage.showDropdownMessage(ColdActivity.this, R.string
+                            .private_key_count_limit);
+                    return;
+                }
+                Intent intent = new Intent(ColdActivity.this, AddHotAddressPrivateKeyActivity.class);
+
                 startActivityForResult(intent, BitherSetting.INTENT_REF.SCAN_REQUEST_CODE);
                 overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
             }
@@ -528,5 +536,20 @@ public class ColdActivity extends BaseFragmentActivity {
                 checkBackup();
             }
         }
+    }
+
+    private ShowImportSuccessListener showImportSuccessListener;
+
+    public void setShowImportSuccessListener(ShowImportSuccessListener showImportSuccessListener) {
+        this.showImportSuccessListener = showImportSuccessListener;
+    }
+
+    public interface ShowImportSuccessListener{
+
+        void showImportSuccess();
+    }
+    public void showImportSuccess(){
+        if (showImportSuccessListener!=null)
+            showImportSuccessListener.showImportSuccess();
     }
 }

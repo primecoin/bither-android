@@ -70,7 +70,7 @@ public class MarketDepthDetailView extends LinearLayout {
         this.tvVolume = (TextView) findViewById(R.id.tv_detail_volume);
         this.ivSymbolBtc = (ImageView) findViewById(R.id.iv_symbol_btc);
         this.btcBit = UnitUtilWrapper.getBtcSlimSymbol(this.tvVolume,
-                UnitUtilWrapper.BitcoinUnitWrapper.BTC);
+                UnitUtilWrapper.BitcoinUnitWrapper.XPM);
         this.tvSymbol = (TextView) findViewById(R.id.tv_symbol);
         //TODO Used to calculate the widht, set the default value
         this.tvVolume.setText("10000.00");

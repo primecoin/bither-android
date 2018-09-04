@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import net.bither.NotificationAndroidImpl;
 import net.bither.R;
+import net.bither.activity.hot.NetworkMonitorActivity;
 import net.bither.bitherj.core.Peer;
 import net.bither.bitherj.core.PeerManager;
 import net.bither.bitherj.utils.Utils;
@@ -164,6 +165,9 @@ public final class PeerListFragment extends ListFragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if (peerCacheList != null && peerCacheList.size() == 0) {
+                    ((NetworkMonitorActivity) getActivity()).refreshPeer();
+                }
                 adapter.clear();
                 refreshPeer();
 

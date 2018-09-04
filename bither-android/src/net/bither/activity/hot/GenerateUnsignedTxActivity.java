@@ -66,6 +66,7 @@ import net.bither.ui.base.keyboard.EntryKeyboardView;
 import net.bither.ui.base.keyboard.amount.AmountEntryKeyboardView;
 import net.bither.ui.base.listener.IBackClickListener;
 import net.bither.util.BroadcastUtil;
+import net.bither.util.ExchangeUtil;
 import net.bither.util.InputParser.StringInputParser;
 import net.bither.util.MarketUtil;
 import net.bither.util.ThreadUtil;
@@ -525,11 +526,12 @@ public class GenerateUnsignedTxActivity extends SwipeRightActivity implements En
     }
 
     private double getExchangeRate() {
-        Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
+        // 获取汇率
+       /* Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
         if (ticker != null) {
             return ticker.getDefaultExchangePrice();
-        }
-        return 0;
+        }*/
+        return  ExchangeUtil.getCurrentRate();
     }
 
     private BroadcastReceiver marketBroadcastReceiver = new BroadcastReceiver() {

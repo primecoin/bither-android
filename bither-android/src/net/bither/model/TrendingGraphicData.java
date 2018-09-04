@@ -86,7 +86,7 @@ public class TrendingGraphicData {
 			throws JSONException {
 		double high = 0;
 		double low = Double.MAX_VALUE;
-		double rate = ExchangeUtil.getRate();
+		double rate = ExchangeUtil.getCurrentRate();
 		double[] prices = new double[jsonArray.length()];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			double price = jsonArray.getDouble(i) / 100 * rate;
@@ -120,7 +120,36 @@ public class TrendingGraphicData {
 		return trendingGraphicData;
 
 	}
+	public static TrendingGraphicData formatNew(JSONArray jsonArray, int type) throws JSONException {
+		double high = 0;
+		double low = Double.MAX_VALUE;
+		double rate = ExchangeUtil.getCurrentRate();
+		double k = 0.000001;
+		if (type == 2) {
+			k = 1000;
+		} else if (type == 3) {
+			k = 10;
+		}
+		double[] prices = new double[TrendingGraphicUtil.TRENDING_GRAPIC_COUNT];
+		for (int i = jsonArray.length() - TrendingGraphicUtil.TRENDING_GRAPIC_COUNT; i < jsonArray.length(); i++) {
+			double price;
+			if (type == 1) {
+				price = ((int) ((JSONArray) jsonArray.get(i)).get(1) * k) * rate;
+			} else {
+				price = ((double) ((JSONArray) jsonArray.get(i)).get(1) * k) * rate;
+			}
+			prices[i - jsonArray.length() + TrendingGraphicUtil.TRENDING_GRAPIC_COUNT] = price;
+			if (high < price) {
+				high = price;
+			}
+			if (low > price) {
+				low = price;
+			}
+		}
+		TrendingGraphicData trendingGraphicData = new TrendingGraphicData(high, low, prices);
+		return trendingGraphicData;
 
+	}
 	public static TrendingGraphicData getEmptyData() {
 		if (EmptyData == null) {
 			double[] prices = new double[TrendingGraphicUtil.TRENDING_GRAPIC_COUNT];

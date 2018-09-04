@@ -22,10 +22,12 @@ import android.os.Looper;
 import net.bither.bitherj.BitherjSettings;
 import net.bither.bitherj.BitherjSettings.MarketType;
 import net.bither.bitherj.api.GetExchangeTrendApi;
+import net.bither.bitherj.api.GetExchangeTrendApiNew;
 import net.bither.model.TrendingGraphicData;
 import net.bither.runnable.BaseRunnable;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class TrendingGraphicUtil {
 
@@ -55,12 +57,20 @@ public class TrendingGraphicUtil {
             public void run() {
 
                 try {
-                    GetExchangeTrendApi getExchangeTrendApi = new GetExchangeTrendApi(
-                            marketType);
+//                    GetExchangeTrendApi getExchangeTrendApi = new GetExchangeTrendApi(marketType);
+                    GetExchangeTrendApiNew getExchangeTrendApi = new GetExchangeTrendApiNew();
+
                     getExchangeTrendApi.handleHttpGet();
-                    JSONArray jsonArray = new JSONArray(getExchangeTrendApi
-                            .getResult());
-                    final TrendingGraphicData trendingGraphicData = TrendingGraphicData.format(jsonArray);
+                    JSONObject jsonObject = new JSONObject(getExchangeTrendApi.getResult());
+                    String name = "market_cap_by_available_supply";
+                    if (BitherjSettings.getMarketValue(marketType) == 2) {
+                        name = "price_btc";
+                    } else if (BitherjSettings.getMarketValue(marketType) == 3) {
+                        name = "price_usd";
+                    }
+                    JSONArray jsonArray = jsonObject.getJSONArray(name);
+
+                    final TrendingGraphicData trendingGraphicData = TrendingGraphicData.formatNew(jsonArray, BitherjSettings.getMarketValue(marketType));
                     trendingDatas[BitherjSettings.getMarketValue(marketType)] = trendingGraphicData;
                     if (trendingGraphicListener != null) {
                         new Handler(Looper.getMainLooper())

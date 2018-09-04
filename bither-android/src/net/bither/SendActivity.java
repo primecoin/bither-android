@@ -41,6 +41,7 @@ import net.bither.activity.hot.SelectAddressToSendActivity;
 import net.bither.bitherj.BitherjSettings;
 import net.bither.bitherj.core.Address;
 import net.bither.bitherj.core.AddressManager;
+import net.bither.bitherj.core.Coin;
 import net.bither.bitherj.core.Tx;
 import net.bither.bitherj.crypto.SecureCharSequence;
 import net.bither.bitherj.utils.Utils;
@@ -65,12 +66,16 @@ import net.bither.ui.base.keyboard.amount.AmountEntryKeyboardView;
 import net.bither.ui.base.keyboard.password.PasswordEntryKeyboardView;
 import net.bither.ui.base.listener.IBackClickListener;
 import net.bither.util.BroadcastUtil;
+import net.bither.util.ExchangeUtil;
 import net.bither.util.InputParser.StringInputParser;
 import net.bither.util.MarketUtil;
 import net.bither.util.UnitUtilWrapper;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
-
+/**
+ *发送交易界面
+ */
 public class SendActivity extends SwipeRightActivity implements EntryKeyboardView
         .EntryKeyboardViewListener, CommitTransactionThread.CommitTransactionListener,
         DialogSendOption.DialogSendOptionListener {
@@ -313,6 +318,11 @@ public class SendActivity extends SwipeRightActivity implements EntryKeyboardVie
                             R.string.select_change_address_change_to_same_warn);
                     return;
                 }
+                if (Utils.compareString(address,this.address.getAddress())){
+                    DropdownMessage.showDropdownMessage(SendActivity.this,
+                            R.string.error_play_tip);
+                    return;
+                }
                 try {
                     CompleteTransactionRunnable completeRunnable = new
                             CompleteTransactionRunnable(addressPosition,
@@ -492,11 +502,12 @@ public class SendActivity extends SwipeRightActivity implements EntryKeyboardVie
     }
 
     private double getExchangeRate() {
-        Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
+        // 获取汇率
+       /* Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
         if (ticker != null) {
             return ticker.getDefaultExchangePrice();
-        }
-        return 0;
+        }*/
+        return  ExchangeUtil.getCurrentRate();
     }
 
     private BroadcastReceiver marketBroadcastReceiver = new BroadcastReceiver() {

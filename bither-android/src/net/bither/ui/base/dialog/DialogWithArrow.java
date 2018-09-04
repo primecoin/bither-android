@@ -63,8 +63,7 @@ public class DialogWithArrow extends Dialog {
 		ivArrowTop = (ImageView) findViewById(R.id.iv_arrow_top);
 		lpArrowTop = (LinearLayout.LayoutParams) ivArrowTop.getLayoutParams();
 		ivArrowBottom = (ImageView) findViewById(R.id.iv_arrow_bottom);
-		lpArrowBottom = (LinearLayout.LayoutParams) ivArrowBottom
-				.getLayoutParams();
+		lpArrowBottom = (LinearLayout.LayoutParams) ivArrowBottom.getLayoutParams();
 		this.inflater = LayoutInflater.from(getContext());
 	}
 

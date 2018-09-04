@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">比太</string>
+    <string name="app_name">Primecoin</string>
     <string name="localization.language.code">zh_CN</string>
     <string name="market_trading_amount">交易量</string>
     <string name="market_price_high">最高</string>
@@ -9,9 +9,9 @@
     <string name="market_price_open">开盘</string>
     <string name="market_price_close">收盘</string>
     <string name="market_name_huobi">火币网</string>
-    <string name="market_name_chbtc">中国比特币</string>
-    <string name="market_name_btcchina">比特币中国</string>
-    <string name="market_name_btctrade">比特币交易网</string>
+    <string name="market_name_chbtc">中国质数币</string>
+    <string name="market_name_btcchina">质数币中国</string>
+    <string name="market_name_btctrade">质数币交易网</string>
     <string name="activity_name_address_detail">详情</string>
     <string name="activity_name_address_sign_tx">签名交易</string>
     <string name="activity_name_qr_code">二维码</string>
@@ -23,7 +23,7 @@
     <string name="operate">设置</string>
     <string name="address_option_delete">停止监控</string>
     <string name="address_option_remonitor">重新监控</string>
-    <string name="address_option_view_on_blockchain_info">在Blockchain.info上查看</string>
+    <string name="address_option_view_on_blockchain_info">在Bchain.info上查看</string>
     <string name="address_option_view_on_btc">在btc.com上查看</string>
     <string name="address_delete_confirmation">确认停止监控这个地址?</string>
     <string name="address_remonitor_confirmation">确认重新监控这个地址?</string>
@@ -83,12 +83,12 @@
     <string name="add_address_tab_private_key">私钥</string>
     <string name="add_address_scan">二维码</string>
     <string name="add_address_delete">删除</string>
-    <string name="add_address_watch_only_hint">比特币地址</string>
+    <string name="add_address_watch_only_hint">Primecoin地址</string>
     <string name="add_address_already_watched">这个地址已经被监控了</string>
     <string name="addresses_already_monitored">这个冷钱包已经被监控了</string>
     <string name="add_address_generate_address_with_private_key">生成</string>
     <string name="add_address_generate_address_password_label">请输入钱包密码</string>
-    <string name="add_address_generate_address_password_lengh_note">长度: 6&#8211;43</string>
+    <string name="add_address_generate_address_password_lengh_note">长度: 6&#8211;43:数字/字母/符号组合</string>
     <string name="add_address_generate_address_password_set_label">请设置钱包密码</string>
     <string name="add_address_generate_address_password_hint">密码</string>
     <string name="add_address_generate_address_password_confirm_hint">确认密码</string>
@@ -103,9 +103,9 @@
     <string name="send_progress_dialog_message">发送中</string>
     <string name="send_success">发送成功</string>
     <string name="send_failed">发送失败</string>
-    <string name="send_failed_missing_btc">发送失败. 可用余额中缺少 %s BTC.</string>
+    <string name="send_failed_missing_btc">发送失败. 可用余额中缺少 %s XPM.</string>
     <string name="send_failed_dust_out_put">发送失败. 这样小额的交易会被忽略.</string>
-    <string name="send_failed_pendding">发送失败. %s BTC 正在等待确认.\n请等待一个新的确认后再交易.</string>
+    <string name="send_failed_pendding">发送失败. %s XPM 正在等待确认.\n请等待一个新的确认后再交易.</string>
     <string name="send_failed_max_tx_size">发送失败. 交易大小过大.\n请减少发送金额.</string>
     <string name="send_coins_fragment_sending_address_label">从</string>
     <string name="send_coins_fragment_receiving_address_label">发送给</string>
@@ -190,7 +190,7 @@
     <string name="export_address_success">地址已导出到 :</string>
     <string name="setting_name_import_private_key">导入私钥</string>
     <string name="setting_name_import_bip38_key">导入BIP38私钥</string>
-    <string name="import_private_key_qr_code">来自比太私钥二维码</string>
+    <string name="import_private_key_qr_code">来自质数币私钥二维码</string>
     <string name="import_private_key_text">来自私钥明文</string>
     <string name="import_hdm_cold_seed_qr_code">来自HDM冷种子二维码</string>
     <string name="import_hdm_cold_seed_phrase">来自HDM密语(冷)</string>
@@ -233,8 +233,8 @@
     <string name="synchronous_interval_only_open_app">仅在打开应用时</string>
     <!-- Input parser -->
     <string name="input_parser_cannot_classify">无法分类输入:\n%s</string>
-    <string name="input_parser_invalid_bitcoin_uri">比特币URI 无效:\n%s</string>
-    <string name="input_parser_invalid_address">取得无效比特币地址!\n(是否Mainnet/Testnet 混用?)</string>
+    <string name="input_parser_invalid_bitcoin_uri">质数币URI 无效:\n%s</string>
+    <string name="input_parser_invalid_address">取得无效质数币地址!\n(是否Mainnet/Testnet 混用?)</string>
     <string name="input_parser_invalid_transaction">无效交易:\n%s</string>
 
     <!-- feed -->
@@ -278,7 +278,7 @@
     <string name="private_key_is_empty">你还没有添加私钥, 请先添加私钥</string>
     <string name="next_page">下一张</string>
     <string name="can_not_find_private_key">没有找到对应的私钥</string>
-    <string name="scan_watch_only_address_error">二维码不符合比特币地址格式</string>
+    <string name="scan_watch_only_address_error">二维码不符合质数币地址格式</string>
     <string name="sign_transaction">签名交易</string>
     <string name="scan_qr_transport_init_label">请扫描比太提供的第1张二维码</string>
     <string name="scan_qr_transport_page_label">请扫描第%1$d张二维码, 共%2$d张</string>
@@ -331,7 +331,7 @@
 
     <!-- donate -->
     <string name="select_address_to_donate">请选择用来捐赠的地址</string>
-    <string name="donate_no_address">您没有可以用来捐赠的比特币</string>
+    <string name="donate_no_address">您没有可以用来捐赠的质数币</string>
     <string name="donate_receiving_address_label">捐赠给开发者</string>
     <string name="donate_sending_verb">捐赠</string>
     <string name="donate_unsigned_transaction_verb">捐赠</string>
@@ -371,9 +371,9 @@
     <string name="activity_name_advance">高级选项</string>
 
     <!-- first run dialog -->
-    <string name="first_run_dialog_title">为了保护您的比特币:</string>
-    <string name="first_run_dialog_line_1">请不要卸载比太钱包</string>
-    <string name="first_run_dialog_line_2">请不要清除比太数据</string>
+    <string name="first_run_dialog_title">为了保护您的质数币:</string>
+    <string name="first_run_dialog_line_1">请不要卸载质数币钱包</string>
+    <string name="first_run_dialog_line_2">请不要清除质数币数据</string>
     <string name="first_run_dialog_line_3">请牢记您的密码</string>
 
     <!-- upgrade -->
@@ -415,7 +415,7 @@
 
     <!-- trash -->
     <string name="trash_private_key">移入回收站</string>
-    <string name="trash_with_money_warn">这个地址内还有比特币.\n您不能把它移入回收站.</string>
+    <string name="trash_with_money_warn">这个地址内还有质数币.\n您不能把它移入回收站.</string>
     <string name="trashing_private_key">正在移入回收站</string>
     <string name="trash_can">回收站</string>
     <string name="trash_can_empty">回收站空</string>
@@ -547,7 +547,7 @@
     <string name="hdm_keychain_recovery_setting_name">HDM 帐号恢复</string>
     <string name="hdm_keychain_recovery_warn">HDM 账号正在恢复中</string>
     <string name="hdm_keychain_recovery_no_addresses">没有需要恢复的 HDM 地址</string>
-    <string name="hdm_keychain_recovery_message">请尽快转移走 HDM 恢复帐号中的比特币</string>
+    <string name="hdm_keychain_recovery_message">请尽快转移走 HDM 恢复帐号中的质数币</string>
     <string name="address_group_hdm_recovery">HDM 恢复</string>
     <string name="activity_name_hdm_import_word_list">导入 HDM 密语</string>
     <string name="hdm_import_word_list_input_hint">下一单词</string>
@@ -585,6 +585,7 @@
     <!-- bither team address -->
     <string name="bither_team_address">开发者地址</string>
     <string name="bither_team_address_copied">开发者地址已复制</string>
+    <string name="generate_secure_private_key">生成安全私钥</string>
 
     <!-- password strength -->
     <string name="password_strength_weak">较弱</string>
@@ -730,4 +731,7 @@
     <string name="address_cold">冷钱包地址</string>
     <string name="error_hash">Hash 格式错误</string>
     <string name="sign_hash_input_hint">待签名的 Hash</string>
+
+    <string name="error_play_tip">不能付款給自己</string>
+    <string name="error_play_small">发送失败. 这样小额(&#060;0.01)的交易会被忽略. </string>
 </resources>

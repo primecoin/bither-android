@@ -57,8 +57,7 @@ public class MarketFragmentListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		MarketFragmentListItemView view;
-		if (convertView == null
-				|| !(convertView instanceof MarketFragmentListItemView)) {
+		if (convertView == null || !(convertView instanceof MarketFragmentListItemView)) {
 			convertView = new MarketFragmentListItemView(activity);
 		}
 		view = (MarketFragmentListItemView) convertView;

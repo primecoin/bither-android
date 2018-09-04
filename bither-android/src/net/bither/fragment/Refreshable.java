@@ -19,4 +19,5 @@ package net.bither.fragment;
 public abstract interface Refreshable {
 
 	public abstract void doRefresh();
+	public abstract void showProgressBar();
 }

@@ -19,7 +19,9 @@ package net.bither.factory;
 import android.app.Activity;
 
 import net.bither.R;
+import net.bither.activity.cold.ColdActivity;
 import net.bither.activity.cold.ColdAdvanceActivity;
+import net.bither.activity.hot.HotActivity;
 import net.bither.activity.hot.HotAdvanceActivity;
 import net.bither.bitherj.core.Address;
 import net.bither.bitherj.crypto.ECKey;
@@ -131,6 +133,7 @@ public class ImportPrivateKeyAndroid extends ImportPrivateKey {
     }
 
     private void importPrivateKey(final Address address) {
+        if (address==null)return;
         new ThreadNeedService(dp, activity) {
             @Override
             public void runWithService(BlockchainService service) {
@@ -148,8 +151,14 @@ public class ImportPrivateKeyAndroid extends ImportPrivateKey {
                             if (activity instanceof HotAdvanceActivity) {
                                 ((HotAdvanceActivity) activity).showImportSuccess();
                             }
+                            if (activity instanceof HotActivity) {
+                                ((HotActivity) activity).showImportSuccess();
+                            }
                             if (activity instanceof ColdAdvanceActivity) {
                                 ((ColdAdvanceActivity) activity).showImportSuccess();
+                            }
+                            if (activity instanceof ColdActivity) {
+                                ((ColdActivity) activity).showImportSuccess();
                             }
                         }
                     });

@@ -90,6 +90,9 @@ public class AppSharedPreference {
     private SharedPreferences mPreferences;
     private SharedPreferences mObtainBccPreferences;
 
+    private static final String CNY_EXCHANGE_RATE="cny_exchange_rate";
+    private static final String USD_EXCHANGE_RATE="usd_exchange_rate";
+
     public static AppSharedPreference getInstance() {
         return mInstance;
     }
@@ -132,7 +135,7 @@ public class AppSharedPreference {
         if (ordinal < BitherjSettings.TransactionFeeMode.values().length && ordinal >= 0) {
             return BitherjSettings.TransactionFeeMode.values()[ordinal];
         }
-        return BitherjSettings.TransactionFeeMode.TenX;
+        return BitherjSettings.TransactionFeeMode.Normal;
     }
 
     public void setTransactionFeeMode(BitherjSettings.TransactionFeeMode mode) {
@@ -152,10 +155,10 @@ public class AppSharedPreference {
     }
     // TODO: get api mode
     public BitherjSettings.ApiConfig getApiConfig() {
-        int config = this.mPreferences.getInt(API_MODE, 1);
-        if (config < BitherjSettings.ApiConfig.values().length && config >= 0) {
-            return BitherjSettings.ApiConfig.values()[config];
-        }
+//        int config = this.mPreferences.getInt(API_MODE, 1);
+//        if (config < BitherjSettings.ApiConfig.values().length && config >= 0) {
+//            return BitherjSettings.ApiConfig.values()[config];
+//        }
         return BitherjSettings.ApiConfig.BLOCKCHAIN_INFO;
     }
 
@@ -186,6 +189,19 @@ public class AppSharedPreference {
         return BitherjSettings.getMarketType(type);
 
     }
+    //保存当前汇率
+    public void setCNYExchangeRate(float rate){
+        this.mPreferences.edit().putFloat(CNY_EXCHANGE_RATE,rate).commit();
+    }
+    public float getCNYExchangeRate(){
+       return this.mPreferences.getFloat(CNY_EXCHANGE_RATE,0.0f);
+    }
+    public void setUSDExchangeRate(float rate){
+        this.mPreferences.edit().putFloat(USD_EXCHANGE_RATE,rate).commit();
+    }
+    public float getUSDExchangeRate(){
+        return this.mPreferences.getFloat(USD_EXCHANGE_RATE,0.0f);
+    }
 
     //marketType  begin 0
     public void setMarketType(MarketType marketType) {
@@ -197,26 +213,14 @@ public class AppSharedPreference {
         String defaultCountry = Locale.getDefault().getCountry();
         if (Utils.compareString(defaultCountry, "CN") || Utils.compareString
                 (defaultCountry, "cn")) {
-            setMarketType(MarketType.BITSTAMP);
+            setMarketType(MarketType.COINMARKETCAP);
         } else {
-            setMarketType(MarketType.BITSTAMP);
+            setMarketType(MarketType.COINMARKETCAP);
         }
         String currencyCode = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
         if (Utils.compareString(currencyCode, "CNY")) {
             setExchangeType(ExchangeUtil.Currency.CNY);
-        } else if (Utils.compareString(currencyCode, "EUR")) {
-            setExchangeType(ExchangeUtil.Currency.EUR);
-        } else if (Utils.compareString(currencyCode, "GBP")) {
-            setExchangeType(ExchangeUtil.Currency.GBP);
-        } else if (Utils.compareString(currencyCode, "JPY")) {
-            setExchangeType(ExchangeUtil.Currency.JPY);
-        } else if (Utils.compareString(currencyCode, "KRW")) {
-            setExchangeType(ExchangeUtil.Currency.KRW);
-        } else if (Utils.compareString(currencyCode, "CAD")) {
-            setExchangeType(ExchangeUtil.Currency.CAD);
-        } else if (Utils.compareString(currencyCode, "AUD")) {
-            setExchangeType(ExchangeUtil.Currency.AUD);
-        } else {
+        }  else {
             setExchangeType(ExchangeUtil.Currency.USD);
         }
     }
@@ -400,7 +404,7 @@ public class AppSharedPreference {
         if (ordinal >= 0 && ordinal < BitcoinUnit.values().length) {
             return UnitUtilWrapper.BitcoinUnitWrapper.values()[ordinal];
         } else {
-            return UnitUtilWrapper.BitcoinUnitWrapper.BTC;
+            return UnitUtilWrapper.BitcoinUnitWrapper.XPM;
         }
     }
 
@@ -438,7 +442,7 @@ public class AppSharedPreference {
     }
 
     public boolean getPasswordStrengthCheck() {
-        return mPreferences.getBoolean(PASSWORD_STRENGTH_CHECK, false);
+        return mPreferences.getBoolean(PASSWORD_STRENGTH_CHECK, true);
     }
 
     public void setTotalBalanceHide(TotalBalanceHide h) {

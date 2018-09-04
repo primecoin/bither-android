@@ -1,4 +1,4 @@
-///*
+package net.bither.db;///*
 // * Copyright 2014 http://Bither.net
 // *
 // * Licensed under the Apache License, Version 2.0 (the "License");

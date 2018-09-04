@@ -150,6 +150,12 @@
 
                 <include layout="@layout/layout_vertical_seperator" />
 
+                <!--导入私钥-->
+                <net.bither.ui.base.SettingSelectorView
+                    android:id="@+id/ssv_import_private_key"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                 <!--高级选项-->
                 <Button
                     android:id="@+id/btn_advance"
                     android:layout_width="match_parent"
@@ -172,13 +178,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:src="@drawable/setting_footer_logo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
@@ -191,7 +198,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bither Cold"
+                    android:text="Primecoin Cold"
                     android:textColor="#ffc2c2c2"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -212,6 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginTop="5dp"
+                android:visibility="gone"
                 android:text="http://Bither.net"
                 android:textColor="#ffc2c2c2"
                 android:textSize="13sp"
@@ -224,6 +232,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:text="@string/setting_privacy_policy"
+                android:visibility="gone"
                 android:textColor="#ffc2c2c2"
                 android:textSize="13sp"
                 android:textStyle="bold"/>

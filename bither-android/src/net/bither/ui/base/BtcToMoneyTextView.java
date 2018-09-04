@@ -24,6 +24,7 @@ import net.bither.BitherSetting;
 import net.bither.bitherj.utils.Utils;
 import net.bither.model.Ticker;
 import net.bither.preference.AppSharedPreference;
+import net.bither.util.ExchangeUtil;
 import net.bither.util.MarketUtil;
 import net.bither.util.UIUtil;
 
@@ -55,10 +56,11 @@ public class BtcToMoneyTextView extends TextView implements
 	}
 
 	private void getPrice() {
-		Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
+		/*Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
 		if (ticker != null) {
 			price = ticker.getDefaultExchangePrice();
-		}
+		}*/
+		price= ExchangeUtil.getCurrentRate();
 	}
 
 	public void onPause() {

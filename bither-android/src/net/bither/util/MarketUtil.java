@@ -18,12 +18,16 @@ package net.bither.util;
 
 import net.bither.bitherj.BitherjSettings;
 import net.bither.bitherj.BitherjSettings.MarketType;
+import net.bither.bitherj.utils.Utils;
 import net.bither.model.Market;
+import net.bither.model.MarketTicket;
 import net.bither.model.Ticker;
 import net.bither.preference.AppSharedPreference;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 public class MarketUtil {
     private static ArrayList<Market> markets = new ArrayList<Market>();
@@ -86,4 +90,31 @@ public class MarketUtil {
         }
 
     }
+
+    //TODO 设置新的ticket数据
+    public static void setMarketTicket(MarketTicket marketTicket) {
+        if (marketTicket != null) {
+            synchronized (markets) {
+                for (Market market : markets) {
+                    if (market.getMarketType() == MarketType.COINMARKETCAP) {
+                        market.setMarketTicket(marketTicket);
+
+                        if (marketTicket.getData() != null && marketTicket.getData().getQuotes().getCNY() != null) {
+                            float cnyRate = marketTicket.getData().getQuotes().getCNY().getPrice();
+                            AppSharedPreference.getInstance().setCNYExchangeRate(cnyRate);
+                        }
+
+                        if (marketTicket.getData() != null && marketTicket.getData().getQuotes().getUSD() != null) {
+                            float usdRate = marketTicket.getData().getQuotes().getUSD().getPrice();
+                            AppSharedPreference.getInstance().setUSDExchangeRate(usdRate);
+                        }
+
+
+                    }
+
+                }
+            }
+        }
+    }
+
 }

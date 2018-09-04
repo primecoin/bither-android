@@ -265,7 +265,7 @@ public final class BlockListFragment extends ListFragment {
             rowHash.setText(WalletUtils.formatHash(null,
                     Utils.bytesToHexString(Utils.reverseBytes(storedBlock.getBlockHash())), 8, 0, ' '));
 
-            final int transactionChildCount = row.getChildCount()
+            /*final int transactionChildCount = row.getChildCount()
                     - ROW_BASE_CHILD_COUNT;
             int iTransactionView = 0;
 
@@ -299,7 +299,7 @@ public final class BlockListFragment extends ListFragment {
                     - iTransactionView;
             if (leftoverTransactionViews > 0)
                 row.removeViews(ROW_INSERT_INDEX + iTransactionView,
-                        leftoverTransactionViews);
+                        leftoverTransactionViews);*/
 
             return row;
         }
@@ -307,7 +307,6 @@ public final class BlockListFragment extends ListFragment {
 
     private static class BlockLoader extends AsyncTaskLoader<List<Block>> {
         private Context context;
-
 
         private BlockLoader(final Context context) {
             super(context);

@@ -50,6 +50,7 @@ import net.bither.BitherApplication;
 import net.bither.BitherSetting;
 import net.bither.ChooseModeActivity;
 import net.bither.R;
+import net.bither.activity.cold.HdmImportWordListActivity;
 import net.bither.activity.hot.CheckPrivateKeyActivity;
 import net.bither.activity.hot.HotActivity;
 import net.bither.activity.hot.HotAdvanceActivity;
@@ -59,16 +60,30 @@ import net.bither.bitherj.BitherjSettings;
 import net.bither.bitherj.core.AbstractHD;
 import net.bither.bitherj.core.AddressManager;
 import net.bither.bitherj.core.HDAccount;
+import net.bither.bitherj.crypto.ECKey;
+import net.bither.bitherj.crypto.EncryptedData;
+import net.bither.bitherj.crypto.SecureCharSequence;
 import net.bither.bitherj.crypto.hd.DeterministicKey;
+import net.bither.bitherj.crypto.mnemonic.MnemonicCode;
 import net.bither.bitherj.crypto.mnemonic.MnemonicException;
+import net.bither.bitherj.crypto.mnemonic.MnemonicWordList;
 import net.bither.bitherj.exception.AddressFormatException;
+import net.bither.bitherj.factory.ImportHDSeed;
+import net.bither.bitherj.factory.ImportPrivateKey;
 import net.bither.bitherj.qrcode.QRCodeUtil;
+import net.bither.bitherj.utils.PrivateKeyUtil;
 import net.bither.bitherj.utils.Utils;
+import net.bither.factory.ImportHDSeedAndroid;
+import net.bither.factory.ImportPrivateKeyAndroid;
+import net.bither.fragment.Refreshable;
 import net.bither.fragment.Selectable;
 import net.bither.image.glcrop.CropImageGlActivity;
+import net.bither.mnemonic.MnemonicCodeAndroid;
 import net.bither.model.Market;
 import net.bither.preference.AppSharedPreference;
 import net.bither.qrcode.ScanActivity;
+import net.bither.qrcode.ScanQRCodeTransportActivity;
+import net.bither.qrcode.ScanQRCodeWithOtherActivity;
 import net.bither.runnable.ThreadNeedService;
 import net.bither.runnable.UploadAvatarRunnable;
 import net.bither.service.BlockchainService;
@@ -78,8 +93,12 @@ import net.bither.ui.base.SettingSelectorView.SettingSelector;
 import net.bither.ui.base.dialog.DialogConfirmTask;
 import net.bither.ui.base.dialog.DialogDonate;
 import net.bither.ui.base.dialog.DialogHDMonitorFirstAddressValidation;
+import net.bither.ui.base.dialog.DialogImportPrivateKeyText;
+import net.bither.ui.base.dialog.DialogPassword;
 import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.ui.base.dialog.DialogSetAvatar;
+import net.bither.ui.base.listener.ICheckPasswordListener;
+import net.bither.ui.base.listener.IDialogPasswordListener;
 import net.bither.util.ExchangeUtil;
 import net.bither.util.FileUtil;
 import net.bither.util.ImageFileUtil;
@@ -92,8 +111,11 @@ import net.bither.util.UIUtil;
 import net.bither.util.UnitUtilWrapper;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.bither.ui.base.dialog.DialogImportPrivateKeyText.ScanPrivateKeyQRCodeRequestCode;
 
 public class OptionHotFragment extends Fragment implements Selectable,
         DialogSetAvatar.SetAvatarDelegate {
@@ -113,8 +135,15 @@ public class OptionHotFragment extends Fragment implements Selectable,
     private ImageView ivLogo;
     private View llSwitchToCold;
     private TextView tvPrivacyPolicy;
-
+    private SettingSelectorView ssvImportPrivateKey;
     private MonitorBitherColdUtil monitorUtil;
+    private HotActivity hotActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        hotActivity= (HotActivity) activity;
+    }
 
 
     private DialogProgress dp;
@@ -127,6 +156,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
         }
     };
 
+    /*默认单位选择器*/
     private SettingSelector bitcoinUnitSelector = new SettingSelector() {
         @Override
         public int getOptionCount() {
@@ -138,6 +168,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
             UnitUtilWrapper.BitcoinUnitWrapper unit = UnitUtilWrapper.BitcoinUnitWrapper.values()
                     [index];
             SpannableString s = new SpannableString("  " + unit.name());
+            //TODO 修改图标
             Bitmap bmp = UnitUtilWrapper.getBtcSlimSymbol(getResources().getColor(R.color.text_field_text_color),
                     getResources().getDisplayMetrics().scaledDensity * 15.6f, unit);
             s.setSpan(new ImageSpan(getActivity(), bmp, ImageSpan.ALIGN_BASELINE), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -175,7 +206,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
             }
         }
     };
-
+    /*默认货币选择器 （默认值为当前国家货币）*/
     private SettingSelector currencySelector = new SettingSelector() {
         private int length = ExchangeUtil.Currency.values().length;
 
@@ -222,6 +253,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
             return null;
         }
     };
+    /*默认交易所*/
     private SettingSelector marketSelector = new SettingSelector() {
         private List<Market> markets = MarketUtil.getMarkets();
 
@@ -260,6 +292,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
             return null;
         }
     };
+    /*默认手续费*/
     private SettingSelector transactionFeeModeSelector = new SettingSelector() {
 
         @Override
@@ -322,30 +355,30 @@ public class OptionHotFragment extends Fragment implements Selectable,
                     .getTransactionFeeMode();
             switch (mode) {
                 case High:
-                    return 3;
+                    return 1;
                 case Higher:
                     return 2;
                 case TenX:
-                    return 1;
+                    return 3;
                 case TwentyX:
-                    return 0;
-                default:
                     return 4;
+                default:
+                    return 0;
             }
         }
 
         private BitherjSettings.TransactionFeeMode getModeByIndex(int index) {
             if (index >= 0 && index < BitherjSettings.TransactionFeeMode.values().length) {
                 switch (index) {
-                    case 4:
+                    case 0:
                         return BitherjSettings.TransactionFeeMode.Normal;
-                    case 3:
+                    case 1:
                         return BitherjSettings.TransactionFeeMode.High;
                     case 2:
                         return BitherjSettings.TransactionFeeMode.Higher;
-                    case 1:
+                    case 3:
                         return BitherjSettings.TransactionFeeMode.TenX;
-                    case 0:
+                    case 4:
                         return BitherjSettings.TransactionFeeMode.TwentyX;
                 }
             }
@@ -368,11 +401,11 @@ public class OptionHotFragment extends Fragment implements Selectable,
             }
         }
 
-        private  String getFeeStr(BitherjSettings.TransactionFeeMode transactionFeeMode) {
+        private String getFeeStr(BitherjSettings.TransactionFeeMode transactionFeeMode) {
             float dividend = 100000;
-            String unit = "mBTC/kb";
-            float fee = (float)transactionFeeMode.getMinFeeSatoshi()/dividend;
-            return  String.valueOf(fee)+unit;
+            String unit = "mXPM/kb";
+            float fee = (float) transactionFeeMode.getMinFeeSatoshi() / dividend;
+            return String.valueOf(fee) + unit;
         }
 
         @Override
@@ -422,7 +455,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
         @Override
         public void onClick(View v) {
             if ((AddressManager.getInstance().getPrivKeyAddresses() == null
-                        || AddressManager.getInstance().getPrivKeyAddresses().size() == 0)
+                    || AddressManager.getInstance().getPrivKeyAddresses().size() == 0)
                     && !AddressManager.getInstance().hasHDMKeychain()
                     && !AddressManager.getInstance().hasHDAccountHot()) {
                 DropdownMessage.showDropdownMessage(getActivity(), R.string.private_key_is_empty);
@@ -440,6 +473,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
             dialog.show();
         }
     };
+    /*高级选项*/
     private OnClickListener advanceClick = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -489,23 +523,23 @@ public class OptionHotFragment extends Fragment implements Selectable,
         public void onClick(View v) {
             monitorUtil = new MonitorBitherColdUtil(OptionHotFragment.this, new
                     MonitorBitherColdUtil.MonitorBitherColdUtilDelegate() {
-                @Override
-                public void onAddressMonitored(ArrayList<String> addresses) {
-                    monitorUtil = null;
-                    if (getActivity() instanceof HotActivity) {
-                        HotActivity hot = (HotActivity) getActivity();
-                        Intent intent = new Intent();
-                        intent.putExtra(BitherSetting.INTENT_REF.ADDRESS_POSITION_PASS_VALUE_TAG,
-                                addresses);
-                        hot.onActivityResult(BitherSetting.INTENT_REF.SCAN_REQUEST_CODE, Activity
-                                .RESULT_OK, intent);
-                    }
-                }
-            });
+                        @Override
+                        public void onAddressMonitored(ArrayList<String> addresses) {
+                            monitorUtil = null;
+                            if (getActivity() instanceof HotActivity) {
+                                HotActivity hot = (HotActivity) getActivity();
+                                Intent intent = new Intent();
+                                intent.putExtra(BitherSetting.INTENT_REF.ADDRESS_POSITION_PASS_VALUE_TAG,
+                                        addresses);
+                                hot.onActivityResult(BitherSetting.INTENT_REF.SCAN_REQUEST_CODE, Activity
+                                        .RESULT_OK, intent);
+                            }
+                        }
+                    });
             monitorUtil.scan();
         }
     };
-
+    //监控冷HD账户
     private OnClickListener monitorColdHDClick = new View.OnClickListener() {
 
         @Override
@@ -519,6 +553,115 @@ public class OptionHotFragment extends Fragment implements Selectable,
                     MonitorCodeHDRequestCode);
         }
     };
+    //导入私钥选择器
+    private SettingSelectorView.SettingSelector importPrivateKeySelector = new
+            SettingSelectorView.SettingSelector() {
+                @Override
+                public int getOptionCount() {
+                    return 2;
+                   /* if (AddressManager.getInstance().getHDAccountHot() != null) {
+                        return 2;
+                    } else {
+                        return 4;
+                    }*/
+                }
+
+                @Override
+                public String getOptionName(int index) {
+                    switch (index) {
+                        case 0:
+                            return getString(R.string.import_private_key_qr_code);
+                        case 1:
+                            return getString(R.string.import_private_key_text);
+                        case 2:
+                            return getString(R.string.import_hd_account_seed_qr_code);
+                        case 3:
+                            return getString(R.string.import_hd_account_seed_phrase);
+                        default:
+                            return "";
+                    }
+                }
+
+                @Override
+                public String getOptionNote(int index) {
+                    return null;
+                }
+
+                @Override
+                public Drawable getOptionDrawable(int index) {
+                    switch (index) {
+                        case 0:
+                        case 2:
+                            return getResources().getDrawable(R.drawable.scan_button_icon);
+                        case 1:
+                        case 3:
+                            return getResources().getDrawable(R.drawable.import_private_key_text_icon);
+                        default:
+                            return null;
+                    }
+                }
+
+                @Override
+                public String getSettingName() {
+                    return getString(R.string.setting_name_import_private_key);
+                }
+
+                @Override
+                public int getCurrentOptionIndex() {
+                    return -1;
+                }
+
+                @Override
+                public void onOptionIndexSelected(int index) {
+                    switch (index) {
+                        case 0:
+                            importPrivateKeyFromQrCode();
+                            break;
+                        case 1:
+                            DialogImportPrivateKeyText dialog= new DialogImportPrivateKeyText(getActivity());
+                            dialog.show();
+                            dialog.setOnBtnScanClickListener(new DialogImportPrivateKeyText.OnBtnScanClickListener() {
+                                @Override
+                                public void onBtnScanClick() {
+                                    startActivityForResult(new Intent(getActivity(), ScanActivity.class),
+                                            ScanPrivateKeyQRCodeRequestCode);
+                                }
+                            });
+                            break;
+                        case 2://来自HD种子二维码
+                            importHDFromQRCode();
+                            break;
+                        case 3:
+                            importHDFromPhrase();
+                            break;
+                        default:
+                            return;
+                    }
+                }
+            };
+
+    private void importPrivateKeyFromQrCode() {
+        Intent intent = new Intent(getActivity(), ScanQRCodeTransportActivity.class);
+        intent.putExtra(BitherSetting.INTENT_REF.TITLE_STRING,
+                getString(R.string.import_private_key_qr_code_scan_title));
+        startActivityForResult(intent, BitherSetting.INTENT_REF
+                .IMPORT_PRIVATE_KEY_REQUEST_CODE);
+    }
+
+    private void importHDFromQRCode() {
+        Intent intent = new Intent(getActivity(), ScanQRCodeTransportActivity.class);
+        intent.putExtra(BitherSetting.INTENT_REF.TITLE_STRING,
+                getString(R.string.import_hd_account_seed_qr_code));
+        startActivityForResult(intent, BitherSetting.INTENT_REF
+                .IMPORT_HD_ACCOUNT_SEED_REQUEST_CODE);
+
+    }
+
+    private void importHDFromPhrase() {
+        Intent intent = new Intent(getActivity(), HdmImportWordListActivity.class);
+        intent.putExtra(BitherSetting.INTENT_REF.IMPORT_HD_SEED_TYPE, ImportHDSeed.ImportHDSeedType.HDSeedPhrase);
+        startActivityForResult(intent, BitherSetting.INTENT_REF.IMPORT_ACCOUNT_SEED_FROM_PHRASE_REQUEST_CODE);
+    }
 
     @Override
     public void avatarFromCamera() {
@@ -538,6 +681,11 @@ public class OptionHotFragment extends Fragment implements Selectable,
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media
                 .EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, BitherSetting.REQUEST_CODE_IMAGE);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -582,7 +730,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
                     }
                 }
                 break;
-            case MonitorCodeHDRequestCode:
+            case MonitorCodeHDRequestCode://监控冷HD账户
                 if (data.getExtras().containsKey(ScanActivity.INTENT_EXTRA_RESULT)) {
                     String content = data.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT);
                     if (!content.startsWith(QRCodeUtil.HD_MONITOR_QR_PREFIX)) {
@@ -626,13 +774,9 @@ public class OptionHotFragment extends Fragment implements Selectable,
                                                 public void run() {
                                                     new ThreadNeedService(dp, getActivity()) {
                                                         @Override
-                                                        public void runWithService
-                                                                (BlockchainService service) {
+                                                        public void runWithService(BlockchainService service) {
                                                             try {
-                                                                final HDAccount account = new
-                                                                        HDAccount(key
-                                                                        .getPubKeyExtended(),
-                                                                        false, false, null);
+                                                                final HDAccount account = new HDAccount(key.getPubKeyExtended(), false, false, null);
                                                                 if (service != null) {
                                                                     service.stopAndUnregister();
                                                                 }
@@ -712,6 +856,135 @@ public class OptionHotFragment extends Fragment implements Selectable,
                     }
                 }
                 break;
+            //导入私钥
+            case BitherSetting.INTENT_REF.IMPORT_PRIVATE_KEY_REQUEST_CODE:
+                final String content = data.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT);
+                if (content.indexOf(QRCodeUtil.HDM_QR_CODE_FLAG) == 0) {
+                    DropdownMessage.showDropdownMessage(getActivity(), R.string.can_not_import_hdm_cold_seed);
+                    return;
+                }
+                DialogPassword dialogPassword = new DialogPassword(getActivity(),
+                        new ImportPrivateKeyPasswordListenerI(content, false));
+                dialogPassword.setCheckPre(false);
+                dialogPassword.setTitle(R.string.import_private_key_qr_code_password);
+                dialogPassword.setCheckPasswordListener(new ICheckPasswordListener() {
+                    @Override
+                    public boolean checkPassword(SecureCharSequence password) {
+                        ECKey ecKey = PrivateKeyUtil.getECKeyFromSingleString(content, password);
+                        boolean result = ecKey != null;
+                        if (ecKey != null) {
+                            ecKey.clearPrivateKey();
+                        }
+                        return result;
+                    }
+                });
+                dialogPassword.show();
+                break;
+            case ScanPrivateKeyQRCodeRequestCode:
+                final String priv = data.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT);
+                if (!Utils.validBitcoinPrivateKey(priv)) {
+                    DropdownMessage.showDropdownMessage(getActivity(),
+                            R.string.import_private_key_text_format_error);
+                    break;
+                }
+                new DialogPassword(getActivity(), new IDialogPasswordListener() {
+                    @Override
+                    public void onPasswordEntered(SecureCharSequence password) {
+                        ImportPrivateKeyAndroid importPrivateKey = new ImportPrivateKeyAndroid
+                                (getActivity(), ImportPrivateKey.ImportPrivateKeyType
+                                        .Text, dp, priv, password);
+                        importPrivateKey.importPrivateKey();
+                    }
+                }).show();
+                break;
+            case BitherSetting.INTENT_REF.IMPORT_HD_ACCOUNT_SEED_REQUEST_CODE://扫描HD种子二维码回调
+                final String hdAccountSeed = data.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT);
+                final MnemonicWordList mnemonicWordList = MnemonicWordList.getMnemonicWordListForHdSeed(hdAccountSeed);
+                if (mnemonicWordList != null) {
+                    try {
+                        MnemonicCode mnemonicCode = new MnemonicCodeAndroid();
+                        mnemonicCode.setMnemonicWordList(mnemonicWordList);
+                        dialogPassword = new DialogPassword(getActivity(),
+                                new ImportHDAccountPasswordListener(hdAccountSeed, mnemonicCode));
+                        dialogPassword.setCheckPre(false);
+                        dialogPassword.setCheckPasswordListener(new ICheckPasswordListener() {
+                            @Override
+                            public boolean checkPassword(SecureCharSequence password) {
+                                String keyString = hdAccountSeed.substring(mnemonicWordList.getHdQrCodeFlag().length());
+                                String[] passwordSeeds = QRCodeUtil.splitOfPasswordSeed(keyString);
+                                String encreyptString = Utils.joinString(new String[]{passwordSeeds[0], passwordSeeds[1], passwordSeeds[2]}, QRCodeUtil.QR_CODE_SPLIT);
+                                EncryptedData encryptedData = new EncryptedData(encreyptString);
+                                byte[] result = null;
+                                try {
+                                    result = encryptedData.decrypt(password);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return result != null;
+                            }
+                        });
+                        dialogPassword.setTitle(R.string.import_private_key_qr_code_password);
+                        dialogPassword.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        DropdownMessage.showDropdownMessage(getActivity(), R.string.import_hd_account_seed_format_error);
+                    }
+                } else {
+                    DropdownMessage.showDropdownMessage(getActivity(), R.string.import_hd_account_seed_format_error);
+                }
+                break;
+            case BitherSetting.INTENT_REF.IMPORT_ACCOUNT_SEED_FROM_PHRASE_REQUEST_CODE:
+                ssvImportPrivateKey.loadData();
+        }
+
+    }
+
+    private class ImportPrivateKeyPasswordListenerI implements IDialogPasswordListener {
+        private String content;
+        private boolean isFromBip38;
+
+        public ImportPrivateKeyPasswordListenerI(String content, boolean isFromBip38) {
+            this.content = content;
+            this.isFromBip38 = isFromBip38;
+        }
+
+        @Override
+        public void onPasswordEntered(SecureCharSequence password) {
+            if (dp != null && !dp.isShowing()) {
+                dp.setMessage(R.string.import_private_key_qr_code_importing);
+                if (!isFromBip38) {
+
+                    ImportPrivateKeyAndroid importPrivateKey = new ImportPrivateKeyAndroid(getActivity()
+                            , ImportPrivateKey.ImportPrivateKeyType.BitherQrcode, dp,
+                            content, password);
+                    importPrivateKey.importPrivateKey();
+
+                }
+
+            }
+        }
+    }
+    private class ImportHDAccountPasswordListener implements IDialogPasswordListener {
+        private String content;
+        private MnemonicCode mnemonicCode;
+
+
+        public ImportHDAccountPasswordListener(String content, MnemonicCode mnemonicCode) {
+            this.content = content;
+            this.mnemonicCode = mnemonicCode;
+        }
+
+        @Override
+        public void onPasswordEntered(SecureCharSequence password) {
+            if (dp != null && !dp.isShowing()) {
+                dp.setMessage(R.string.import_private_key_qr_code_importing);
+                LogUtil.d("importhdseed", "onPasswordEntered");
+                ImportHDSeedAndroid importHDSeedAndroid = new ImportHDSeedAndroid
+                        (getActivity(), ImportHDSeed.ImportHDSeedType.HDSeedQRCode, dp, content, null, password, mnemonicCode);
+                importHDSeedAndroid.importHDSeed();
+
+            }
+
         }
 
     }
@@ -738,6 +1011,34 @@ public class OptionHotFragment extends Fragment implements Selectable,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hot_option, container, false);
         initView(view);
+        hotActivity.setShowImportSuccessListener(new HotActivity.ShowImportSuccessListener() {
+            @Override
+            public void showImportSuccess() {
+                ssvImportPrivateKey.loadData();
+                DropdownMessage.showDropdownMessage(getActivity(),
+                        R.string.import_private_key_qr_code_success, new Runnable() {
+                            @Override
+                            public void run() {
+                                if (BitherApplication.hotActivity != null) {
+                                    Fragment f = BitherApplication.hotActivity.getFragmentAtIndex(1);
+                                    if (f != null && f instanceof Refreshable) {
+                                        Refreshable r = (Refreshable) f;
+                                        r.showProgressBar();
+                                        r.doRefresh();
+                                    }
+                                }
+                                if (BitherApplication.hotActivity != null) {
+                                    ThreadUtil.getMainThreadHandler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            BitherApplication.hotActivity.scrollToFragmentAt(1);
+                                        }
+                                    }, 500);
+                                }
+                            }
+                        });
+            }
+        });
         return view;
     }
 
@@ -750,7 +1051,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
         tvWebsite = (TextView) view.findViewById(R.id.tv_website);
         tvWebsite.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         tvPrivacyPolicy = (TextView) view.findViewById(R.id.tv_privacy_policy);
-        tvPrivacyPolicy.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        tvPrivacyPolicy.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
         ivLogo = (ImageView) view.findViewById(R.id.iv_logo);
         btnSwitchToCold = (Button) view.findViewById(R.id.btn_switch_to_cold);
         llSwitchToCold = view.findViewById(R.id.ll_switch_to_cold);
@@ -783,9 +1084,11 @@ public class OptionHotFragment extends Fragment implements Selectable,
         btnAvatar.setOnClickListener(avatarClick);
         btnAdvance.setOnClickListener(advanceClick);
         tvWebsite.setOnClickListener(websiteClick);
-        ivLogo.setOnClickListener(logoClickListener);
+//        ivLogo.setOnClickListener(logoClickListener);
         setAvatar(AppSharedPreference.getInstance().getUserAvatar());
-        tvPrivacyPolicy.setOnClickListener(privacyPolicyClick);
+        tvPrivacyPolicy.setOnClickListener(privacyPolicyClick);//隐私政策点击事件
+        ssvImportPrivateKey = (SettingSelectorView) view.findViewById(R.id.ssv_import_private_key);
+        ssvImportPrivateKey.setSelector(importPrivateKeySelector);
     }
 
     private void setAvatar(String photoName) {

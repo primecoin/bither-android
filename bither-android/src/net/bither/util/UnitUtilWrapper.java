@@ -51,7 +51,7 @@ import net.bither.preference.AppSharedPreference;
  */
 public class UnitUtilWrapper {
     public static enum BitcoinUnitWrapper {
-        BTC(BitcoinUnit.BTC), bits(BitcoinUnit.bits);
+        XPM(BitcoinUnit.XPM);
         public BitcoinUnit unit;
         public long satoshis;
         public int slimDrawable;
@@ -64,17 +64,10 @@ public class UnitUtilWrapper {
             this.unit = unit;
             satoshis = unit.satoshis;
             switch (unit) {
-                case BCD:
-                case BTW:
-                case BTC:
+                case XPM:
                     boldAfterDot = 2;
                     slimDrawable = R.drawable.symbol_btc_slim;
                     boldDrawable = R.drawable.symbol_btc;
-                    break;
-                case bits:
-                    boldAfterDot = 0;
-                    slimDrawable = R.drawable.symbol_bits_slim;
-                    boldDrawable = R.drawable.symbol_bits;
                     break;
             }
         }
@@ -97,12 +90,11 @@ public class UnitUtilWrapper {
 
         public static final BitcoinUnitWrapper getWrapper(BitcoinUnit unit) {
             switch (unit) {
-                case BTC:
-                    return BitcoinUnitWrapper.BTC;
-                case bits:
-                    return BitcoinUnitWrapper.bits;
+                case XPM:
+                    return BitcoinUnitWrapper.XPM;
+
             }
-            return BitcoinUnitWrapper.BTC;
+            return BitcoinUnitWrapper.XPM;
         }
     }
 
@@ -147,6 +139,7 @@ public class UnitUtilWrapper {
         SpannableString spannable = new SpannableString(str);
         spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, boldLength,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         if (boldLength < str.length()) {
             spannable.setSpan(new RelativeSizeSpan(0.8f), boldLength, str.length(),
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

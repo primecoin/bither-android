@@ -24,6 +24,7 @@ import net.bither.bitherj.BitherjSettings.MarketType;
 public class Market {
 
     private Ticker mTicker;
+    private MarketTicket marketTicket;
     private MarketType marketType;
     private boolean showDetail;
 
@@ -52,14 +53,8 @@ public class Market {
     public int getMarketColor() {
         int resource = -1;
         switch (getMarketType()) {
-            case BITSTAMP:
+            case COINMARKETCAP:
                 resource = R.color.market_color_bitstamp;
-                break;
-            case BITFINEX:
-                resource = R.color.market_color_bitfinex;
-                break;
-            case COINBASE:
-                resource = R.color.market_color_coinbase;
                 break;
             default:
                 resource = R.color.text_field_text_color;
@@ -91,13 +86,8 @@ public class Market {
 
     public String getDomainName() {
         switch (getMarketType()) {
-            case BITSTAMP:
+            case COINMARKETCAP:
                 return "bitstamp.net";
-            case BITFINEX:
-                return "bitfinex.com";
-            case COINBASE:
-                return "coinbase.com";
-
             default:
                 return null;
         }
@@ -111,4 +101,11 @@ public class Market {
         this.mTicker = mTicker;
     }
 
+    public MarketTicket getMarketTicket() {
+        return marketTicket;
+    }
+
+    public void setMarketTicket(MarketTicket marketTicket) {
+        this.marketTicket = marketTicket;
+    }
 }

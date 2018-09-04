@@ -4,14 +4,43 @@
 //}
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'primecoin_debug'
+            keyPassword 'pcdxzb'
+            storeFile file('../primecoin.keystore')
+            storePassword 'pcdxzb'
+        }
+        release {
+            keyAlias 'primecoin_release'
+            keyPassword 'pcdxzb'
+            storeFile file('../primecoin.keystore')
+            storePassword 'pcdxzb'
+        }
+    }
+    defaultConfig {
+        applicationId "org.primecoin.wallet"
+       /* splits {
+            abi {
+                enable true
+                reset()
+                include 'x86', 'armeabi-v7a', 'x86_64'
+                universalApk true
+            }
+        }*/
+    }
 //    useLibrary 'org.apache.http.legacy'
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
 //            multiDexEnabled true
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -23,6 +52,8 @@ configurations {
     }
 }
 dependencies {
+    def retrofit_version = '2.4.0'
+    def ok_http_version = '3.11.0'
     compile 'com.google.protobuf:protobuf-java:2.5.0'
     compile 'com.android.support:appcompat-v7:19.+'
     compile 'com.nineoldandroids:library:2.4.+'
@@ -32,7 +63,17 @@ dependencies {
         // Work around for gradle 0.9 and 0.10
         transitive = true
     }
+    /*Gson*/
+    compile 'com.google.code.gson:gson:2.8.5'
+    /*OkHttp*/
+    compile 'com.squareup.okhttp3:okhttp:3.11.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     compile project(':bitherj')
     compile project(':wheel')
     compile project(':android-charts')
+    compile files('libs/fastjson-1.2.7.jar')
 }
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+configurations{compile.exclude group:"org.json",module:"json"}

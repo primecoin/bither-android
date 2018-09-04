@@ -60,7 +60,6 @@ public class AddressDetailActivity extends SwipeRightFragmentActivity implements
     private int page = 1;
     private boolean hasMore = true;
     private boolean isLoding = false;
-
     protected int addressPosition;
     protected Address address;
     private ArrayList<Tx> transactions = new ArrayList<Tx>();
@@ -237,6 +236,7 @@ public class AddressDetailActivity extends SwipeRightFragmentActivity implements
     }
 
 
+    /*右上角菜单点击事件*/
     private OnClickListener optionClick = new OnClickListener() {
 
         @Override

@@ -9,12 +9,13 @@ buildscript {
 //        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.0'
     }
+
 }
 
 project(':bither-android') {
-    apply plugin: 'android'
+    apply plugin: 'com.android.application'
 }
 project(':wheel') {
     apply plugin: 'com.android.library'
@@ -75,6 +76,10 @@ subprojects {
         lintOptions {
             abortOnError false
             disable "ResourceType"
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_7
+            targetCompatibility JavaVersion.VERSION_1_7
         }
     }
 }

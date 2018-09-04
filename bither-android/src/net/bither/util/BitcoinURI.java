@@ -335,7 +335,7 @@ public class BitcoinURI {
 
         if (amount != 0) {
             builder.append(QUESTION_MARK_SEPARATOR).append(FIELD_AMOUNT).append("=");
-            builder.append(UnitUtil.formatValue(amount, UnitUtil.BitcoinUnit.BTC));
+            builder.append(UnitUtil.formatValue(amount, UnitUtil.BitcoinUnit.XPM));
             questionMarkHasBeenOutput = true;
         }
 

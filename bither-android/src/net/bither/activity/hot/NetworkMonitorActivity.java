@@ -96,19 +96,7 @@ public final class NetworkMonitorActivity extends BaseFragmentActivity {
                     actions.add(new Action(R.string.network_monitor_clear_peer, new Runnable() {
                         @Override
                         public void run() {
-                            new ThreadNeedService(null, NetworkMonitorActivity.this) {
-
-                                @Override
-                                public void runWithService(BlockchainService service) {
-                                    if (service != null) {
-                                        service.stopAndUnregister();
-                                    }
-                                    AbstractDb.peerProvider.recreate();
-                                    if (service != null) {
-                                        service.startAndRegister();
-                                    }
-                                }
-                            }.start();
+                            refreshPeer();
                         }
                     }));
                     return actions;
@@ -116,7 +104,22 @@ public final class NetworkMonitorActivity extends BaseFragmentActivity {
             }.show();
         }
     };
+	//刷新节点
+    public void refreshPeer(){
+        new ThreadNeedService(null, NetworkMonitorActivity.this) {
 
+            @Override
+            public void runWithService(BlockchainService service) {
+                if (service != null) {
+                    service.stopAndUnregister();
+                }
+                AbstractDb.peerProvider.recreate();
+                if (service != null) {
+                    service.startAndRegister();
+                }
+            }
+        }.start();
+    }
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {

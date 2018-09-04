@@ -38,11 +38,13 @@
 
                 <include layout="@layout/layout_vertical_seperator"/>
 
+                <!--监控冷HD账户-->
                 <Button
                     android:id="@+id/btn_monitor_hd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     android:background="@drawable/ui_touchable_bg"
                     android:drawableRight="@drawable/scan_button_icon"
                     android:gravity="left"
@@ -51,7 +53,7 @@
                     android:textColor="@color/text_field_text_color"
                     android:textSize="18sp"/>
 
-                <include layout="@layout/layout_vertical_seperator"/>
+                <!--<include layout="@layout/layout_vertical_seperator"/>-->
 
                 <net.bither.ui.base.SettingSelectorView
                     android:id="@+id/ssv_bitcoin_unit"
@@ -93,7 +95,12 @@
 
                     <include layout="@layout/layout_vertical_seperator"/>
                 </LinearLayout>
-
+                <!--导入私钥-->
+                <net.bither.ui.base.SettingSelectorView
+                    android:id="@+id/ssv_import_private_key"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <!--设置头像-->
                 <Button
                     android:id="@+id/btn_avatar"
                     android:layout_width="match_parent"
@@ -147,6 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:src="@drawable/setting_footer_logo"/>
 
         <LinearLayout
@@ -166,7 +174,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bither Hot"
+                    android:text="Primecoin Hot"
                     android:textColor="#ffc2c2c2"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
@@ -187,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginTop="5dp"
-                android:text="http://Bither.net"
+                android:text="http://primecoin.io"
                 android:textColor="#ffc2c2c2"
                 android:textSize="13sp"
                 android:textStyle="bold"/>

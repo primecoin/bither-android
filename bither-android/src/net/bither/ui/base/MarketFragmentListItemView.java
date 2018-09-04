@@ -18,6 +18,7 @@ package net.bither.ui.base;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,15 +26,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.bither.BitherSetting;
 import net.bither.R;
 import net.bither.bitherj.utils.Utils;
 import net.bither.model.Market;
+import net.bither.model.MarketTicket;
 import net.bither.model.Ticker;
 import net.bither.preference.AppSharedPreference;
 import net.bither.util.ExchangeUtil;
 
-public class MarketFragmentListItemView extends FrameLayout implements
-        MarketTickerChangedObserver {
+import java.util.Currency;
+import java.util.Locale;
+
+public class MarketFragmentListItemView extends FrameLayout implements MarketTickerChangedObserver {
     private Market market;
     private TextView tvMarketName;
     private TextView tvPrice;
@@ -41,8 +46,7 @@ public class MarketFragmentListItemView extends FrameLayout implements
 
     public MarketFragmentListItemView(FragmentActivity activity) {
         super(activity);
-        View v = LayoutInflater.from(activity).inflate(
-                R.layout.list_item_market_fragment, null);
+        View v = LayoutInflater.from(activity).inflate(R.layout.list_item_market_fragment, null);
         addView(v, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         initView();
     }
@@ -73,11 +77,12 @@ public class MarketFragmentListItemView extends FrameLayout implements
         if (market != null) {
             tvMarketName.setText(market.getName());
             tvMarketName.setTextColor(market.getMarketColor());
+
         }
         if (market.getTicker() == null) {
             return;
         }
-        Ticker ticker = market.getTicker();
+       /* Ticker ticker = market.getTicker();
         if (ExchangeUtil.getCurrenciesRate() != null) {
             tvPrice.setText(AppSharedPreference.getInstance()
                     .getDefaultExchangeType().getSymbol()
@@ -87,6 +92,37 @@ public class MarketFragmentListItemView extends FrameLayout implements
             tvPrice.setText(ExchangeUtil
                     .getExchangeType(market.getMarketType()).getSymbol()
                     + Utils.formatDoubleToMoneyString(ticker.getPrice()));
+        }*/
+        MarketTicket marketTicket = market.getMarketTicket();
+        String cnyPrice = "";
+        String usdPrice = "";
+        if (marketTicket != null && marketTicket.getData() != null) {
+            if (marketTicket.getData().getQuotes().getCNY() != null) {
+                cnyPrice = String.format("%.2f", marketTicket.getData().getQuotes().getCNY().getPrice());
+            }
+            if (marketTicket.getData().getQuotes().getUSD() != null) {
+                usdPrice = String.format("%.2f", marketTicket.getData().getQuotes().getUSD().getPrice());
+            }
+        }
+        String symbol = "";
+        ExchangeUtil.Currency currency = AppSharedPreference.getInstance().getDefaultExchangeType();
+        switch (currency) {
+            case CNY:
+                symbol = "\u00a5";
+                if (!TextUtils.isEmpty(cnyPrice)) {
+                    tvPrice.setText(symbol + cnyPrice);
+                } else {
+                    tvPrice.setText(BitherSetting.UNKONW_ADDRESS_STRING);
+                }
+                break;
+            case USD:
+                symbol = "$";
+                if (!TextUtils.isEmpty(usdPrice)) {
+                    tvPrice.setText(symbol + usdPrice);
+                } else {
+                    tvPrice.setText(BitherSetting.UNKONW_ADDRESS_STRING);
+                }
+                break;
         }
         if (market.getPriceAlert() == null) {
             ivPriceAlert.setVisibility(View.INVISIBLE);

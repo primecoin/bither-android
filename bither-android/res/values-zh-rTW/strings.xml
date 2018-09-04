@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">比太</string>
+    <string name="app_name">Primecoin</string>
     <string name="localization.language.code">zh_TW</string>
     <string name="market_trading_amount">交易量</string>
     <string name="market_price_high">最高</string>
@@ -9,9 +9,9 @@
     <string name="market_price_open">開盤</string>
     <string name="market_price_close">收盤</string>
     <string name="market_name_huobi">火幣網</string>
-    <string name="market_name_chbtc">中國比特幣</string>
-    <string name="market_name_btcchina">比特幣中國</string>
-    <string name="market_name_btctrade">比特幣交易網</string>
+    <string name="market_name_chbtc">中國質數幣</string>
+    <string name="market_name_btcchina">質數幣中國</string>
+    <string name="market_name_btctrade">質數幣交易網</string>
     <string name="activity_name_address_detail">詳情</string>
     <string name="activity_name_address_sign_tx">簽名交易</string>
     <string name="activity_name_qr_code">二維碼</string>
@@ -23,7 +23,7 @@
     <string name="operate">設置</string>
     <string name="address_option_delete">停止監控</string>
     <string name="address_option_remonitor">重新监控</string>
-    <string name="address_option_view_on_blockchain_info">在Blockchain.info上查看</string>
+    <string name="address_option_view_on_blockchain_info">在Bchain.info上查看</string>
     <string name="address_option_view_on_btc">在btc.com上查看</string>
     <string name="address_delete_confirmation">確認停止監控這個地址?</string>
     <string name="address_remonitor_confirmation">確認重新監控這個地址?</string>
@@ -82,7 +82,7 @@
     <string name="add_address_tab_private_key">私鑰</string>
     <string name="add_address_scan">二維碼</string>
     <string name="add_address_delete">刪除</string>
-    <string name="add_address_watch_only_hint">比特幣地址</string>
+    <string name="add_address_watch_only_hint">Primecoin地址</string>
     <string name="add_address_already_watched">這個地址已經被監控了</string>
     <string name="addresses_already_monitored">這個冷錢包已經被監控了</string>
     <string name="add_address_generate_address_with_private_key">生成</string>
@@ -103,9 +103,9 @@
     <string name="send_progress_dialog_message">發送中</string>
     <string name="send_success">發送成功</string>
     <string name="send_failed">發送失敗</string>
-    <string name="send_failed_missing_btc">發送失敗. 可用餘額中缺少%s BTC.</string>
+    <string name="send_failed_missing_btc">發送失敗. 可用餘額中缺少%s XPM.</string>
     <string name="send_failed_dust_out_put">發送失敗. 這樣小額的交易會被忽略.</string>
-    <string name="send_failed_pendding">發送失敗. %s BTC 正在等待確認.\n請等待一個新的確認後再交易.</string>
+    <string name="send_failed_pendding">發送失敗. %s XPM 正在等待確認.\n請等待一個新的確認後再交易.</string>
     <string name="send_failed_max_tx_size">發送失敗. 交易大小过大.\n請減少發送金額.</string>
     <string name="send_coins_fragment_sending_address_label">從</string>
     <string name="send_coins_fragment_receiving_address_label">發送給</string>
@@ -233,8 +233,8 @@
     <string name="synchronous_interval_only_open_app">僅在打開應用時</string>
     <!-- Input parser -->
     <string name="input_parser_cannot_classify">無法分類輸入:\n%s</string>
-    <string name="input_parser_invalid_bitcoin_uri">比特幣 URI 無效:\n%s</string>
-    <string name="input_parser_invalid_address">取得無效比特幣地址!\n(是否 Mainnet/Testnet 混用?)</string>
+    <string name="input_parser_invalid_bitcoin_uri">質數幣 URI 無效:\n%s</string>
+    <string name="input_parser_invalid_address">取得無效質數幣地址!\n(是否 Mainnet/Testnet 混用?)</string>
     <string name="input_parser_invalid_transaction">無效交易:\n%s</string>
 
     <!-- feed -->
@@ -278,7 +278,7 @@
     <string name="private_key_is_empty">你還沒有添加私鑰, 請先添加私鑰</string>
     <string name="next_page">下壹張</string>
     <string name="can_not_find_private_key">沒有找到對應的私鑰</string>
-    <string name="scan_watch_only_address_error">二維碼不符合比特幣地址格式</string>
+    <string name="scan_watch_only_address_error">二維碼不符合質數幣地址格式</string>
     <string name="sign_transaction">簽名交易</string>
     <string name="scan_qr_transport_init_label">請掃描比太提供的第1張二維碼</string>
     <string name="scan_qr_transport_page_label">請掃描第%1$d張二維​​碼, 共%2$d張</string>
@@ -331,7 +331,7 @@
 
     <!-- donate -->
     <string name="select_address_to_donate">請選擇用來捐贈的地址</string>
-    <string name="donate_no_address">您沒有可以用來捐贈的比特幣</string>
+    <string name="donate_no_address">您沒有可以用來捐贈的質數幣</string>
     <string name="donate_receiving_address_label">捐贈給開發者</string>
     <string name="donate_sending_verb">捐贈</string>
     <string name="donate_unsigned_transaction_verb">捐贈</string>
@@ -371,9 +371,9 @@
     <string name="activity_name_advance">高級選項</string>
 
     <!-- first run dialog -->
-    <string name="first_run_dialog_title">為了保護您的比特幣:</string>
-    <string name="first_run_dialog_line_1">請不要卸載比太錢包</string>
-    <string name="first_run_dialog_line_2">請不要清除比太數據</string>
+    <string name="first_run_dialog_title">為了保護您的質數幣:</string>
+    <string name="first_run_dialog_line_1">請不要卸載質數幣錢包</string>
+    <string name="first_run_dialog_line_2">請不要清除質數幣數據</string>
     <string name="first_run_dialog_line_3">請牢記您的密碼</string>
 
     <!-- upgrade -->
@@ -415,7 +415,7 @@
 
     <!-- trash -->
     <string name="trash_private_key">移入回收站</string>
-    <string name="trash_with_money_warn">這個地址上還有比特幣.\n您不能把它移入回收站.</string>
+    <string name="trash_with_money_warn">這個地址上還有質數幣.\n您不能把它移入回收站.</string>
     <string name="trashing_private_key">正在移入回收站</string>
     <string name="trash_can">回收站</string>
     <string name="trash_can_empty">回收站空</string>
@@ -547,7 +547,7 @@
     <string name="hdm_keychain_recovery_setting_name">HDM 賬號恢復</string>
     <string name="hdm_keychain_recovery_warn">HDM 賬號正在恢復中</string>
     <string name="hdm_keychain_recovery_no_addresses">沒有需要恢復的 HDM 地址</string>
-    <string name="hdm_keychain_recovery_message">請盡快轉移走HDM 恢復帳號中的比特幣</string>
+    <string name="hdm_keychain_recovery_message">請盡快轉移走HDM 恢復帳號中的質數幣</string>
     <string name="address_group_hdm_recovery">HDM 恢復</string>
     <string name="activity_name_hdm_import_word_list">導入 HDM 密語</string>
     <string name="hdm_import_word_list_input_hint">下一單詞</string>
@@ -731,4 +731,6 @@
     <string name="error_hash">Hash 格式錯誤</string>
     <string name="sign_hash_input_hint">待簽名 Hash</string>
 
+    <string name="generate_secure_private_key">生成安全密鑰</string>
+    <string name="error_play_small">發送失敗. 這樣小額(&#060;0.01)的交易會被忽略. </string>
 </resources>

@@ -37,17 +37,18 @@
                             android:orientation="vertical"
                             android:paddingBottom="6dp"
                             android:paddingTop="10dp">
-
+                             <!--网络设置-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_wifi"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-
+                            <!--同步间隔-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_sync_interval"
                                 android:layout_width="match_parent"
+                                android:visibility="gone"
                                 android:layout_height="wrap_content" />
-
+                            <!--修改密码-->
                             <Button
                                 android:id="@+id/btn_edit_password"
                                 android:layout_width="match_parent"
@@ -62,27 +63,24 @@
                                 android:textSize="18sp" />
 
                             <include layout="@layout/layout_vertical_seperator" />
-
+                             <!--PIN码-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_pin_code"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-
+                             <!--二维码精度-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_qr_code_quality"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
-                            <net.bither.ui.base.SettingSelectorView
-                                android:id="@+id/ssv_import_private_key"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
 
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_import_bip38_key"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
+                            <!--HDM账号恢复   代码逻辑隐藏-->
                             <LinearLayout
                                 android:id="@+id/ll_hdm_recover"
                                 android:layout_width="match_parent"
@@ -103,10 +101,12 @@
                                 <include layout="@layout/layout_vertical_seperator" />
                             </LinearLayout>
 
+                            <!--获得分叉币 隐藏-->
                             <LinearLayout
                                 android:id="@+id/ll_fork_coins"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -124,6 +124,7 @@
                                 <include layout="@layout/layout_vertical_seperator" />
                             </LinearLayout>
 
+                            <!--重置 HDM 服务器授权  -->
                             <LinearLayout
                                 android:id="@+id/ll_hdm_server_auth_reset"
                                 android:layout_width="match_parent"
@@ -149,10 +150,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
+                            <!--签名Hash 隐藏-->
                             <LinearLayout
                                 android:id="@+id/ll_sign_hash"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -168,16 +171,17 @@
                                     android:textSize="18sp" />
                                 <include layout="@layout/layout_vertical_seperator" />
                             </LinearLayout>
+                            <!--密码强度检查-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_password_strength_check"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
-
+                             <!--总余额-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_total_balance_hide"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
-
+                             <!--回收站-->
                             <Button
                                 android:id="@+id/btn_trash_can"
                                 android:layout_width="match_parent"
@@ -192,11 +196,13 @@
 
                             <include layout="@layout/layout_vertical_seperator" />
 
+                            <!--API设置  隐藏-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_api_config"
                                 android:layout_width="match_parent"
+                                android:visibility="gone"
                                 android:layout_height="wrap_content" />
-
+                            <!--重载交易数据-->
                             <Button
                                 android:id="@+id/btn_reset_tx"
                                 android:layout_width="match_parent"
@@ -209,7 +215,7 @@
                                 android:textSize="18sp" />
 
                             <include layout="@layout/layout_vertical_seperator" />
-
+                             <!--导出日志   隐藏-->
                             <Button
                                 android:id="@+id/btn_export_log"
                                 android:layout_width="match_parent"
@@ -217,12 +223,13 @@
                                 android:background="@drawable/ui_touchable_bg"
                                 android:gravity="left"
                                 android:padding="10dp"
+                                android:visibility="gone"
                                 android:text="@string/export_log"
                                 android:textColor="@color/text_field_text_color"
                                 android:textSize="18sp" />
 
-                            <include layout="@layout/layout_vertical_seperator" />
-
+                            <!--<include layout="@layout/layout_vertical_seperator" />-->
+                             <!--导出地址    隐藏-->
                             <Button
                                 android:id="@+id/btn_export_address"
                                 android:layout_width="match_parent"
@@ -230,11 +237,12 @@
                                 android:background="@drawable/ui_touchable_bg"
                                 android:gravity="left"
                                 android:padding="10dp"
+                                android:visibility="gone"
                                 android:text="@string/export_address"
                                 android:textColor="@color/text_field_text_color"
                                 android:textSize="18sp" />
 
-                            <include layout="@layout/layout_vertical_seperator" />
+                            <!--<include layout="@layout/layout_vertical_seperator" />-->
 
                             <Button
                                 android:id="@+id/btn_network_monitor"
@@ -249,11 +257,24 @@
 
                             <include layout="@layout/layout_vertical_seperator"/>
 
+                            <!--开发者地址  ==》生成安全私钥-->
+                            <Button
+                                android:id="@+id/btn_generate_key"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ui_touchable_bg"
+                                android:gravity="left"
+                                android:padding="10dp"
+                                android:text="@string/generate_secure_private_key"
+                                android:textColor="@color/text_field_text_color"
+                                android:textSize="18sp" />
+                            <!--开发者地址-->
                             <LinearLayout
                                 android:id="@+id/ll_bither_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
+                                android:visibility="gone"
                                 android:background="@drawable/ui_touchable_bg"
                                 android:paddingLeft="10dp">
 
@@ -264,7 +285,6 @@
                                     android:orientation="vertical"
                                     android:paddingTop="10dp"
                                     android:paddingBottom="10dp">
-
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -301,6 +321,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:visibility="gone"
                         android:layout_marginTop="10dp"
                         android:src="@drawable/setting_footer_logo" />
 
@@ -386,4 +407,5 @@
             </LinearLayout>
         </FrameLayout>
     </net.bither.ui.base.SwipeRightTouchView>
+
 </FrameLayout>

@@ -19,8 +19,10 @@ package net.bither.factory;
 import android.app.Activity;
 
 import net.bither.R;
+import net.bither.activity.cold.ColdActivity;
 import net.bither.activity.cold.ColdAdvanceActivity;
 import net.bither.activity.cold.HdmImportWordListActivity;
+import net.bither.activity.hot.HotActivity;
 import net.bither.activity.hot.HotAdvanceActivity;
 import net.bither.bitherj.BitherjSettings;
 import net.bither.bitherj.core.HDAccount;
@@ -37,6 +39,7 @@ import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.util.BackupUtil;
 import net.bither.util.KeyUtil;
 import net.bither.util.ThreadUtil;
+
 import java.util.List;
 
 public class ImportHDSeedAndroid extends ImportHDSeed {
@@ -82,9 +85,18 @@ public class ImportHDSeedAndroid extends ImportHDSeed {
                             }
                             if (activity instanceof HotAdvanceActivity) {
                                 ((HotAdvanceActivity) activity).showImportSuccess();
+
                             }
+                            if (activity instanceof HotActivity) {
+                                ((HotActivity) activity).showImportSuccess();
+
+                            }
+
                             if (activity instanceof ColdAdvanceActivity) {
                                 ((ColdAdvanceActivity) activity).showImportSuccess();
+                            }
+                            if (activity instanceof ColdActivity) {
+                                ((ColdActivity) activity).showImportSuccess();
                             }
                             if (activity instanceof HdmImportWordListActivity) {
                                 HdmImportWordListActivity hdmImportWordListActivity = (HdmImportWordListActivity) activity;
@@ -146,9 +158,16 @@ public class ImportHDSeedAndroid extends ImportHDSeed {
                                 HotAdvanceActivity hotAdvanceActivity = (HotAdvanceActivity) activity;
                                 hotAdvanceActivity.showImportSuccess();
                             }
+                            if (activity instanceof HotActivity) {
+                                ((HotActivity) activity).showImportSuccess();
+
+                            }
                             if (activity instanceof ColdAdvanceActivity) {
                                 ColdAdvanceActivity coldAdvanceActivity = (ColdAdvanceActivity) activity;
                                 coldAdvanceActivity.showImportSuccess();
+                            }
+                            if (activity instanceof ColdActivity) {
+                                ((ColdActivity) activity).showImportSuccess();
                             }
 
                             if (activity instanceof HdmImportWordListActivity) {

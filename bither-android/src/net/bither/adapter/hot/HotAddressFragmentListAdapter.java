@@ -454,10 +454,12 @@ public class HotAddressFragmentListAdapter extends BaseExpandableListAdapter imp
             if (a.isHDAccount() && !a.hasPrivKey()) {
                 view.ivType.setOnLongClickListener(null);
                 view.setOnClickListener(hdAccountMonitoredDetailClick);
+
             } else if (a.isHDAccount()) {
                 view.ivType.setOnLongClickListener(hdAccountLongClick);
                 view.setOnClickListener(hdAccountDetailClick);
             } else {
+                //热钱包
                 view.ivType.setOnLongClickListener(new AddressLongClick(a));
                 view.setOnClickListener(new AddressDetailClick(childPosition, a.hasPrivKey(), a.isHDM(),
                         a instanceof EnterpriseHDMAddress,a));

@@ -148,6 +148,11 @@ public class ColdAddressFragment extends Fragment implements Refreshable,
         }
     }
 
+    @Override
+    public void showProgressBar() {
+
+    }
+
     private Runnable showAddressesAddedRunnable = new Runnable() {
         @Override
         public void run() {

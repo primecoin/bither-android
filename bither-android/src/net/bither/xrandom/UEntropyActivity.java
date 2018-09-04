@@ -33,6 +33,7 @@ import android.widget.ProgressBar;
 import net.bither.R;
 import net.bither.activity.cold.AddColdAddressActivity;
 import net.bither.activity.hot.AddHotAddressActivity;
+import net.bither.activity.hot.AddHotAddressPrivateKeyActivity;
 import net.bither.bitherj.BitherjSettings;
 import net.bither.bitherj.crypto.SecureCharSequence;
 import net.bither.preference.AppSharedPreference;
@@ -312,14 +313,14 @@ public abstract class UEntropyActivity extends BaseFragmentActivity implements U
             }
         });
     }
-
+    //取消回退
     protected void backToFromActivity() {
         isFinishing = true;
         Class target;
         if (AppSharedPreference.getInstance().getAppMode() == BitherjSettings.AppMode.COLD) {
-            target = AddColdAddressActivity.class;
+            target = AddHotAddressPrivateKeyActivity.class;
         } else {
-            target = AddHotAddressActivity.class;
+            target = AddHotAddressPrivateKeyActivity.class;
         }
         Intent intent = new Intent(UEntropyActivity.this, target);
         intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);

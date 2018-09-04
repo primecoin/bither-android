@@ -32,6 +32,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ExpandableListView;
 
 import net.bither.R;
+import net.bither.activity.hot.HotActivity;
 import net.bither.activity.hot.SplitBccSelectAddressActivity;
 import net.bither.adapter.hot.HotAddressFragmentListAdapter;
 import net.bither.bitherj.AbstractApp;
@@ -63,7 +64,7 @@ public class HotAddressFragment extends Fragment implements Refreshable, Selecta
     private PinnedHeaderAddressExpandableListView lv;
     private View ivNoAddress;
     private List<Address> watchOnlys;
-    private List<Address> privates;
+    private List<Address> privates;//热钱包列表数据
     private List<HDMAddress> hdms;
     private boolean isLoading = false;
 
@@ -73,6 +74,13 @@ public class HotAddressFragment extends Fragment implements Refreshable, Selecta
     private String notifyAddress = null;
     public boolean isSplitCoinAddress;
     public SplitCoin splitCoin = SplitCoin.BCC;
+    private HotActivity hotActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        hotActivity= (HotActivity) activity;
+    }
 
     @Override
     public void onCreate(Bundle paramBundle) {
@@ -218,6 +226,11 @@ public class HotAddressFragment extends Fragment implements Refreshable, Selecta
         } else {
             refresh();
         }
+    }
+
+    @Override
+    public void showProgressBar() {
+        hotActivity.showProgressBar();
     }
 
     private void lvRefreshing() {

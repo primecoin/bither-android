@@ -29,6 +29,7 @@ import net.bither.R;
 import net.bither.bitherj.utils.Utils;
 import net.bither.model.Ticker;
 import net.bither.preference.AppSharedPreference;
+import net.bither.util.ExchangeUtil;
 import net.bither.util.MarketUtil;
 import net.bither.util.UIUtil;
 import net.bither.util.UnitUtilWrapper;
@@ -101,12 +102,13 @@ public class BtcToMoneyButton extends Button implements OnClickListener,
     }
 
     private void getPrice() {
-        Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
+        /*Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
         if (ticker != null) {
             price = ticker.getDefaultExchangePrice();
         } else {
             price = 0;
-        }
+        }*/
+        price= ExchangeUtil.getCurrentRate();
     }
 
     public void onPause() {

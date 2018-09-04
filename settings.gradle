@@ -1,2 +1,2 @@
 include ':bitherj', ':wheel', ':android-charts', ':bither-android'
-project(':bitherj').projectDir = new File('bitherj/bitherj')
+project(':bitherj').projectDir = new File('bitherj')

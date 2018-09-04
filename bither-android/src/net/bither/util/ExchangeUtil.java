@@ -25,8 +25,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.AbstractMap;
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class ExchangeUtil {
     private ExchangeUtil() {
@@ -35,13 +38,7 @@ public class ExchangeUtil {
 
     public enum Currency {
         USD("USD", "$"),
-        CNY("CNY", "\u00a5"),
-        EUR("EUR", "€"),
-        GBP("GBP", "£"),
-        JPY("JPY", "\u00a5"),
-        KRW("KRW", "₩"),
-        CAD("CAD", "$"),
-        AUD("AUD", "$");
+        CNY("CNY", "\u00a5");
 
         private String symbol;
         private String name;
@@ -164,15 +161,45 @@ public class ExchangeUtil {
 
     public static Currency getExchangeType(BitherjSettings.MarketType marketType) {
         switch (marketType) {
-            case BITSTAMP:
-            case BITFINEX:
-            case COINBASE:
+            case COINMARKETCAP:
                 return Currency.USD;
             default:
                 break;
         }
         return Currency.CNY;
 
+    }
+
+    //获取当前所在国家
+    public static Currency getCurrentCurrency(){
+        String currencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+        if (Utils.compareString(currencyCode, "USD")){
+            return Currency.USD;
+        }
+        return Currency.CNY;
+    }
+
+    //获取当前汇率
+    public static double getCNYRate(){
+        BigDecimal b = new BigDecimal(String.valueOf(AppSharedPreference.getInstance().getCNYExchangeRate()));
+        return b.doubleValue();
+    }
+    public static double getUSDRate(){
+        BigDecimal b = new BigDecimal(String.valueOf(AppSharedPreference.getInstance().getUSDExchangeRate()));
+        return b.doubleValue();
+    }
+
+
+    public static double getCurrentRate(){
+        ExchangeUtil.Currency currency=  AppSharedPreference.getInstance().getDefaultExchangeType();
+        switch (currency){
+            case CNY:
+                return getCNYRate();
+            case USD:
+                return getUSDRate();
+        }
+
+        return getCNYRate();
     }
 
 }

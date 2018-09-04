@@ -257,6 +257,7 @@ public class FileUtil {
 
     }
 
+
     public static File getPriceAlertFile() {
         File marketDir = getMarketCache();
         return new File(marketDir, PRICE_ALERT);

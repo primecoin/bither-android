@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Primecoin</string>
+    <string name="localization.language.code">zh_TW</string>
+    <string name="market_trading_amount">交易量</string>
+    <string name="market_price_high">最高</string>
+    <string name="market_price_low">最低</string>
+    <string name="market_price_open">開盤</string>
+    <string name="market_price_close">收盤</string>
+    <string name="market_name_huobi">火幣網</string>
+    <string name="market_name_chbtc">中國質數幣</string>
+    <string name="market_name_btcchina">質數幣中國</string>
+    <string name="market_name_btctrade">質數幣交易網</string>
+    <string name="activity_name_address_detail">詳情</string>
+    <string name="activity_name_address_sign_tx">簽名交易</string>
+    <string name="activity_name_qr_code">二維碼</string>
+    <string name="activity_name_generate_unsigned_tx">餘額:</string>
+    <string name="activity_name_add_cold_address">生成新私鑰</string>
+    <string name="OK">確認</string>
+    <string name="cancel">取消</string>
+    <string name="close">返回</string>
+    <string name="operate">設置</string>
+    <string name="address_option_delete">停止監控</string>
+    <string name="address_option_remonitor">重新监控</string>
+    <string name="address_option_view_on_blockchain_info">在Bchain.info上查看</string>
+    <string name="address_option_view_on_btc">在btc.com上查看</string>
+    <string name="address_delete_confirmation">確認停止監控這個地址?</string>
+    <string name="address_remonitor_confirmation">確認重新監控這個地址?</string>
+    <string name="address_monitor_failed">監控失敗</string>
+    <string name="address_monitor_failed_too_much_tx">不能監控交易過多的地址</string>
+    <string name="address_monitor_failed_multiple_address">不能監控此類多簽名地址</string>
+    <string name="total_btc_prefix">總計:</string>
+    <string name="total_address_prefix">私鑰數:</string>
+    <string name="total_hdm_keychain_prefix">HDM 冷:</string>
+    <string name="please_wait">請稍候…</string>
+    <string name="address_group_watch_only">冷錢包地址</string>
+    <string name="address_group_private">熱錢包地址</string>
+    <string name="network_or_connection_error">網絡錯誤</string>
+    <string name="high_api_is_too_old">請等待服務器數據更新</string>
+    <string name="find_browser_error">您的手機上未安裝瀏覽器</string>
+
+    <!-- Address Detail -->
+    <string name="address_balance">餘額</string>
+    <string name="address_total_incoming">總收入</string>
+    <string name="address_total_outgoing">總支出</string>
+    <string name="address_detail_balance_detail_transaction_count">交易數</string>
+    <string name="address_total_transaction_count">交易:</string>
+    <string name="address_first_seen_time">最早出現時間</string>
+    <string name="input_coinbase">挖礦</string>
+    <string name="address_cannot_be_parsed">地址不詳</string>
+    <string name="address_mine">我的地址</string>
+    <string name="copy_address">複製</string>
+    <string name="qr_code">二​​維碼</string>
+    <string name="copy_address_success">地址已復制</string>
+    <string name="copy_private_key_success">私鑰已復制</string>
+    <string name="confirmations_postfix">確認</string>
+    <string name="confirmation_postfix">確認</string>
+    <string name="unconfirmed">未確認</string>
+    <string name="address_detail_send">發送</string>
+    <string name="address_detail_unsigned_transaction">未簽名交易</string>
+    <string name="address_detail_send_balance_zero">餘額為零, 無法發送</string>
+    <string name="address_detail_no_transactions">沒有找到這個地址的交易, 它可能還沒有在網絡上使用過.</string>
+    <string name="address_detail_monitor_failed">無法監控交易量過大的地址.</string>
+    <string name="address_detail_monitor_failed_tx_toomuch">此地址有太多交易 ,不能監控</string>
+    <string name="address_detail_monitor_failed_special_address">此地址有特殊交易 ,不能監控</string>
+
+    <string name="address_detail_cancel_monitor">停止監控</string>
+    <string name="address_detail_transaction_confidence_dialog_prefix">確認:</string>
+    <string name="address_detail_stop_monitoring_progress_dialog">正在停止監控…</string>
+    <string name="address_detail_cannot_stop_monitoring">一分鐘內只能停止監控一個地址.</string>
+    <string name="address_detail_cannot_remonitor">一分鐘內只能重新監控一個地址.</string>
+    <string name="address_detail_empty_address_list_notice">不能清空地址列表</string>
+    <string name="address_detail_private_key_qr_code">私鑰二維碼</string>
+    <string name="address_detail_private_key_qr_code_encrypted">私鑰二維碼 (加密)</string>
+    <string name="address_detail_private_key_qr_code_decrypted">私鑰二維碼 (解密)</string>
+    <string name="address_detail_private_Key_qr_code_bip38">BIP38 私鑰二維碼</string>
+    <string name="address_detail_private_key_qr_code_backup">備份私鑰</string>
+
+    <!-- add address -->
+    <string name="add_address_tab_watch_only">監控</string>
+    <string name="add_address_tab_private_key">私鑰</string>
+    <string name="add_address_scan">二維碼</string>
+    <string name="add_address_delete">刪除</string>
+    <string name="add_address_watch_only_hint">Primecoin地址</string>
+    <string name="add_address_already_watched">這個地址已經被監控了</string>
+    <string name="addresses_already_monitored">這個冷錢包已經被監控了</string>
+    <string name="add_address_generate_address_with_private_key">生成</string>
+    <string name="add_address_generate_address_password_label">請輸入錢包密碼</string>
+    <string name="add_address_generate_address_password_lengh_note">長度: 6&#8211;43:數字/字母/符號組合</string>
+    <string name="add_address_generate_address_password_set_label">請設置錢包密碼</string>
+    <string name="add_address_generate_address_password_hint">密碼</string>
+    <string name="add_address_generate_address_password_confirm_hint">確認密碼</string>
+    <string name="add_address_generate_address_password_not_same">兩次輸入的密碼不符</string>
+    <string name="password_checking">正在檢查密碼</string>
+    <string name="password_wrong">密碼錯誤</string>
+    <string name="decrypt_failed">解密失敗</string>
+    <string name="wallet_loading">錢包初始化中, 請稍後再試.</string>
+    <string name="add_address_watch_only_scanned_address_warning">比太只能監控冷錢包監控二維碼,\n不能監控其它地址</string>
+
+
+    <!-- send -->
+    <string name="send_progress_dialog_message">發送中</string>
+    <string name="send_success">發送成功</string>
+    <string name="send_failed">發送失敗</string>
+    <string name="send_failed_missing_btc">發送失敗. 可用餘額中缺少%s XPM.</string>
+    <string name="send_failed_dust_out_put">發送失敗. 這樣小額的交易會被忽略.</string>
+    <string name="send_failed_pendding">發送失敗. %s XPM 正在等待確認.\n請等待一個新的確認後再交易.</string>
+    <string name="send_failed_max_tx_size">發送失敗. 交易大小过大.\n請減少發送金額.</string>
+    <string name="send_coins_fragment_sending_address_label">從</string>
+    <string name="send_coins_fragment_receiving_address_label">發送給</string>
+    <string name="send_coins_fragment_amount_label">金額</string>
+    <string name="send_result_sent_to">已被發給了</string>
+    <string name="send_result_with_fee">手續費</string>
+    <string name="send_confirm_address">將要發送給:</string>
+    <string name="send_confirm_amount">金額:</string>
+    <string name="send_confirm_fee">手續費:</string>
+    <string name="send_confirm_low_priority_warn">交易中有小於0.01BTC的支出,\n手續費較低.\n<b>確認時間可能很長</b>.</string>
+    <string name="unsigned_transaction_exit_waring">放棄簽名嗎?\n此交易將不會被廣播</string>
+
+    <!-- market -->
+    <string name="market_sell">賣一:</string>
+    <string name="market_buy">買一:</string>
+    <string name="market_height">最高:</string>
+    <string name="market_low">最低:</string>
+    <string name="market_line_one_minute">1分鐘</string>
+    <string name="market_line_five_minute">5分鐘</string>
+    <string name="market_line_one_hour">1小時</string>
+    <string name="market_line_one_day">1天</string>
+    <string name="market_detail_new_price">最新價</string>
+    <string name="market_detail_sell_price">賣一價</string>
+    <string name="market_detail_buy_price">買一價</string>
+    <string name="market_detail_high_price">最高價</string>
+    <string name="market_detail_low_price">最低價</string>
+    <string name="market_detail_depth">市場深度</string>
+    <string name="market_share_button">分享</string>
+    <string name="market_web_button_prefix">訪問</string>
+    <string name="market_share_failed">分享失敗</string>
+    <string name="kline">K線圖</string>
+    <string name="ten_line">10均線: </string>
+    <string name="thirty_line">30均線: </string>
+    <string name="kline_high">最高: </string>
+    <string name="kline_low">最低: </string>
+    <string name="kline_open">開盤: </string>
+    <string name="kline_close">收盤: </string>
+    <string name="kline_amount">交易量: </string>
+    <string name="market_price_alert_high_hint">高於</string>
+    <string name="market_price_alert_low_hint">低於</string>
+    <string name="market_price_alert_high_error">價格預警最高值不應比當前價格低</string>
+    <string name="market_price_alert_low_error">價格預警最低值不應比當前價格高</string>
+    <string name="market_price_alert_title">價格預警</string>
+    <string name="price_alert_higher_than">%s價格高於 </string>
+    <string name="price_alert_lower_than">%s價格低於 </string>
+
+    <!-- setting -->
+    <string name="setting_name_currency">默認貨幣</string>
+    <string name="setting_name_market">默認交易所</string>
+    <string name="setting_name_wifi">網絡設置</string>
+    <string name="setting_name_wifi_yes">只在wifi下同步</string>
+    <string name="setting_name_wifi_no">一直同步</string>
+    <string name="setting_name_transaction_fee">默認手續費</string>
+    <string name="setting_name_transaction_fee_normal">正常</string>
+    <string name="setting_name_transaction_fee_higher">更高</string>
+    <string name="setting_name_transaction_fee_high">高</string>
+    <string name="setting_name_transaction_fee_10x">10倍</string>
+    <string name="setting_name_transaction_fee_20x">20倍</string>
+    <string name="setting_name_transaction_fee_normal_note">較快確認</string>
+    <string name="setting_name_transaction_fee_low_note">較慢確認</string>
+    <string name="setting_name_transaction_fee_high_note">高優先順序</string>
+    <string name="setting_api_config"> API 設定</string>
+    <string name="setting_api_config_bither_net">Bither.net</string>
+    <string name="setting_api_config_blockchain">Blockchain.info</string>
+    <string name="setting_name_api_config_bither">Bither</string>
+    <string name="setting_name_api_config_blockchain">Blockchain</string>
+    <string name="donate_button">捐贈</string>
+    <string name="donate_thanks">謝謝您的捐贈</string>
+    <string name="buy_order">買單</string>
+    <string name="sell_order">賣單</string>
+    <string name="setting_name_transaction_fee_low_warn">確認默認使用低手續費模式?\n這會導致較慢的交易確認</string>
+    <string name="backup_again">一個小時內剛剛進行過備份，確認要再次備份嗎?</string>
+    <string name="set_avatar">設置頭像</string>
+    <string name="set_avatar_camera">來自相機</string>
+    <string name="set_avatar_gallery">來自圖庫</string>
+    <string name="edit_password_button">修改密碼</string>
+    <string name="export_log">導出日志</string>
+    <string name="export_address">導出地址</string>
+    <string name="export_log_prompt">確認導出日志到sd卡？</string>
+    <string name="reload_tx">重載交易數據</string>
+    <string name="export_success">日志已導出到 :</string>
+    <string name="export_address_success">地址已導出到 :</string>
+    <string name="setting_name_import_private_key">導入私鑰</string>
+    <string name="setting_name_import_bip38_key">導入BIP38私鑰</string>
+    <string name="import_private_key_qr_code">來自比太私鑰二維碼</string>
+    <string name="import_private_key_text">來自私鑰明文</string>
+    <string name="import_hdm_cold_seed_qr_code">來自HDM冷種子二維碼</string>
+    <string name="import_hdm_cold_seed_phrase">來自HDM密語(冷)</string>
+    <string name="import_hd_account_seed_qr_code">來自HD種子二維碼</string>
+    <string name="import_hd_account_seed_phrase">來自HD密語</string>
+
+    <string name="import_bip38_key_qr_code">來自BIP38私鑰二維碼</string>
+    <string name="import_bip38_key_text">來自BIP38私鑰文本</string>
+    <string name="private_key_text">私鑰明文</string>
+    <string name="import_bip38_key_text_hint">輸入BIP38私鑰明文</string>
+    <string name="enter_bip38_key_password">請輸入BIP38私鑰的密碼</string>
+    <string name="import_bip38_key_text_format_erro">不符合BIP38私鑰格式</string>
+    <string name="import_private_key_text_hint">輸入私鑰明文</string>
+    <string name="import_private_key_text_format_error">不符合私鑰格式</string>
+    <string name="import_hdm_cold_seed_format_error">不是HDM冷種子</string>
+    <string name="import_hd_account_seed_format_error">不是HD賬戶種子</string>
+    <string name="can_not_import_hdm_cold_seed">不能導入HDM冷種子</string>
+    <string name="import_private_key_qr_code_scan_title">掃描私鑰二維碼</string>
+    <string name="import_hdm_cold_seed_qr_code_scan_title">掃描HDM冷種子二維碼</string>
+    <string name="import_bip38private_key_qr_code_scan_title">掃描BIP38私鑰二維碼</string>
+    <string name="import_private_key_qr_code_password">輸入原密碼</string>
+    <string name="import_private_key_qr_code_success">導入成功</string>
+    <string name="import_private_key_qr_code_failed">導入失敗</string>
+    <string name="import_hd_account_failed_duplicated">匯入失敗. 這個賬戶已經存在. </string>
+    <string name="import_private_key_qr_code_failed_monitored">不能導入冷錢包私鑰</string>
+    <string name="import_private_key_qr_code_failed_duplicate">私鑰已存在</string>
+    <string name="import_private_key_qr_code_importing">正在導入…</string>
+    <string name="import_private_key_qr_code_failed_different_password">導入私鑰的密碼與已有密碼不同, 無法導入</string>
+    <string name="import_private_key_failed_tx_too_mush">此私鑰有太多交易 ,不能導入</string>
+    <string name="import_private_key_failed_special_address">此私鑰有特殊交易 ,不能導入</string>
+    <string name="reload_tx_need_too_much_time">確認重載交易數據 ?\n需要較長時間\n消耗網絡流量\n建議只在數據出錯時嘗試</string>
+    <string name="reload_tx_failed">重載交易數據失敗 , 請重試 . </string>
+    <string name="reload_tx_success">重載交易數據成功 </string>
+    <string name="tx_cannot_reloding">壹個小時內只能重載交易數據壹次.</string>
+    <string name="base_on_text">基于 </string>
+    <string name="synchronous_interval">同步間隔</string>
+    <string name="synchronous_interval_fifteen_minute">15 分鍾</string>
+    <string name="synchronous_interval_normal">正常</string>
+    <string name="synchronous_interval_one_hour">1 小時</string>
+    <string name="synchronous_interval_only_open_app">僅在打開應用時</string>
+    <!-- Input parser -->
+    <string name="input_parser_cannot_classify">無法分類輸入:\n%s</string>
+    <string name="input_parser_invalid_bitcoin_uri">質數幣 URI 無效:\n%s</string>
+    <string name="input_parser_invalid_address">取得無效質數幣地址!\n(是否 Mainnet/Testnet 混用?)</string>
+    <string name="input_parser_invalid_transaction">無效交易:\n%s</string>
+
+    <!-- feed -->
+    <string name="feed_send_btc">發送:</string>
+    <string name="feed_received_btc">收到:</string>
+    <string name="freshnews_title">新鮮事</string>
+
+    <!-- mode -->
+    <string name="choose_mode_cold_desctription">冷錢包 : 離線, 安全!</string>
+    <string name="choose_mode_warm_desctription">熱錢包 : 聯機, 易用!</string>
+    <string name="choose_mode_warm_waiting">加載中…</string>
+    <string name="choose_mode_warm_retry">重試</string>
+    <string name="choose_mode_warm_change_to_cold">切換到冷錢包</string>
+    <string name="choose_mode_cold_confirm">模式設置後不能切換.\n冷錢包應該運行在離線的備用手機上.\n確認以冷錢包模式運行?</string>
+    <string name="choose_mode_warm_confirm">模式設置後不能切換.\n熱錢包可以方便的在線發送交易.\n確認以熱錢包模式運行?</string>
+
+    <!-- warning -->
+    <string name="cold_warning">警告</string>
+    <string name="safe_your_wallet">爲了您的冷錢包安全, 請關閉網絡</string>
+
+    <!-- cold wallet -->
+    <string name="check_now">立即檢查</string>
+    <string name="check_network">檢查網絡</string>
+    <string name="check_address">檢查地址</string>
+    <string name="cold_wallet_init_check_label">請關閉網絡</string>
+    <string name="wifi_is_close">WIFI已關閉</string>
+    <string name="threeg_is_close">數據網絡已關閉</string>
+    <string name="bluetooth_is_close">藍牙已關閉</string>
+    <string name="wifi_not_close">WIFI未關閉</string>
+    <string name="threeg_not_close">數據網絡未關閉</string>
+    <string name="bluetooth_not_close">藍牙未關閉</string>
+    <string name="wifi_is_close_checking">正在檢查WIFI…</string>
+    <string name="threeg_is_close_checking">正在檢查數據網絡…</string>
+    <string name="bluetooth_is_close_checking">正在檢查藍牙…</string>
+    <string name="check_address_private_key_title">%s 的私鑰</string>
+    <string name="check_address_password">密碼正確</string>
+    <string name="check_private_key_safe">您的私鑰很安全</string>
+    <string name="check_private_key_danger">您的私鑰存在風險</string>
+    <string name="checking_private_key">正在檢查私鑰</string>
+    <string name="check_private_key_button">一鍵檢查私鑰</string>
+    <string name="private_key_is_empty">你還沒有添加私鑰, 請先添加私鑰</string>
+    <string name="next_page">下壹張</string>
+    <string name="can_not_find_private_key">沒有找到對應的私鑰</string>
+    <string name="scan_watch_only_address_error">二維碼不符合質數幣地址格式</string>
+    <string name="sign_transaction">簽名交易</string>
+    <string name="scan_qr_transport_init_label">請掃描比太提供的第1張二維碼</string>
+    <string name="scan_qr_transport_page_label">請掃描第%1$d張二維​​碼, 共%2$d張</string>
+    <string name="signing_transaction">正在簽名</string>
+    <string name="signed_transaction_qr_code_title">用熱錢包掃描以簽名交易</string>
+    <string name="qr_code_page">第%1$d張, 共%2$d張</string>
+    <string name="complete">完成</string>
+    <string name="scan_unsigned_transaction_title">掃描熱錢包上的未簽名交易</string>
+    <string name="clone_to_button">冷錢包克隆二維碼</string>
+    <string name="clone_to_title">用要克隆到的錢包掃描</string>
+    <string name="clone_from_button">冷錢包克隆</string>
+    <string name="clone_from_title">掃描克隆源上的二維碼</string>
+    <string name="clone_from_waiting">正在克隆…</string>
+    <string name="clone_from_success">克隆成功</string>
+    <string name="clone_from_failed">克隆失敗</string>
+    <string name="clone_from_password">輸入克隆源的密碼</string>
+    <string name="qr_code_for_all_addresses">冷錢包監控二維碼</string>
+    <string name="qr_code_for_all_addresses_title">使用熱錢包掃描來監控冷錢包</string>
+    <string name="no_sd_card_of_back_up">沒有SD卡，無法自動備份</string>
+    <string name="backup_finish">備份成功 !</string>
+    <string name="no_sd_card">SD卡錯誤</string>
+    <string name="last_time_of_back_up">上一次備份時間: %s </string>
+    <string name="just_now">剛剛</string>
+    <string name="private_key_count_limit">已達私鑰數量上限</string>
+    <string name="watch_only_address_count_limit">已達到監控地址上限</string>
+    <string name="generate_address_count_label">生成多少個私鑰?</string>
+    <string name="recover_from_backup_of_cold">檢測到sd卡上有過去的冷錢包備份，是否從備份中恢復？</string>
+    <string name="first_add_private_key_check_suggest">是否現在一鍵檢測私鑰?</string>
+
+    <!-- warm wallet -->
+    <string name="prepare_tx">初始化交易</string>
+    <string name="generate_unsigned_tx_button">未簽名交易二維碼</string>
+    <string name="get_sign_hash">得到簽名信息</string>
+    <string name="unsigned_transaction_qr_code_title">使用包含此地址私鑰的冷錢包掃描</string>
+    <string name="unsigned_transaction_qr_code_complete">掃描冷錢包以簽名</string>
+    <string name="unsigned_transaction_sign_failed">簽名失敗</string>
+    <string name="scan_transaction_signature_title">掃描冷錢包上的簽名信息</string>
+    <string name="scan_for_all_addresses_in_bither_cold">一鍵監控冷錢包</string>
+    <string name="scan_for_all_addresses_in_bither_cold_title">掃描冷錢包的二維碼</string>
+    <string name="scan_for_all_addresses_in_bither_cold_success">監控冷錢包成功</string>
+    <string name="scan_for_all_addresses_in_bither_cold_failed">監控冷錢包失敗</string>
+    <string name="time_is_wrong">系統時間錯誤, 請重新設置</string>
+    <string name="only_supports_the_compressed_private_key">只支持壓縮格式的私鑰</string>
+    <string name="old_version_no_support_change_adress">舊版本二維碼不支持選擇找零地址</string>
+    <string name="scan_qr_code_from_photo_wrong">沒有找到二維碼</string>
+
+    <!-- select address to send -->
+    <string name="select_address_to_send">請選擇從哪個地址發送</string>
+    <string name="select_address_to_send_no_address_fount">您沒有一個擁有足夠餘額的地址</string>
+
+    <!-- donate -->
+    <string name="select_address_to_donate">請選擇用來捐贈的地址</string>
+    <string name="donate_no_address">您沒有可以用來捐贈的質數幣</string>
+    <string name="donate_receiving_address_label">捐贈給開發者</string>
+    <string name="donate_sending_verb">捐贈</string>
+    <string name="donate_unsigned_transaction_verb">捐贈</string>
+
+    <string name="network_monitor_activity_title">網路監控</string>
+    <string name="network_monitor_clear_peer">清空節點</string>
+
+    <!-- fancy qr code -->
+    <string name="fancy_qr_code_share">分享</string>
+    <string name="fancy_qr_code_save">保存</string>
+    <string name="saving">正在保存…</string>
+    <string name="fancy_qr_code_save_success">二維碼已保存</string>
+    <string name="fancy_qr_code_view_origin">查看原始二維碼</string>
+    <string name="fancy_qr_code_theme">二維碼風格</string>
+    <string name="fancy_qr_code_theme_name_yellow">黃</string>
+    <string name="fancy_qr_code_theme_name_green">綠</string>
+    <string name="fancy_qr_code_theme_name_red">紅</string>
+    <string name="fancy_qr_code_theme_name_blue">藍</string>
+    <string name="fancy_qr_code_theme_name_purple">紫</string>
+    <string name="fancy_qr_code_theme_name_black">黑</string>
+
+    <!-- edit password -->
+    <string name="edit_password_title">修改密碼</string>
+    <string name="edit_password_old_password">原密碼</string>
+    <string name="edit_password_new_password">新密碼</string>
+    <string name="edit_password_confirm_new_password">確認新密碼</string>
+    <string name="edit_password_success">修改密碼成功</string>
+    <string name="edit_password_fail">修改密碼失敗</string>
+    <string name="edit_password_new_old_same">新密碼不能和舊密碼相同</string>
+    <string name="edit_password_editing">正在修改密碼…\n請不要關閉手機屏幕</string>
+
+    <!-- password keyboard -->
+    <string name="password_keyboard_done">完成</string>
+    <string name="password_keyboard_next">下一項</string>
+
+    <!-- advance -->
+    <string name="activity_name_advance">高級選項</string>
+
+    <!-- first run dialog -->
+    <string name="first_run_dialog_title">為了保護您的質數幣:</string>
+    <string name="first_run_dialog_line_1">請不要卸載質數幣錢包</string>
+    <string name="first_run_dialog_line_2">請不要清除質數幣數據</string>
+    <string name="first_run_dialog_line_3">請牢記您的密碼</string>
+
+    <!-- upgrade -->
+    <string name="begin_upgrade">正在升級…\n1.請不要退出應用\n2.請不要關閉手機\n3.請不要關閉手機屏幕</string>
+    <string name="upgrading">升級中...</string>
+
+    <!-- xrandom -->
+    <string name="xrandom_stopping">正在停止…</string>
+    <string name="xrandom_cancel_confirm">停止生成?</string>
+    <string name="xrandom_generating_failed">生成失敗</string>
+    <string name="xrandom_no_source">無可用隨機源</string>
+    <string name="urandom_not_exists">你的設備無法提供足夠安全的隨機數</string>
+    <string name="xrandom_uncheck_warn">極隨機(XRandom)能提高隨機性.\n確認不使用嗎?</string>
+    <string name="xrandom_final_confirm">您已成功生成%d個極隨機私鑰</string>
+    <string name="xrandom_info_detail">極隨機通過採集數據源以增加隨機性.\n\n數據源包括攝像頭、麥克風、磁場感應器、重力感應器等設備內置傳感器.</string>
+    <string name="xrandom_info_guide">\n\n採集過程中您可通過晃動設備發出聲音等方式增加所採集數據的隨機性.</string>
+    <string name="generating_private_key_final_confirm">您已成功生成%d個私鑰</string>
+    <string name="xrandom_instruction_auto_show_check">下次不再顯示</string>
+
+    <!-- qrcode-->
+    <string name="switch_qrcode">切換二維碼</string>
+    <string name="use_old_version_qrcode">已切換到舊版二維碼，可用 &lt;1.1.0的冷錢包簽名</string>
+    <string name="use_new_version_qrcode">已切換到新版二維碼，可用 ≧1.1.0的冷錢包簽名</string>
+
+    <!-- rcheck -->
+    <string name="rcheck_address_title">%s 的 r 值</string>
+    <string name="rcheck_address_danger_title">%s 的 r 值異常</string>
+    <string name="rcheck_no_address">未添加地址, 無需檢查 r 值.</string>
+    <string name="rcheck_safe">r 值正常.</string>
+    <string name="rcheck_danger">r 值異常.</string>
+    <string name="rchecking">正在檢查 r 值</string>
+    <string name="rcheck_button">RCheck</string>
+    <string name="rcheck_recalculate">r 值檢查失敗, 重新簽名交易.</string>
+    <string name="rchecking_new_tx">r 值檢查</string>
+    <string name="rcheck_new_tx_success">r 值檢查</string>
+    <string name="rcheck_fail_recalculate_confirm">r 值檢查失敗, 重新簽名交易?</string>
+    <string name="rcheck_info">同一個地址的交易歷史中出現重複的 r 值, 有可能導致私鑰暴露.\n\nr 值檢查會檢查交易歷史, 並確保不存在重複 r 值.</string>
+    <string name="setting_name_rcheck">r 值檢查</string>
+
+    <!-- trash -->
+    <string name="trash_private_key">移入回收站</string>
+    <string name="trash_with_money_warn">這個地址上還有質數幣.\n您不能把它移入回收站.</string>
+    <string name="trashing_private_key">正在移入回收站</string>
+    <string name="trash_can">回收站</string>
+    <string name="trash_can_empty">回收站空</string>
+    <string name="trash_address_restore">還原地址?</string>
+
+    <!-- pin code -->
+    <string name="pin_code_enter_notice">輸入您的PIN 碼</string>
+    <string name="pin_code_setting_name">PIN 碼</string>
+    <string name="pin_code_setting_open">開啟 PIN 碼</string>
+    <string name="pin_code_setting_close">關閉 PIN 碼</string>
+    <string name="pin_code_setting_change">修改 PIN 碼</string>
+    <string name="pin_code_setting_open_msg">輸入您的 PIN 碼</string>
+    <string name="pin_code_setting_open_repeat_msg">再次輸入您的 PIN 碼</string>
+    <string name="pin_code_setting_open_repeat_wrong">兩次輸入的 PIN 碼不同</string>
+    <string name="pin_code_setting_change_old_msg">輸入您的原 PIN 碼</string>
+    <string name="pin_code_setting_change_old_wrong">原 PIN 碼錯誤</string>
+    <string name="pin_code_setting_change_new_msg">輸入您的新 PIN 碼</string>
+    <string name="pin_code_setting_change_new_repeat_msg">再次輸入您的新 PIN 碼</string>
+    <string name="pin_code_setting_change_repeat_wrong">兩次輸入的新 PIN 碼不同</string>
+    <string name="pin_code_setting_close_wrong">PIN 碼錯誤</string>
+
+    <!-- launch sequence -->
+    <string name="launch_sequence_switch_to_cold">切換到冷錢包</string>
+    <string name="launch_sequence_switch_to_cold_warn">確認切換到冷錢包模式?\n\n冷錢包應該運行在離線的備用手機上.\n熱錢包可以監控冷錢包.\n一旦切換成冷錢包便不能切換回熱錢包.</string>
+
+    <!-- bitcoin unit -->
+    <string name="setting_name_bitcoin_unit">默認單位</string>
+
+    <!--  Private Key Management -->
+    <string name="private_key_management">私鑰管理</string>
+
+    <!-- Raw Private Key -->
+    <string name="activity_name_raw_private_key">原始私鑰</string>
+    <string name="raw_private_key_private_key">私鑰</string>
+    <string name="raw_private_key_address">地址</string>
+    <string name="raw_private_key_add">添加此私鑰</string>
+    <string name="raw_private_key_not_safe">這個私鑰不安全</string>
+    <string name="raw_private_key_tab_binary">二進制</string>
+    <string name="raw_private_key_tab_dice">骰子</string>
+
+    <!-- QR Code Quality -->
+    <string name="qr_code_quality_setting_name">二維碼精度</string>
+    <string name="qr_code_quality_setting_normal">正常</string>
+    <string name="qr_code_quality_setting_low">較低</string>
+
+    <!-- Manual Delete Transaction -->
+    <string name="manual_delete_transaction_warning">刪除此交易?</string>
+
+    <!-- Select Change Address -->
+    <string name="select_change_address_option_name">選擇找零地址</string>
+    <string name="select_change_address_label">選擇找零地址</string>
+    <string name="send_confirm_change_to_label">找零到:</string>
+    <string name="sign_transaction_change_to_label">找零到:</string>
+    <string name="sign_transaction_change_amount_label">找零金額:</string>
+    <string name="select_change_address_change_to_same_warn">發送到的地址和找零地址不能相同</string>
+
+    <!-- Sign Message -->
+    <string name="sign_message_activity_name">簽名消息</string>
+    <string name="sign_message_button">簽名</string>
+    <string name="sign_message_output_copy">複製</string>
+    <string name="sign_message_output_qr">顯示二維碼</string>
+    <string name="sign_message_output_copied">內容已復制</string>
+    <string name="sign_message_input_hint">待簽名的消息</string>
+    <string name="sign_message_select_address">選擇簽名消息用的地址</string>
+    <string name="sing_message_select_hd_receive">HD賬戶 收款地址</string>
+    <string name="sing_message_select_hd_change">HD賬戶 找零地址</string>
+    <string name="sign_message_select_address_index">序號:</string>
+
+    <!-- Verify Message Signature -->
+    <string name="verify_message_signature_activity_name">驗證消息簽名</string>
+    <string name="verify_message_signature_address_hint">簽名用的地址</string>
+    <string name="verify_message_signature_message_hint">原消息</string>
+    <string name="verify_message_signature_signature_hint">簽名</string>
+    <string name="verify_message_signature_verify_button">驗證</string>
+    <string name="verify_message_signature_verify_button_verifying">正在驗證…</string>
+    <string name="verify_message_signature_verify_button_reverify">重新驗證</string>
+    <string name="verify_message_signature_verify_success">簽名驗證通過</string>
+    <string name="verify_message_signature_verify_failed">簽名驗證未通過</string>
+    <string name="sign_message_setting_name">消息簽名</string>
+
+    <!-- hdm cold add -->
+    <string name="hdm_cold_seed_count_limit">您只能生成一個 HDM 賬戶</string>
+    <string name="hdm_account_cold_address_list_label">HDM 冷</string>
+    <string name="hdm_seed_generation_notice">HDM 結合了分層確定性和多重簽名兩種技術.\n\nHDM 運用多重簽名技術來避免分層確定性錢包的缺陷.\n\n比太使用 2/3 的多重簽名來生成 HDM 地址.\n\n三個私鑰分別由熱錢包, 冷錢包和 HDM 服務器上的確定性種子生成.</string>
+    <string name="hdm_keychain_xrandom_final_confirm">您生成了一個極隨機 HDM 賬戶.</string>
+    <string name="hdm_cold_pub_key_qr_code_name">HDM 冷帳號二維碼</string>
+    <string name="hdm_server_qr_code_name">HDM 服務器二維碼</string>
+    <string name="hdm_cold_seed_qr_code">HDM 冷種子二維碼</string>
+    <string name="hdm_hot_seed_qr_code">HDM 熱種子二維碼</string>
+    <string name="hdm_cold_seed_word_list">HDM 密語(冷)</string>
+    <string name="hdm_hot_seed_word_list">HDM 密語(熱)</string>
+
+    <!-- hdm check -->
+    <string name="hdm_keychain_check_title_cold">HDM 冷</string>
+    <string name="hdm_keychain_check_title_hot">HDM 熱</string>
+
+    <!-- hdm hot add -->
+    <string name="hdm_keychain_add_hot">HDM 熱</string>
+    <string name="hdm_keychain_add_cold">HDM 冷</string>
+    <string name="hdm_keychain_add_server">HDM 服務器</string>
+    <string name="hdm_keychain_add_hot_confirm">生成 HDM 熱帳號</string>
+    <string name="hdm_keychain_add_scan_cold">掃描 HDM 冷帳號二維碼</string>
+    <string name="hdm_keychain_add_unsigned_server_qr_code_title">在冷錢包選擇 HDM 服務器二維碼來簽名</string>
+    <string name="hdm_keychain_add_scan_signed_server_qr_code_action">掃描已簽名服務器二維碼</string>
+    <string name="hdm_keychain_add_signed_server_qr_code_title">已簽名服務器二維碼</string>
+    <string name="hdm_keychain_add_sign_server_qr_code_error">簽名服務器二維碼出錯</string>
+    <string name="hdm_exception_bid_already_exists">此 HDM 冷賬戶已被綁定到另一個 HDM 熱賬戶</string>
+    <string name="hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm">放棄簽名?</string>
+
+    <!-- show hdm address -->
+    <string name="address_group_hdm_hot">HDM 熱</string>
+    <string name="hdm_address_trash_at_least_one_warn">您不能將HDM 帳號裡的所有地址都放入回收站</string>
+    <string name="hdm_address_sign_tx_server_error">HDM 服務器簽名出錯</string>
+
+    <!-- hdm hot address add -->
+    <string name="hdm_address_count_limit">已達 HDM 地址數上限</string>
+    <string name="activity_name_add_hdm_address">增加 HDM 地址</string>
+    <string name="hdm_address_add_count_label">增加多少個 HDM 地址?</string>
+    <string name="hdm_address_add_need_cold_pub">需要 HDM 冷帳號二維碼才能繼續</string>
+    <string name="hdm_address_add_button">增加</string>
+    <string name="hdm_address_add_cold_pub_not_match">HDM 冷帳號和之前不同</string>
+
+    <!-- hdm send -->
+    <string name="hdm_send_with_cold">與 HDM 冷共同簽名</string>
+    <string name="hdm_send_with_server">與 HDM 服務器共同簽名</string>
+    <string name="hdm_send_with_cold_no_requested_seed">您沒有簽名所需的 HDM 冷帳號</string>
+
+    <!-- hdm recovery -->
+    <string name="hdm_keychain_recovery_setting_name">HDM 賬號恢復</string>
+    <string name="hdm_keychain_recovery_warn">HDM 賬號正在恢復中</string>
+    <string name="hdm_keychain_recovery_no_addresses">沒有需要恢復的 HDM 地址</string>
+    <string name="hdm_keychain_recovery_message">請盡快轉移走HDM 恢復帳號中的質數幣</string>
+    <string name="address_group_hdm_recovery">HDM 恢復</string>
+    <string name="activity_name_hdm_import_word_list">導入 HDM 密語</string>
+    <string name="hdm_import_word_list_input_hint">下一單詞</string>
+    <string name="hdm_import_word_list_empty_message">請輸入 HDM 密語</string>
+    <string name="hdm_import_word_list_wrong_word_warn">單詞無效</string>
+    <string name="hdm_import_word_list_delete">刪除</string>
+    <string name="hdm_import_word_list_replace">替換</string>
+    <string name="activity_name_hd_import_word_list">匯入 HD 密語</string>
+    <string name="hd_import_word_list_empty_message">請輸入 HD 密語</string>
+
+    <!-- hdm reset server password -->
+    <string name="hdm_reset_server_password_password_wrong_confirm">HDM 服務器授權失效.\n使用 HDM 冷重新授權?</string>
+    <string name="hdm_reset_server_password_confirm">確認重置 HDM 服務器授權?</string>
+    <string name="hdm_reset_server_password_setting_name">重置 HDM 服務器授權</string>
+    <string name="hdm_reset_server_password_success">HDM 服務器授權已重置</string>
+
+    <!-- hdm singular mode-->
+    <string name="hdm_singular_check_title">單機模式</string>
+    <string name="hdm_singular_cold_seed_remember_warn">HDM 冷種子非常重要.\n您必須自己妥善保存它.</string>
+    <string name="hdm_singular_cold_seed_remember_button">我已保存好 HDM 冷種子</string>
+    <string name="hdm_singular_cold_seed_tab_words">密語</string>
+    <string name="hdm_singular_cold_seed_tab_qr">二維碼</string>
+    <string name="hdm_singular_mode_info">單機模式只需要一部設備即可運行 HDM.\n不需要額外的冷錢包設備.\n但是您需要妥善保管好冷種子.\n冷種子是恢復 HDM 賬戶的唯一方法.</string>
+    <string name="hdm_singular_mode_cancel_warn">HDM 單機模式正在運行, 不能中斷</string>
+
+    <!-- address alias -->
+    <string name="address_alias_manage">地址標籤</string>
+    <string name="address_alias_add">設置地址標籤</string>
+    <string name="address_alias_remove">刪除地址標籤</string>
+    <string name="address_alias_edit">編輯地址標籤</string>
+    <string name="address_alias_input_label">輸入此地址的標籤</string>
+    <string name="address_alias_input_hint">標籤</string>
+    <string name="address_alias_remove_confirm">刪除此地址標籤?</string>
+
+    <!-- bither team address -->
+    <string name="bither_team_address">開發者地址</string>
+    <string name="bither_team_address_copied">開發者地址已復制</string>
+
+    <!-- password strength -->
+    <string name="password_strength_weak">較弱</string>
+    <string name="password_strength_normal">一般</string>
+    <string name="password_strength_medium">中等</string>
+    <string name="password_strength_strong">較強</string>
+    <string name="password_strength_very_strong">很強</string>
+    <string name="password_strength_warning">確定使用強度%s的密碼?</string>
+    <string name="password_strength_check">密碼強度檢查</string>
+    <string name="password_strength_check_on">開</string>
+    <string name="password_strength_check_off">關</string>
+    <string name="password_strength_check_off_warn">確認關閉密碼強度檢查?</string>
+
+    <!-- add hd account -->
+    <string name="add_hd_account_label">生成新的 HD 賬戶</string>
+    <string name="add_hd_account_button">生成</string>
+    <string name="add_hd_account_tab_hd">HD 賬戶</string>
+    <string name="add_hd_account_tab_other">其它</string>
+    <string name="add_hd_account_other_hdm">生成 HDM 賬戶</string>
+    <string name="add_hd_account_other_private">生成普通私鑰</string>
+    <string name="add_hd_account_view_label">已有 HD 賬戶</string>
+    <string name="add_hd_account_seed_qr_code">HD 賬戶種子二維碼</string>
+    <string name="add_hd_account_seed_qr_phrase">HD 賬戶密語</string>
+    <string name="add_hd_account_show_seed_label">HD 種子能夠用來恢復 HD 賬戶,\n請安全地保管它.</string>
+    <string name="add_hd_account_show_seed_button">我已經保管好了 HD 種子</string>
+
+    <!-- show hd account -->
+    <string name="address_group_hd">HD 賬戶</string>
+    <string name="hd_account_request_new_receiving_address">生成新地址</string>
+    <string name="hd_account_request_new_receiving_address_failed">生成失敗, 您最多隻能生成20個未使用的新地址.</string>
+
+    <!-- vanity address length -->
+    <string name="vanity_address_length">榮耀地址位數</string>
+    <string name="vanity_address_none">無</string>
+
+    <!-- Enterprise HDM -->
+    <string name="enterprise_activate_warn">啟用企業賬戶?</string>
+    <string name="enterprise_hdm_keychain_add">新增企業 HDM 賬戶</string>
+    <string name="enterprise_hdm_seed_add">新增企業 HDM 種子</string>
+    <string name="enterprise_hdm_seed_add_fail">新增企業 HDM 種子失敗</string>
+    <string name="enterprise_hdm_seed">企業 HDM 種子</string>
+    <string name="enterprise_hdm_seed_add_note">新增一個種子用來創建企業 HDM 賬戶</string>
+    <string name="enterprise_hdm_seed_qr_code">企業 HDM 種子二維碼</string>
+    <string name="enterprise_hdm_seed_cosign">聯合簽名</string>
+    <string name="enterprise_hdm_seed_import_from_qr_code">從二維碼匯入</string>
+    <string name="enterprise_hdm_seed_import_from_phrase">從密語匯入</string>
+    <string name="enterprise_hdm_seed_backup_qr_code">備份二維碼</string>
+    <string name="enterprise_hdm_seed_backup_phrase">備份密語</string>
+    <string name="enterprise_hdm_keychain">企業 HDM 賬戶</string>
+    <string name="enterprise_hdm_keychain_multisig_scheme">選擇多重簽名模式</string>
+    <string name="enterprise_hdm_keychain_collect_pubs">收集種子二維碼</string>
+    <string name="enterprise_hdm_keychain_address_count">生成多少地址?</string>
+    <string name="enterprise_hdm_keychain_collect_pub_error">新增種子失敗</string>
+    <string name="enterprise_hdm_keychain_add_fail">創建企業 HDM 賬戶失敗</string>
+    <string name="enterprise_hdm_seed_import_format_error">不符合企業 HDM 種子格式</string>
+    <string name="next_step">下一步</string>
+    <string name="enterprise_hdm_keychain_payment_proposal">付款申請</string>
+    <string name="enterprise_hdm_keychain_payment_proposal_signature_needed">需要 %1$d/%2$d 個簽名</string>
+    <string name="enterprise_hdm_keychain_payment_proposal_add_signaure">添加簽名</string>
+    <string name="enterprise_hdm_keychain_payment_proposal_sign_failed">簽名交易失敗</string>
+    <string name="enterprise_hdm_keychain_payment_proposal_sign_success">簽名交易成功</string>
+    <string name="enterprise_hdm_keychain_payment_proposal_signature_collected">已收集簽名</string>
+    <string name="enterprise_hdm_keychain_enable_hint">輸入企業版密碼</string>
+    <string name="enterprise_hdm_keychain_enable_failed">無效的企業版密碼</string>
+    <string name="enterprise_hdm_keychain_add_new_address">增加新地址</string>
+
+    <!-- Cold HD -->
+    <string name="add_cold_hd_account_tab">冷 HD 賬戶</string>
+    <string name="add_cold_hd_account_other_tab">其它</string>
+    <string name="add_cold_hd_account_label">生成新的冷 HD 賬戶</string>
+    <string name="add_cold_hd_account_button">生成</string>
+    <string name="add_cold_hd_account_other_hdm">生成 HDM 賬戶</string>
+    <string name="add_cold_hd_account_other_private">生成普通私鑰</string>
+    <string name="add_cold_hd_account_monitor_qr">HD 賬戶監控二維碼</string>
+    <string name="hd_account_cold_address_list_label">冷 HD 賬戶</string>
+    <string name="import_cold_hd_account_seed_qr_code">來自HD種子二維碼</string>
+    <string name="import_cold_hd_account_seed_phrase">來自HD密語</string>
+
+    <!-- Monitor HD -->
+    <string name="monitor_cold_hd_account">監控冷 HD 賬戶</string>
+    <string name="monitor_cold_hd_account_limit">只能監控 1 個冷 HD 賬戶</string>
+    <string name="monitor_cold_hd_account_failed">監控冷 HD 賬戶失敗</string>
+    <string name="monitor_cold_hd_account_failed_duplicated">監控失敗. 這個賬戶已經存在.</string>
+    <string name="monitor_cold_hd_account_success">監控冷 HD 賬戶成功</string>
+    <string name="address_group_hd_monitored">冷 HD 賬戶</string>
+    <string name="hd_account_old_addresses">舊地址列表</string>
+    <string name="hd_account_old_addresses_zero">目前還沒有使用過的地址</string>
+
+    <!-- Address Full For HD -->
+    <string name="address_full_for_hd_label_own">賬戶內地址</string>
+    <string name="address_full_for_hd_label_foreign">賬戶外地址</string>
+    <string name="address_full_for_hd_type_receiving">接收</string>
+    <string name="address_full_for_hd_type_sending">傳送</string>
+    <string name="address_full_for_hd_type_changing">找零</string>
+
+    <!-- Hide Total Balance -->
+    <string name="total_balance_hide_setting_name">總餘額</string>
+    <string name="total_balance_hide_show_all">顯示餘額和報表</string>
+    <string name="total_balance_hide_show_chart">只顯示報表</string>
+    <string name="total_balance_hide_hide_all">隱藏</string>
+
+    <!-- Normal Private Keys Back Up Notice -->
+    <string name="normal_private_key_back_up_notice">普通私鑰不屬於 HD 賬戶.\n需要單獨備份.</string>
+
+    <!-- HD Account XPub -->
+    <string name="hd_account_cold_first_address">顯示第 1 個地址</string>
+    <string name="hd_account_monitor_xpub_need_to_upgrade">您需要把冷錢包升級到 v1.6.0</string>
+    <string name="hd_account_show_xpub">顯示 XPub</string>
+    <string name="hd_account_monitor_check_first_address">請檢查第 1 個地址</string>
+    <string name="monitor_addresses_validation">請檢查所監控的地址</string>
+
+    <!-- Ad -->
+    <string name="ad_go">前往</string>
+    <string name="ad_image_name">img_zh_TW</string>
+    <string name="ad_skip">跳過</string>
+
+    <string name="setting_privacy_policy">隱私政策</string>
+
+    <!--Split Coin-->
+    <string name="get_fork_coins_title">獲得分叉幣</string>
+    <string name="get_split_coin_setting_name">獲得 %s</string>
+    <string name="get_split_coin">可獲得: </string>
+    <string name="not_bitpie_split_coin_address">僅支持發往比特派%s地址</string>
+    <string name="you_already_get_split_coin">您已經獲得過%s</string>
+    <string name="bitpie_split_coin_address">比特派%s地址</string>
+    <string name="obtain_BCC_receive_address">收幣地址</string>
+    <string name="obtain_BCC_btn_obtain">獲得</string>
+    <string name="no_private_key">請先匯入私鑰</string>
+    <string name="get_success">獲得成功</string>
+    <string name="please_firstly_sync_to_block_no">请先同步到块%d</string>
+    <string name="no_sync_complete">請稍候，交易暫未同步完成！</string>
+    <string name="get_bcd_block_hash_error">獲取BCD區塊高度哈希失敗！</string>
+
+    <string name="private_key_import">導入</string>
+    <string name="private_key_import_title">請選擇導入私鑰對應的地址</string>
+    <string name="private_key_compressed_address">壓縮私鑰地址</string>
+    <string name="private_key_uncompressed_address">未壓縮私鑰地址</string>
+    <string name="private_key_recommend">(推薦)</string>
+
+    <string name="hot.advance.sign.message">簽名 Hash</string>
+    <string name="sign.hash.select.address">選擇簽名 Hash 用的地址</string>
+    <string name="copy.public.key">公鈅已複製</string>
+    <string name="address_cold">冷錢包地址</string>
+    <string name="error_hash">Hash 格式錯誤</string>
+    <string name="sign_hash_input_hint">待簽名 Hash</string>
+
+    <string name="generate_secure_private_key">生成安全密鑰</string>
+    <string name="error_play_tip">不能付款給自己</string>
+    <string name="error_play_small">發送失敗. 這樣小額(&#060;0.01)的交易會被忽略. </string>
+</resources>

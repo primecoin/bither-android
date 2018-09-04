@@ -30,6 +30,7 @@ import net.bither.model.Ticker;
 import net.bither.preference.AppSharedPreference;
 import net.bither.ui.base.PieChartView;
 import net.bither.ui.base.RotatableFrameLayout;
+import net.bither.util.ExchangeUtil;
 import net.bither.util.MarketUtil;
 import net.bither.util.UIUtil;
 import net.bither.util.UnitUtilWrapper;
@@ -233,11 +234,13 @@ public class DialogTotalBtc extends DialogWithArrow implements PieChartView.Rota
         vPieChart.setStartAngle(PieChartView.DefaultStartAngle);
         vPieChart.setTotalAngle(0);
         Ticker ticker = MarketUtil.getTickerOfDefaultMarket();
-        if (ticker != null) {
+       /* if (ticker != null) {
             price = ticker.getDefaultExchangePrice();
         } else {
             price = 0;
-        }
+        }*/
+        //汇率
+        price= ExchangeUtil.getCurrentRate();
         String currencySymbol = AppSharedPreference.getInstance().getDefaultExchangeType()
                 .getSymbol();
         if (btcPrivate != null && btcPrivate.signum() > 0 && price > 0) {

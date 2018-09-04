@@ -9,8 +9,6 @@ import net.bither.bitherj.db.AbstractDb;
 import net.bither.bitherj.utils.Utils;
 import net.bither.preference.AppSharedPreference;
 
-import java.sql.SQLException;
-
 public class AddressDatabaseHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 7;
     private static final String DB_NAME = "address.db";

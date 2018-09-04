@@ -19,6 +19,7 @@ package net.bither.adapter.hot;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import net.bither.fragment.hot.HotAddressFragment;
 import net.bither.fragment.hot.MarketFragment;

@@ -86,8 +86,7 @@ public class BlockchainService extends android.app.Service {
             tickReceiver = new TickReceiver(BlockchainService.this);
             txReceiver = new TxReceiver(BlockchainService.this, tickReceiver);
             receiverConnectivity();
-            registerReceiver(tickReceiver, new IntentFilter(
-                    Intent.ACTION_TIME_TICK));
+            registerReceiver(tickReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
             registerReceiver(txReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_BALANCE));
             BroadcastUtil.sendBroadcastStartPeer();
         }
@@ -274,6 +273,7 @@ public class BlockchainService extends android.app.Service {
                     log.debug("acquiring wakelock");
                     callWekelock();
                     if (!PeerManager.instance().isRunning()) {
+                        LogUtil.d("PEER","开始");
                         startPeer();
                     }
                 } else {
@@ -297,7 +297,7 @@ public class BlockchainService extends android.app.Service {
         }
         PeerManager.instance().stop();
     }
-
+    //刷新
     public void startAndRegister() {
         peerCanNotRun = false;
         receiverConnectivity();

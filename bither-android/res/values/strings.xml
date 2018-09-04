@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Bither</string>
+    <string name="app_name">Primecoin</string>
     <string name="localization.language.code">en</string>
-    <string name="bitcoin_balance_label">BTC</string>
-    <string name="bitcoin_symbol">BTC</string>
+    <string name="bitcoin_balance_label">XPM</string>
+    <string name="bitcoin_symbol">XPM</string>
+    <string name="market_name_coinmarketcap">CoinMarketCap</string>
     <string name="market_trading_amount">Volume</string>
     <string name="market_price_high">High</string>
     <string name="market_price_low">Low</string>
@@ -12,7 +13,7 @@
     <string name="market_price_close">Close</string>
     <string name="market_name_huobi">HUOBI</string>
     <string name="market_name_bitstamp">Bitstamp</string>
-    <string name="market_name_btce">BTC-E</string>
+    <string name="market_name_btce">XPM-E</string>
     <string name="market_name_okcoin">OKCoin.CN</string>
     <string name="market_name_chbtc">CHBTC</string>
     <string name="market_name_btcchina">BTCChina</string>
@@ -92,10 +93,10 @@
     <string name="add_address_delete">Delete</string>
     <string name="add_address_watch_only_hint">Bitcoin Address</string>
     <string name="add_address_already_watched">This address is already monitored</string>
-    <string name="addresses_already_monitored">This Bither Cold is already monitored.</string>
+    <string name="addresses_already_monitored">This Primecoin Cold is already monitored.</string>
     <string name="add_address_generate_address_with_private_key">Generate</string>
     <string name="add_address_generate_address_password_label">Enter password of wallet</string>
-    <string name="add_address_generate_address_password_lengh_note">Length: 6&#8211;43</string>
+    <string name="add_address_generate_address_password_lengh_note">Length: 6&#8211;43:Number/letter/symbol combination</string>
     <string name="add_address_generate_address_password_set_label">Set password of wallet</string>
     <string name="add_address_generate_address_password_hint">Password</string>
     <string name="add_address_generate_address_password_confirm_hint">Confirm Password</string>
@@ -104,15 +105,15 @@
     <string name="password_wrong">Wrong Password</string>
     <string name="decrypt_failed">Decryption Failed</string>
     <string name="wallet_loading">Loading wallets, Please try again later.</string>
-    <string name="add_address_watch_only_scanned_address_warning">Bither can only monitor Bither Cold monitor QR code,\nnot other addresses.</string>
+    <string name="add_address_watch_only_scanned_address_warning">Primecoin can only monitor Primecoin Cold monitor QR code,\nnot other addresses.</string>
 
     <!-- send -->
     <string name="send_progress_dialog_message">Sending</string>
     <string name="send_success">Send success</string>
     <string name="send_failed">Send failed</string>
-    <string name="send_failed_missing_btc">Send failed. Lack of %s BTC.</string>
+    <string name="send_failed_missing_btc">Send failed. Lack of %s XPM.</string>
     <string name="send_failed_dust_out_put">Send failed. Sending coins this few will be ignored.</string>
-    <string name="send_failed_pendding">Send failed. %s BTC to be confirmed.\nPlease wait for another confirmation.</string>
+    <string name="send_failed_pendding">Send failed. %s XPM to be confirmed.\nPlease wait for another confirmation.</string>
     <string name="send_failed_max_tx_size">Send failed. Transaction size is to large.\nPlease reduce amount.</string>
     <string name="send_coins_fragment_sending_address_label">From</string>
     <string name="send_coins_fragment_receiving_address_label">Pay to</string>
@@ -177,9 +178,9 @@
     <string name="setting_name_transaction_fee_low_note">slow confirmation</string>
     <string name="setting_name_transaction_fee_high_note">high priority</string>
     <string name="setting_api_config">Api Config</string>
-    <string name="setting_api_config_bither_net">Bither.net</string>
+    <string name="setting_api_config_bither_net">Primecoin.net</string>
     <string name="setting_api_config_blockchain">Blockchain.info</string>
-    <string name="setting_name_api_config_bither">Bither</string>
+    <string name="setting_name_api_config_bither">Primecoin</string>
     <string name="setting_name_api_config_blockchain">Blockchain</string>
     <string name="donate_button">Donate</string>
     <string name="donate_thanks">Thank you for donating.</string>
@@ -197,7 +198,7 @@
     <string name="export_address_success">The addresses exported to :</string>
     <string name="setting_name_import_private_key">Import Private Key</string>
     <string name="setting_name_import_bip38_key">Import BIP38-private key</string>
-    <string name="import_private_key_qr_code">From Bither Private Key QR Code</string>
+    <string name="import_private_key_qr_code">From Primecoin Private Key QR Code</string>
     <string name="import_private_key_text">From Private Key Text</string>
     <string name="import_hdm_cold_seed_qr_code">From HDM Cold Seed QR Code</string>
     <string name="import_hdm_cold_seed_phrase">From HDM Cold Phrase</string>
@@ -222,8 +223,8 @@
     <string name="import_private_key_qr_code_password">Enter original password</string>
     <string name="import_private_key_qr_code_success">Import success.</string>
     <string name="import_private_key_qr_code_failed">Import failed.</string>
-    <string name="import_hd_account_failed_duplicated">Import failed. This account is already in Bither.</string>
-    <string name="import_private_key_qr_code_failed_monitored">Can\'t import Bither Cold private key.</string>
+    <string name="import_hd_account_failed_duplicated">Import failed. This account is already in Primecoin.</string>
+    <string name="import_private_key_qr_code_failed_monitored">Can\'t import Primecoin Cold private key.</string>
     <string name="import_private_key_qr_code_failed_duplicate">This private key already exists.</string>
     <string name="import_private_key_qr_code_importing">Importing…</string>
     <string name="import_private_key_qr_code_failed_different_password">Password of the private key to import is different from ours. Import failed.</string>
@@ -252,13 +253,13 @@
     <string name="btc_donate">Bitcoin Donate:</string>
 
     <!-- mode -->
-    <string name="choose_mode_cold_desctription">Bither Cold : Offline &amp; Secure.</string>
-    <string name="choose_mode_warm_desctription">Bither Hot : Online &amp; Simple.</string>
+    <string name="choose_mode_cold_desctription">Primecoin Cold : Offline &amp; Secure.</string>
+    <string name="choose_mode_warm_desctription">Primecoin Hot : Online &amp; Simple.</string>
     <string name="choose_mode_warm_waiting">Loading…</string>
     <string name="choose_mode_warm_retry">Retry</string>
-    <string name="choose_mode_warm_change_to_cold">Switch to Bither Cold</string>
-    <string name="choose_mode_cold_confirm">Once mode is set, it can\'t be changed.\nBither Cold need to be run on a offline phone.\nSet this phone as Bither Cold?</string>
-    <string name="choose_mode_warm_confirm">Once mode is set, it can\'t be changed.\nBither Hot is an online bitcoin wallet.\nSet this phone as Bither Hot?</string>
+    <string name="choose_mode_warm_change_to_cold">Switch to Primecoin Cold</string>
+    <string name="choose_mode_cold_confirm">Once mode is set, it can\'t be changed.\nPrimecoin Cold need to be run on a offline phone.\nSet this phone as Primecoin Cold?</string>
+    <string name="choose_mode_warm_confirm">Once mode is set, it can\'t be changed.\nPrimecoin Hot is an online bitcoin wallet.\nSet this phone as Primecoin Hot?</string>
 
     <!-- warning -->
     <string name="cold_warning">Warning</string>
@@ -290,23 +291,23 @@
     <string name="can_not_find_private_key">Can not find private key </string>
     <string name="scan_watch_only_address_error">QR Code contains no bitcoin address</string>
     <string name="sign_transaction">Sign Transaction</string>
-    <string name="scan_qr_transport_init_label">Scan QR code No.1 provided by Bither</string>
+    <string name="scan_qr_transport_init_label">Scan QR code No.1 provided by Primecoin</string>
     <string name="scan_qr_transport_page_label">Scan QR code No.%1$d, total %2$d</string>
     <string name="signing_transaction">Signing Transaction</string>
-    <string name="signed_transaction_qr_code_title">Scan with Bither Hot to sign transaction.</string>
+    <string name="signed_transaction_qr_code_title">Scan with Primecoin Hot to sign transaction.</string>
     <string name="qr_code_page">Page %1$d, Total %2$d</string>
     <string name="complete">Complete</string>
-    <string name="scan_unsigned_transaction_title">Scan QR Code on Bither Hot</string>
+    <string name="scan_unsigned_transaction_title">Scan QR Code on Primecoin Hot</string>
     <string name="clone_to_button">Cold Wallet Clone QR Code</string>
     <string name="clone_to_title">Scan by the clone destination to clone</string>
-    <string name="clone_from_button">Bither Cold Wallet Clone</string>
+    <string name="clone_from_button">Primecoin Cold Wallet Clone</string>
     <string name="clone_from_title">Scan from the clone source</string>
     <string name="clone_from_waiting">Cloning…</string>
     <string name="clone_from_success">Clone success</string>
     <string name="clone_from_failed">Clone failed</string>
     <string name="clone_from_password">Enter source password</string>
     <string name="qr_code_for_all_addresses">Watch Only QR Code</string>
-    <string name="qr_code_for_all_addresses_title">Scan with Bither Hot to watch Bither Cold</string>
+    <string name="qr_code_for_all_addresses_title">Scan with Primecoin Hot to watch Primecoin Cold</string>
     <string name="no_sd_card_of_back_up">SD card failure, Can not backup</string>
     <string name="backup_finish">Back Up Finish !</string>
     <string name="no_sd_card">SD card failure</string>
@@ -315,23 +316,23 @@
     <string name="private_key_count_limit">Reached private key count limit</string>
     <string name="watch_only_address_count_limit">Reached watch only address count limit</string>
     <string name="generate_address_count_label">How many private keys to generate?</string>
-    <string name="recover_from_backup_of_cold">Find previous back up of Bither Cold on SD card. Recover from it?</string>
+    <string name="recover_from_backup_of_cold">Find previous back up of Primecoin Cold on SD card. Recover from it?</string>
     <string name="first_add_private_key_check_suggest">Would you check your private keys now?</string>
 
     <!-- warm wallet -->
     <string name="prepare_tx">Init Transaction</string>
     <string name="generate_unsigned_tx_button">Unsigned TX QR Code</string>
     <string name="get_sign_hash">Get sign </string>
-    <string name="unsigned_transaction_qr_code_title">Scan with Bither Cold to sign transaction</string>
+    <string name="unsigned_transaction_qr_code_title">Scan with Primecoin Cold to sign transaction</string>
     <string name="unsigned_transaction_qr_code_complete">Scan to sign</string>
     <string name="unsigned_transaction_sign_failed">Sign failed</string>
-    <string name="scan_transaction_signature_title">Scan QR Code on Bither Cold</string>
+    <string name="scan_transaction_signature_title">Scan QR Code on Primecoin Cold</string>
     <string name="prompt_block_height">Block Height : %d</string>
     <string name="prompt_wallet_height">Wallet Height : %d</string>
-    <string name="scan_for_all_addresses_in_bither_cold">Monitor Bither Cold</string>
-    <string name="scan_for_all_addresses_in_bither_cold_title">Scan Qr Code to watch Bither Cold</string>
-    <string name="scan_for_all_addresses_in_bither_cold_success">Monitor Bither Cold Success</string>
-    <string name="scan_for_all_addresses_in_bither_cold_failed">Monitor Bither Cold Failed</string>
+    <string name="scan_for_all_addresses_in_bither_cold">Monitor Primecoin Cold</string>
+    <string name="scan_for_all_addresses_in_bither_cold_title">Scan Qr Code to watch Primecoin Cold</string>
+    <string name="scan_for_all_addresses_in_bither_cold_success">Monitor Primecoin Cold Success</string>
+    <string name="scan_for_all_addresses_in_bither_cold_failed">Monitor Primecoin Cold Failed</string>
     <string name="time_is_wrong">Current system time is wrong, please correct it.</string>
     <string name="only_supports_the_compressed_private_key">Only supports the compressed format of private key</string>
     <string name="old_version_no_support_change_adress">old version QR Code does not support change address selection</string>
@@ -387,13 +388,13 @@
     <string name="activity_name_advance">Advanced Options</string>
 
     <!-- first run dialog -->
-    <string name="first_run_dialog_title">To protect your bitcoin:</string>
-    <string name="first_run_dialog_line_1">NEVER UNINSTALL Bither.</string>
-    <string name="first_run_dialog_line_2">NEVER CLEAR Bither\'s data.</string>
+    <string name="first_run_dialog_title">To protect your primecoin:</string>
+    <string name="first_run_dialog_line_1">NEVER UNINSTALL Primecoin.</string>
+    <string name="first_run_dialog_line_2">NEVER CLEAR Primecoin\'s data.</string>
     <string name="first_run_dialog_line_3">NEVER FORGET your password.</string>
 
     <!-- upgrade -->
-    <string name="begin_upgrade">Upgrading...\n1.Do not exit Bither.\n2.Do not turn off the phone.\n3.Do not turn off the screen.</string>
+    <string name="begin_upgrade">Upgrading...\n1.Do not exit Primecoin.\n2.Do not turn off the phone.\n3.Do not turn off the screen.</string>
     <string name="upgrading">Upgrading...</string>
 
     <!-- xrandom -->
@@ -411,8 +412,8 @@
 
     <!-- qrcode-->
     <string name="switch_qrcode">Switch QRCode</string>
-    <string name="use_old_version_qrcode">Switched to old version QR Codes, sign with Bither Cold &lt;1.1.0</string>
-    <string name="use_new_version_qrcode">Switched to new version QR Codes, sign with Bither Cold ≧1.1.0</string>
+    <string name="use_old_version_qrcode">Switched to old version QR Codes, sign with Primecoin Cold &lt;1.1.0</string>
+    <string name="use_new_version_qrcode">Switched to new version QR Codes, sign with Primecoin Cold ≧1.1.0</string>
 
     <!-- rcheck -->
     <string name="rcheck_address_title">r-values of %s</string>
@@ -454,8 +455,8 @@
     <string name="pin_code_setting_close_wrong">PIN code is wrong</string>
 
     <!-- launch sequence -->
-    <string name="launch_sequence_switch_to_cold">Switch to Bither Cold</string>
-    <string name="launch_sequence_switch_to_cold_warn">Set this phone as Bither Cold?\n\nBither Cold need to be run on a offline phone.\nYou can monitor Bither Cold by Bither Hot.\nOnce set you can\'t switch back.</string>
+    <string name="launch_sequence_switch_to_cold">Switch to Primecoin Cold</string>
+    <string name="launch_sequence_switch_to_cold_warn">Set this phone as Primecoin Cold?\n\nPrimecoin Cold need to be run on a offline phone.\nYou can monitor Primecoin Cold by Primecoin Hot.\nOnce set you can\'t switch back.</string>
 
     <!-- bitcoin unit -->
     <string name="setting_name_bitcoin_unit">Default Unit</string>
@@ -516,7 +517,7 @@
     <string name="add_address_tab_hdm" translatable="false">HDM</string>
     <string name="hdm_cold_seed_count_limit">You can only have 1 HDM account</string>
     <string name="hdm_account_cold_address_list_label">HDM Cold</string>
-    <string name="hdm_seed_generation_notice">HDM is the hybrid of Hierarchical Deterministic &amp; Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nBither uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Bither Hot, Bither Cold &amp; HDM server.</string>
+    <string name="hdm_seed_generation_notice">HDM is the hybrid of Hierarchical Deterministic &amp; Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nPrimecoin uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Primecoin Hot, Primecoin Cold &amp; HDM server.</string>
     <string name="hdm_keychain_xrandom_final_confirm">You have generated 1 HDM account from XRandom.</string>
     <string name="hdm_cold_pub_key_qr_code_name">HDM Cold Account QR Code</string>
     <string name="hdm_server_qr_code_name">HDM Server QR Code</string>
@@ -535,7 +536,7 @@
     <string name="hdm_keychain_add_server">HDM Server</string>
     <string name="hdm_keychain_add_hot_confirm">Generate HDM Hot account</string>
     <string name="hdm_keychain_add_scan_cold">Scan HDM Cold Account QR Code</string>
-    <string name="hdm_keychain_add_unsigned_server_qr_code_title">Choose HDM Server QR Code on Bither Cold</string>
+    <string name="hdm_keychain_add_unsigned_server_qr_code_title">Choose HDM Server QR Code on Primecoin Cold</string>
     <string name="hdm_keychain_add_scan_signed_server_qr_code_action">Scan Signed Server QR Code</string>
     <string name="hdm_keychain_add_signed_server_qr_code_title">Signed Server QR Code</string>
     <string name="hdm_keychain_add_sign_server_qr_code_error">Signing server QR code is wrong</string>
@@ -587,7 +588,7 @@
     <string name="hdm_singular_cold_seed_remember_button">I have saved my HDM Cold seed.</string>
     <string name="hdm_singular_cold_seed_tab_words">Seed Phrase</string>
     <string name="hdm_singular_cold_seed_tab_qr">QR Code</string>
-    <string name="hdm_singular_mode_info">Singular Mode runs on one device.\nDo not need Bither Cold.\nBut you need to keep Cold seed safely.\nCold seed is the only way to recover.</string>
+    <string name="hdm_singular_mode_info">Singular Mode runs on one device.\nDo not need Primecoin Cold.\nBut you need to keep Cold seed safely.\nCold seed is the only way to recover.</string>
     <string name="hdm_singular_mode_cancel_warn">HDM singular mode can not be interrupted.</string>
 
     <!-- address alias -->
@@ -623,7 +624,7 @@
     <string name="add_hd_account_tab_other">Others</string>
     <string name="add_hd_account_other_hdm">Generate HDM Account</string>
     <string name="add_hd_account_other_private">Generate Normal Private Keys</string>
-    <string name="add_hd_account_monitor">Monitor Bither Cold</string>
+    <string name="add_hd_account_monitor">Monitor Primecoin Cold</string>
     <string name="add_hd_account_view_label">You already have an HD account.</string>
     <string name="add_hd_account_seed_qr_code">HD Account Seed QR Code</string>
     <string name="add_hd_account_seed_qr_phrase">HD Account Seed Phrase</string>
@@ -688,7 +689,7 @@
     <string name="monitor_cold_hd_account">Monitor Cold HD Account</string>
     <string name="monitor_cold_hd_account_limit">You can only monitor 1 cold HD account</string>
     <string name="monitor_cold_hd_account_failed">Monitor cold HD account failed</string>
-    <string name="monitor_cold_hd_account_failed_duplicated">Monitor failed. This account is already in Bither.</string>
+    <string name="monitor_cold_hd_account_failed_duplicated">Monitor failed. This account is already in Primecoin.</string>
     <string name="monitor_cold_hd_account_success">Monitor cold HD account success</string>
     <string name="address_group_hd_monitored">Cold HD Account</string>
     <string name="hd_account_old_addresses">Old Addresses</string>
@@ -723,7 +724,7 @@
 
     <!-- HD Account XPub -->
     <string name="hd_account_cold_first_address">Show First Address</string>
-    <string name="hd_account_monitor_xpub_need_to_upgrade">You need to upgrade Bither cold to v1.6.0</string>
+    <string name="hd_account_monitor_xpub_need_to_upgrade">You need to upgrade Primecoin cold to v1.6.0</string>
     <string name="hd_account_show_xpub">Show XPub</string>
     <string name="hd_account_monitor_check_first_address">Check First Address</string>
     <string name="monitor_addresses_validation">Check Monitored Addresses</string>
@@ -766,4 +767,8 @@
     <string name="address_cold">Cold Wallet Address</string>
     <string name="error_hash">Hash format error</string>
     <string name="sign_hash_input_hint">Hash to sign</string>
+
+    <string name="error_play_tip">Can\'t pay for yourself</string>
+    <string name="error_play_small">Send failed. Sending coins(&#060;0.01) this few will be igored.</string>
+    <string name="generate_secure_private_key">generate_secure_private_key</string>
 </resources>

@@ -235,6 +235,7 @@ public class AddressDetailHeader extends FrameLayout implements DialogFragmentFa
         }
     };
 
+    /*发送按钮*/
     private OnClickListener sendClick = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -264,6 +265,7 @@ public class AddressDetailHeader extends FrameLayout implements DialogFragmentFa
                             .SEND_REQUEST_CODE);
                     return;
                 }
+                //热钱包发送弹窗
                 if (address.isHDM() || address.hasPrivKey()) {
                     Intent intent = new Intent(activity, address.isHDM() ? HdmSendActivity.class
                             : SendActivity.class);

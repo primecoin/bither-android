@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import net.bither.R;
+import net.bither.activity.hot.HotActivity;
 import net.bither.bitherj.crypto.SecureCharSequence;
 import net.bither.bitherj.factory.ImportPrivateKey;
 import net.bither.bitherj.utils.Utils;
@@ -114,8 +115,11 @@ public class DialogImportPrivateKeyText extends CenterDialog implements DialogIn
         }
         et.setText("");
         if (clickedId == R.id.ibtn_scan) {
-            activity.startActivityForResult(new Intent(activity, ScanActivity.class),
-                    ScanPrivateKeyQRCodeRequestCode);
+            if (onBtnScanClickListener!=null){
+                onBtnScanClickListener.onBtnScanClick();
+            }
+            /*activity.startActivityForResult(new Intent(activity, ScanActivity.class),
+                    ScanPrivateKeyQRCodeRequestCode);*/
         }
     }
 
@@ -149,5 +153,14 @@ public class DialogImportPrivateKeyText extends CenterDialog implements DialogIn
         importPrivateKey.importPrivateKey();
     }
 
+    private OnBtnScanClickListener onBtnScanClickListener;
+
+    public void setOnBtnScanClickListener(OnBtnScanClickListener onBtnScanClickListener) {
+        this.onBtnScanClickListener = onBtnScanClickListener;
+    }
+
+    public interface OnBtnScanClickListener{
+        void onBtnScanClick();
+    }
 
 }

@@ -50,6 +50,7 @@ import net.bither.fragment.Unselectable;
 import net.bither.fragment.hot.HotAddressFragment;
 import net.bither.fragment.hot.MarketFragment;
 import net.bither.preference.AppSharedPreference;
+import net.bither.qrcode.ScanActivity;
 import net.bither.runnable.AddErrorMsgRunnable;
 import net.bither.runnable.DownloadAvatarRunnable;
 import net.bither.runnable.UploadAvatarRunnable;
@@ -68,6 +69,8 @@ import net.bither.util.WalletUtils;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.bither.ui.base.dialog.DialogImportPrivateKeyText.ScanPrivateKeyQRCodeRequestCode;
 
 public class HotActivity extends BaseFragmentActivity {
     private TabButton tbtnMessage;
@@ -143,6 +146,7 @@ public class HotActivity extends BaseFragmentActivity {
     protected void onResume() {
         super.onResume();
         BitherApplication.startBlockchainService();
+        //通知节点更新
         PeerManager.instance().notifyMaxConnectedPeerCountChange();
         refreshTotalBalance();
     }
@@ -219,7 +223,9 @@ public class HotActivity extends BaseFragmentActivity {
                             R.string.watch_only_address_count_limit);
                     return;
                 }
-                Intent intent = new Intent(HotActivity.this, AddHotAddressActivity.class);
+                //直接跳转到生成热钱包界面
+//                Intent intent = new Intent(HotActivity.this, AddHotAddressActivity.class);
+                Intent intent = new Intent(HotActivity.this, AddHotAddressPrivateKeyActivity.class);
                 startActivityForResult(intent, BitherSetting.INTENT_REF.SCAN_REQUEST_CODE);
                 overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
 
@@ -230,7 +236,7 @@ public class HotActivity extends BaseFragmentActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == BitherSetting.INTENT_REF.SCAN_REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> addresses = (ArrayList<String>) data.getExtras().getSerializable
                     (BitherSetting.INTENT_REF.ADDRESS_POSITION_PASS_VALUE_TAG);
@@ -259,7 +265,7 @@ public class HotActivity extends BaseFragmentActivity {
                 RESULT_OK) {
             DropdownMessage.showDropdownMessage(this, R.string.donate_thanks);
         }
-        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     private class PageChangeListener implements OnPageChangeListener {
@@ -415,8 +421,8 @@ public class HotActivity extends BaseFragmentActivity {
                     public void run() {
                         configureTabMainIcons();
                         tbtnMain.setBigInteger(BigInteger.valueOf(btcPrivate), BigInteger.valueOf
-                                (btcWatchOnly), BigInteger.valueOf(btcHdm), BigInteger.valueOf
-                                (btcHD), BigInteger.valueOf(btcHdMonitored),
+                                        (btcWatchOnly), BigInteger.valueOf(btcHdm), BigInteger.valueOf
+                                        (btcHD), BigInteger.valueOf(btcHdMonitored),
                                 BigInteger.valueOf(btcEnterpriseHdm));
                     }
                 });
@@ -426,11 +432,7 @@ public class HotActivity extends BaseFragmentActivity {
 
     private void configureTabMainIcons() {
         switch (AppSharedPreference.getInstance().getBitcoinUnit()) {
-            case bits:
-                tbtnMain.setIconResource(R.drawable.tab_main_bits,
-                        R.drawable.tab_main_bits_checked);
-                break;
-            case BTC:
+            case XPM:
             default:
                 tbtnMain.setIconResource(R.drawable.tab_main, R.drawable.tab_main_checked);
         }
@@ -447,6 +449,7 @@ public class HotActivity extends BaseFragmentActivity {
         }
     }
 
+    //接收请求进度广播
     private final class ProgressBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, final Intent intent) {
@@ -458,6 +461,11 @@ public class HotActivity extends BaseFragmentActivity {
         }
     }
 
+    public void showProgressBar() {
+        pbSync.setProgress(0.6);
+    }
+
+    //刷新TX
     private final class TxAndBlockBroadcastReceiver extends BroadcastReceiver {
 
         @Override
@@ -474,6 +482,7 @@ public class HotActivity extends BaseFragmentActivity {
             Fragment fragment = getFragmentAtIndex(1);
             if (fragment != null && fragment instanceof HotAddressFragment) {
                 ((HotAddressFragment) fragment).refresh();
+                pbSync.setProgress(-1);
             }
         }
     }
@@ -490,6 +499,22 @@ public class HotActivity extends BaseFragmentActivity {
                 ((HotAddressFragment) fragment).refresh();
             }
         }
+    }
+
+    private ShowImportSuccessListener showImportSuccessListener;
+
+    public void setShowImportSuccessListener(ShowImportSuccessListener showImportSuccessListener) {
+        this.showImportSuccessListener = showImportSuccessListener;
+    }
+
+    public interface ShowImportSuccessListener {
+
+        void showImportSuccess();
+    }
+
+    public void showImportSuccess() {
+        if (showImportSuccessListener != null)
+            showImportSuccessListener.showImportSuccess();
     }
 
 //    private void addNewPrivateKey() {

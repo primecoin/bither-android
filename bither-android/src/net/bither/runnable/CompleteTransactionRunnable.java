@@ -28,7 +28,7 @@ import net.bither.bitherj.crypto.SecureCharSequence;
 import net.bither.bitherj.exception.PasswordException;
 import net.bither.bitherj.exception.TxBuilderException;
 import net.bither.bitherj.utils.Utils;
-import net.bither.util.LogUtil;
+import net.bither.util.UnitUtilWrapper;
 
 import java.util.List;
 
@@ -194,6 +194,13 @@ public class CompleteTransactionRunnable extends BaseRunnable {
             if (tx == null) {
                 obtainMessage(HandlerMessage.MSG_FAILURE, BitherApplication.mContext.getString(R
                         .string.send_failed));
+                return;
+            }
+            String outAddress = tx.getFirstOutAddressOtherThanChange(changeAddress);
+            String amount=UnitUtilWrapper.formatValueWithBold(tx.amountSentToAddress(outAddress)).toString();
+            if (Double.valueOf(amount)<0.01){
+                obtainMessage(HandlerMessage.MSG_FAILURE, BitherApplication.mContext.getString(R
+                        .string.error_play_small));
                 return;
             }
             if (toSign) {

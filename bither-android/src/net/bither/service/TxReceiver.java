@@ -66,8 +66,9 @@ public class TxReceiver extends BroadcastReceiver {
         Intent intent = new Intent(blockchainService, HotActivity.class);
         intent.putExtra(BitherSetting.INTENT_REF.NOTIFICATION_ADDRESS, address);
         SystemUtil.nmNotifyOfWallet(nm, blockchainService,
+
                 BitherSetting.NOTIFICATION_ID_COINS_RECEIVED, intent, title,
-                contentText, R.drawable.ic_launcher, R.raw.coins_received);
+                contentText, R.drawable.icon, R.raw.coins_received);
 
     }
 }
