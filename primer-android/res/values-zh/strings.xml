@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Primecoin</string>
+    <string name="app_name">Primer</string>
     <string name="localization.language.code">zh_CN</string>
     <string name="market_trading_amount">交易量</string>
     <string name="market_price_high">最高</string>

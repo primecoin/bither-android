@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Primecoin</string>
+    <string name="app_name">Primer</string>
     <string name="localization.language.code">en</string>
     <string name="bitcoin_balance_label">XPM</string>
     <string name="bitcoin_symbol">XPM</string>

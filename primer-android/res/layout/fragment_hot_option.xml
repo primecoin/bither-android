@@ -174,7 +174,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Primecoin Hot"
+                    android:text="Primer Hot"
                     android:textColor="#ffc2c2c2"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
