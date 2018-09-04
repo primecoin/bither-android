@@ -1,4 +1,4 @@
-[submodule "bitherj"]
-	path = bitherj
+[submodule "primerj"]
+	path = primerj
 	url = git@github.com:primecoin/primerj.git
-	branch = develop
+	branch = master
