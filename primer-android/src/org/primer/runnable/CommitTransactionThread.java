@@ -1,0 +1,94 @@
+/*
+ * Copyright 2014 http://Bither.net
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.primer.runnable;
+
+import org.primer.primerj.api.PushTxThirdParty;
+import org.primer.primerj.core.Address;
+import org.primer.primerj.core.AddressManager;
+import org.primer.primerj.core.PeerManager;
+import org.primer.primerj.core.Tx;
+import org.primer.primerj.core.UnSignTransaction;
+import org.primer.primerj.utils.TransactionsUtil;
+import org.primer.service.BlockchainService;
+import org.primer.ui.base.dialog.DialogProgress;
+import org.primer.util.ThreadUtil;
+
+public class CommitTransactionThread extends ThreadNeedService {
+    public static interface CommitTransactionListener {
+        public void onCommitTransactionSuccess(Tx tx);
+
+        public void onCommitTransactionFailed();
+    }
+
+    private int addressPosition;
+    private Address wallet;
+    private Tx tx;
+    private CommitTransactionListener listener;
+
+    public CommitTransactionThread(DialogProgress dp, int addressPosition, Tx tx, boolean isHDM,
+                                   boolean withPrivateKey, CommitTransactionListener listener)
+            throws Exception {
+        super(dp, dp.getContext());
+        this.addressPosition = addressPosition;
+        this.listener = listener;
+        if (isHDM) {
+            wallet = AddressManager.getInstance().getHdmKeychain().getAddresses().get
+                    (addressPosition);
+        } else if (withPrivateKey) {
+            Address a = AddressManager.getInstance().getPrivKeyAddresses().get(addressPosition);
+            if (a.hasPrivKey()) {
+                wallet = a;
+            } else {
+                throw new Exception("address not with private key");
+            }
+        } else {
+            wallet = AddressManager.getInstance().getWatchOnlyAddresses().get(addressPosition);
+        }
+        this.tx = tx;
+    }
+
+    @Override
+    public void runWithService(BlockchainService service) {
+        boolean success = false;
+        try {
+            PushTxThirdParty.getInstance().pushTx(tx);
+            PeerManager.instance().publishTransaction(tx);
+            TransactionsUtil.removeSignTx(new UnSignTransaction(tx, wallet.getAddress()));
+            success = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            success = false;
+        } finally {
+            final boolean s = success;
+            ThreadUtil.runOnMainThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(dp.isShowing()) {
+                        dp.dismiss();
+                    }
+                    if (listener != null) {
+                        if (s) {
+                            listener.onCommitTransactionSuccess(tx);
+                        } else {
+                            listener.onCommitTransactionFailed();
+                        }
+                    }
+                }
+            });
+        }
+    }
+}

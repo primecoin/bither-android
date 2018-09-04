@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.primer.ui.base.OverScrollableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/card_list_padding"
+            android:paddingRight="@dimen/card_list_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="6dp"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:id="@+id/btn_get_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ui_touchable_bg"
+                    android:drawableRight="@drawable/scan_button_icon"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:text="@string/sign_transaction"
+                    android:textColor="@color/text_field_text_color"
+                    android:textSize="18sp" />
+
+                <include layout="@layout/layout_vertical_seperator" />
+
+                <Button
+                    android:id="@+id/btn_clone_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ui_touchable_bg"
+                    android:drawableRight="@drawable/qr_code_button_icon"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:text="@string/clone_to_button"
+                    android:textColor="@color/text_field_text_color"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_clone_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ui_touchable_bg"
+                    android:drawableRight="@drawable/scan_button_icon"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:text="@string/clone_from_button"
+                    android:textColor="@color/text_field_text_color"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_qr_all_keys"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/layout_vertical_seperator" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ui_touchable_bg"
+                        android:drawableRight="@drawable/qr_code_button_icon"
+                        android:duplicateParentState="true"
+                        android:gravity="left"
+                        android:padding="10dp"
+                        android:text="@string/qr_code_for_all_addresses"
+                        android:textColor="@color/text_field_text_color"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <include layout="@layout/layout_vertical_seperator"/>
+
+                <org.primer.ui.base.SettingSelectorView
+                    android:id="@+id/ssv_bitcoin_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <FrameLayout
+                    android:id="@+id/ll_back_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ui_touchable_bg"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_backup_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="left"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/text_field_text_color"
+                            android:textSize="18sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_backup_path"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="left"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="1dp"
+                            android:textColor="@color/text_unselected_color"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right|center_vertical"
+                        android:padding="10dp">
+
+                        <ProgressBar
+                            android:id="@+id/pb_back_up"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:indeterminateDrawable="@drawable/check_progress_bar"
+                            android:indeterminateDuration="600"
+                            android:indeterminateOnly="true"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <include layout="@layout/layout_vertical_seperator" />
+
+                <!--导入私钥-->
+                <org.primer.ui.base.SettingSelectorView
+                    android:id="@+id/ssv_import_private_key"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                 <!--高级选项-->
+                <Button
+                    android:id="@+id/btn_advance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ui_touchable_bg"
+                    android:drawableRight="@drawable/advance_button_icon"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:text="@string/activity_name_advance"
+                    android:textColor="@color/text_field_text_color"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_card_foreground_single" />
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:src="@drawable/setting_footer_logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Primecoin Cold"
+                    android:textColor="#ffc2c2c2"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#ffc2c2c2"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:text="http://Bither.net"
+                android:textColor="#ffc2c2c2"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_privacy_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="@string/setting_privacy_policy"
+                android:visibility="gone"
+                android:textColor="#ffc2c2c2"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</org.primer.ui.base.OverScrollableScrollView>

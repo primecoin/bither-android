@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <net.bither.charts.view.MACandleStickChart
+            <org.primer.charts.view.MACandleStickChart
                 android:id="@+id/macandlestickchart"
                 android:layout_width="fill_parent"
                 android:layout_height="240dip" />
@@ -51,7 +51,7 @@
             </LinearLayout>
         </FrameLayout>
 
-        <net.bither.charts.view.MarketDepthChart
+        <org.primer.charts.view.MarketDepthChart
             android:id="@+id/marketdepthchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="@string/gridchart" />
 
-        <net.bither.charts.view.GridChart
+        <org.primer.charts.view.GridChart
             android:id="@+id/gridchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:text="@string/linechart" />
 
-        <net.bither.charts.view.LineChart
+        <org.primer.charts.view.LineChart
             android:id="@+id/linechart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sliplinechart" />
 
-        <net.bither.charts.view.SlipLineChart
+        <org.primer.charts.view.SlipLineChart
             android:id="@+id/sliplinechart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:text="@string/slipareachart" />
 
-        <net.bither.charts.view.SlipAreaChart
+        <org.primer.charts.view.SlipAreaChart
             android:id="@+id/slipareachart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:text="@string/slipbandchart" />
 
-        <net.bither.charts.view.SlipBandAreaChart
+        <org.primer.charts.view.SlipBandAreaChart
             android:id="@+id/slipbandchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:text="@string/stickchart" />
 
-        <net.bither.charts.view.StickChart
+        <org.primer.charts.view.StickChart
             android:id="@+id/stickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:text="@string/slipstickchart" />
 
-        <net.bither.charts.view.SlipStickChart
+        <org.primer.charts.view.SlipStickChart
             android:id="@+id/slipstickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="@string/coloredslipstickchart" />
 
-        <net.bither.charts.view.ColoredSlipStickChart
+        <org.primer.charts.view.ColoredSlipStickChart
             android:id="@+id/coloredslipstickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:text="@string/mastickchart" />
 
-        <net.bither.charts.view.MAStickChart
+        <org.primer.charts.view.MAStickChart
             android:id="@+id/mastickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:text="@string/maslipstickchart" />
 
-        <net.bither.charts.view.MASlipStickChart
+        <org.primer.charts.view.MASlipStickChart
             android:id="@+id/maslipstickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:text="@string/minusstickchart" />
 
-        <net.bither.charts.view.MinusStickChart
+        <org.primer.charts.view.MinusStickChart
             android:id="@+id/minusstickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -171,7 +171,7 @@
             android:layout_height="wrap_content"
             android:text="@string/slipminusstickchart" />
 
-        <net.bither.charts.view.SlipMinusStickChart
+        <org.primer.charts.view.SlipMinusStickChart
             android:id="@+id/slipminusstickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:text="@string/candlestickchart" />
 
-        <net.bither.charts.view.CandleStickChart
+        <org.primer.charts.view.CandleStickChart
             android:id="@+id/candlestickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -191,7 +191,7 @@
             android:layout_height="wrap_content"
             android:text="@string/slipcandlestickchart" />
 
-        <net.bither.charts.view.SlipCandleStickChart
+        <org.primer.charts.view.SlipCandleStickChart
             android:id="@+id/slipcandlestickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -201,7 +201,7 @@
             android:layout_height="wrap_content"
             android:text="@string/maslipcandlestickchart" />
 
-        <net.bither.charts.view.MASlipCandleStickChart
+        <org.primer.charts.view.MASlipCandleStickChart
             android:id="@+id/maslipcandlestickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -211,7 +211,7 @@
             android:layout_height="wrap_content"
             android:text="@string/bollmaslipcandlestickchart" />
 
-        <net.bither.charts.view.BOLLMASlipCandleStickChart
+        <org.primer.charts.view.BOLLMASlipCandleStickChart
             android:id="@+id/bollmaslipcandlestickchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -221,7 +221,7 @@
             android:layout_height="wrap_content"
             android:text="@string/macdchart" />
 
-        <net.bither.charts.view.MACDChart
+        <org.primer.charts.view.MACDChart
             android:id="@+id/macdchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -231,7 +231,7 @@
             android:layout_height="wrap_content"
             android:text="@string/piechart" />
 
-        <net.bither.charts.view.PieChart
+        <org.primer.charts.view.PieChart
             android:id="@+id/piechart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />
@@ -241,7 +241,7 @@
             android:layout_height="wrap_content"
             android:text="@string/spiderwebchart" />
 
-        <net.bither.charts.view.SpiderWebChart
+        <org.primer.charts.view.SpiderWebChart
             android:id="@+id/spiderwebchart"
             android:layout_width="fill_parent"
             android:layout_height="240dip" />

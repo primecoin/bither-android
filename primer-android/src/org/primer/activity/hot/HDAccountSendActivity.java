@@ -1,0 +1,198 @@
+/*
+ *
+ *  * Copyright 2014 http://Bither.net
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *    http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ */
+
+package org.primer.activity.hot;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import org.primer.R;
+import org.primer.SendActivity;
+import org.primer.primerj.api.PushTxThirdParty;
+import org.primer.primerj.core.AddressManager;
+import org.primer.primerj.core.HDAccount;
+import org.primer.primerj.core.PeerManager;
+import org.primer.primerj.core.Tx;
+import org.primer.primerj.crypto.KeyCrypterException;
+import org.primer.primerj.crypto.SecureCharSequence;
+import org.primer.primerj.crypto.mnemonic.MnemonicException;
+import org.primer.primerj.exception.TxBuilderException;
+import org.primer.primerj.utils.Utils;
+import org.primer.runnable.CompleteTransactionRunnable;
+import org.primer.ui.base.DropdownMessage;
+import org.primer.ui.base.dialog.DialogHdSendConfirm;
+
+/**
+ * Created by songchenwen on 15/4/17.
+ */
+public class HDAccountSendActivity extends SendActivity implements DialogHdSendConfirm
+        .SendConfirmListener {
+    private long btcAmount;
+    private String toAddress;
+    private Tx tx;
+
+    static {
+        CompleteTransactionRunnable.registerTxBuilderExceptionMessages();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        findViewById(R.id.ibtn_option).setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void initAddress() {
+        address = AddressManager.getInstance().getHDAccountHot();
+        addressPosition = 0;
+    }
+
+    @Override
+    protected void sendClicked() {
+        final long btc = amountCalculatorLink.getAmount();
+        if (btc > 0) {
+            btcAmount = btc;
+            tx = null;
+            String address = etAddress.getText().toString().trim();
+            if (Utils.validBicoinAddress(address)) {
+                toAddress = address;
+                if (!dp.isShowing()) {
+                    dp.show();
+                }
+                new Thread() {
+                    @Override
+                    public void run() {
+                        send();
+                    }
+                }.start();
+            } else {
+                DropdownMessage.showDropdownMessage(HDAccountSendActivity.this, R.string
+                        .send_failed);
+            }
+        }
+    }
+
+    private void send() {
+        tx = null;
+        HDAccount account = (HDAccount) address;
+        SecureCharSequence password = new SecureCharSequence(etPassword.getText());
+        try {
+            tx = account.newTx(toAddress, btcAmount, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            btcAmount = 0;
+            tx = null;
+            String msg = getString(R.string.send_failed);
+            if (e instanceof KeyCrypterException || e instanceof MnemonicException
+                    .MnemonicLengthException) {
+                msg = getString(R.string.password_wrong);
+            } else if (e instanceof TxBuilderException) {
+                msg = e.getMessage();
+            }
+            final String m = msg;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (dp.isShowing()) {
+                        dp.dismiss();
+                    }
+                    DropdownMessage.showDropdownMessage(HDAccountSendActivity.this, m);
+                }
+            });
+        } finally {
+            password.wipe();
+        }
+        if (tx != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showConfirm();
+                }
+            });
+        }
+    }
+
+    private void showConfirm() {
+        if (dp.isShowing()) {
+            dp.dismiss();
+        }
+        new DialogHdSendConfirm(this, toAddress, tx, this).show();
+    }
+
+    @Override
+    public void onConfirm() {
+        if (!dp.isShowing()) {
+            dp.show();
+        }
+        new Thread() {
+            @Override
+            public void run() {
+                boolean success = false;
+                try {
+                    PushTxThirdParty.getInstance().pushTx(tx);
+                    PeerManager.instance().publishTransaction(tx);
+                    success = true;
+                    tx = null;
+                    toAddress = null;
+                    btcAmount = 0;
+                } catch (PeerManager.PublishUnsignedTxException e) {
+                    e.printStackTrace();
+                    tx = null;
+                    toAddress = null;
+                    btcAmount = 0;
+                }
+                if (success) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (dp.isShowing()) {
+                                dp.dismiss();
+                            }
+                            Intent intent = getIntent();
+                            if (tx != null) {
+                                intent.putExtra(SelectAddressToSendActivity
+                                        .INTENT_EXTRA_TRANSACTION, tx.getHashAsString());
+                            }
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (dp.isShowing()) {
+                                dp.dismiss();
+                            }
+                            DropdownMessage.showDropdownMessage(HDAccountSendActivity.this, R
+                                    .string.send_failed);
+                        }
+                    });
+                }
+            }
+        }.start();
+    }
+
+    @Override
+    public void onCancel() {
+        tx = null;
+        toAddress = null;
+        btcAmount = 0;
+    }
+}

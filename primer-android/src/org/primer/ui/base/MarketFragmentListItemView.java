@@ -1,0 +1,142 @@
+/*
+ * Copyright 2014 http://Bither.net
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.primer.ui.base;
+
+import android.content.Context;
+import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.primer.PrimerSetting;
+import org.primer.R;
+import org.primer.model.Market;
+import org.primer.model.MarketTicket;
+import org.primer.preference.AppSharedPreference;
+import org.primer.util.ExchangeUtil;
+
+public class MarketFragmentListItemView extends FrameLayout implements MarketTickerChangedObserver {
+    private Market market;
+    private TextView tvMarketName;
+    private TextView tvPrice;
+    private ImageView ivPriceAlert;
+
+    public MarketFragmentListItemView(FragmentActivity activity) {
+        super(activity);
+        View v = LayoutInflater.from(activity).inflate(R.layout.list_item_market_fragment, null);
+        addView(v, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        initView();
+    }
+
+    private void initView() {
+        tvMarketName = (TextView) findViewById(R.id.tv_market_name);
+        tvPrice = (TextView) findViewById(R.id.tv_price);
+        ivPriceAlert = (ImageView) findViewById(R.id.iv_price_alert);
+    }
+
+    private MarketFragmentListItemView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    private MarketFragmentListItemView(Context context, AttributeSet attrs,
+                                       int defStyle) {
+        super(context, attrs, defStyle);
+    }
+
+    public void setMarket(Market market, int loaderPosition) {
+        this.market = market;
+        if (market != null) {
+            showTickerInfo();
+        }
+    }
+
+    private void showTickerInfo() {
+        if (market != null) {
+            tvMarketName.setText(market.getName());
+            tvMarketName.setTextColor(market.getMarketColor());
+
+        }
+        if (market.getTicker() == null) {
+            return;
+        }
+       /* Ticker ticker = market.getTicker();
+        if (ExchangeUtil.getCurrenciesRate() != null) {
+            tvPrice.setText(AppSharedPreference.getInstance()
+                    .getDefaultExchangeType().getSymbol()
+                    + Utils.formatDoubleToMoneyString(ticker
+                    .getDefaultExchangePrice()));
+        } else {
+            tvPrice.setText(ExchangeUtil
+                    .getExchangeType(market.getMarketType()).getSymbol()
+                    + Utils.formatDoubleToMoneyString(ticker.getPrice()));
+        }*/
+        MarketTicket marketTicket = market.getMarketTicket();
+        String cnyPrice = "";
+        String usdPrice = "";
+        if (marketTicket != null && marketTicket.getData() != null) {
+            if (marketTicket.getData().getQuotes().getCNY() != null) {
+                cnyPrice = String.format("%.2f", marketTicket.getData().getQuotes().getCNY().getPrice());
+            }
+            if (marketTicket.getData().getQuotes().getUSD() != null) {
+                usdPrice = String.format("%.2f", marketTicket.getData().getQuotes().getUSD().getPrice());
+            }
+        }
+        String symbol = "";
+        ExchangeUtil.Currency currency = AppSharedPreference.getInstance().getDefaultExchangeType();
+        switch (currency) {
+            case CNY:
+                symbol = "\u00a5";
+                if (!TextUtils.isEmpty(cnyPrice)) {
+                    tvPrice.setText(symbol + cnyPrice);
+                } else {
+                    tvPrice.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                }
+                break;
+            case USD:
+                symbol = "$";
+                if (!TextUtils.isEmpty(usdPrice)) {
+                    tvPrice.setText(symbol + usdPrice);
+                } else {
+                    tvPrice.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                }
+                break;
+        }
+        if (market.getPriceAlert() == null) {
+            ivPriceAlert.setVisibility(View.INVISIBLE);
+        } else {
+            ivPriceAlert.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void onResume() {
+        showTickerInfo();
+    }
+
+    public void onPause() {
+    }
+
+    @Override
+    public void onMarketTickerChanged() {
+
+        showTickerInfo();
+
+    }
+}

@@ -1,0 +1,336 @@
+/*
+ * Copyright 2014 http://Bither.net
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.primer.activity.hot;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import org.primer.PrimerSetting;
+import org.primer.R;
+import org.primer.SendActivity;
+import org.primer.primerj.core.Address;
+import org.primer.primerj.core.AddressManager;
+import org.primer.primerj.utils.Utils;
+import org.primer.preference.AppSharedPreference;
+import org.primer.ui.base.SwipeRightActivity;
+import org.primer.ui.base.dialog.DialogAddressFull;
+import org.primer.ui.base.listener.IBackClickListener;
+import org.primer.util.primecoinURI;
+import org.primer.util.UnitUtilWrapper;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+public class SelectAddressToSendActivity extends SwipeRightActivity {
+    public static final String INTENT_EXTRA_ADDRESS = "address";
+    public static final String INTENT_EXTRA_AMOUNT = "amount";
+    public static final String INTENT_EXTRA_TRANSACTION = "transaction";
+    public static final int SEND_REQUEST_CODE = 437;
+
+    private String receivingAddress;
+    private long btc;
+    private boolean isAppInternal = false;
+
+    private TextView tvAddress;
+    private TextView tvAmount;
+    private ListView lv;
+    private TextView tvNoAddress;
+    private TextView tvSymbol;
+    private ProgressBar pb;
+
+    private ArrayList<AddressBalance> addresses = new ArrayList<AddressBalance>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (!processIntent()) {
+            finish();
+            return;
+        }
+        setContentView(R.layout.activity_select_address_to_send);
+        initView();
+        getAddressesForSending();
+    }
+
+    private void initView() {
+        if (!isAppInternal) {
+            mTouchView.addIgnoreView(mTouchView);
+        }
+        findViewById(R.id.ibtn_cancel).setOnClickListener(new IBackClickListener());
+        tvAddress = (TextView) findViewById(R.id.tv_address);
+        tvAmount = (TextView) findViewById(R.id.tv_btc);
+        tvSymbol = (TextView) findViewById(R.id.tv_symbol);
+        tvNoAddress = (TextView) findViewById(R.id.tv_no_address);
+        lv = (ListView) findViewById(R.id.lv);
+        pb = (ProgressBar) findViewById(R.id.pb);
+        lv.setAdapter(adapter);
+        tvAddress.setText(receivingAddress);
+        tvSymbol.setText(AppSharedPreference.getInstance().getBitcoinUnit().name());
+        tvAmount.setText(UnitUtilWrapper.formatValueWithBold(btc));
+    }
+
+    private void getAddressesForSending() {
+        pb.setVisibility(View.VISIBLE);
+        lv.setVisibility(View.INVISIBLE);
+        tvNoAddress.setVisibility(View.GONE);
+        addresses.clear();
+        new Thread() {
+            public void run() {
+                List<Address> as = AddressManager.getInstance().getAllAddresses();
+                ArrayList<AddressBalance> availableAddresses = new ArrayList<AddressBalance>();
+                for (Address a : as) {
+                    long balance = a.getBalance();
+                    if (balance > btc) {
+                        availableAddresses.add(new AddressBalance(a, balance));
+                    }
+                }
+                addresses.addAll(availableAddresses);
+                Collections.sort(addresses, Collections.reverseOrder());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                        if (addresses.size() > 0) {
+                            lv.setVisibility(View.VISIBLE);
+                            tvNoAddress.setVisibility(View.GONE);
+                        } else {
+                            lv.setVisibility(View.GONE);
+                            tvNoAddress.setVisibility(View.VISIBLE);
+                        }
+                        pb.setVisibility(View.GONE);
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private BaseAdapter adapter = new BaseAdapter() {
+        private LayoutInflater inflater;
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (inflater == null) {
+                inflater = LayoutInflater.from(SelectAddressToSendActivity.this);
+            }
+            ViewHolder h;
+            if (convertView != null) {
+                h = (ViewHolder) convertView.getTag();
+            } else {
+                convertView = inflater.inflate(R.layout.list_item_select_address_to_send, null);
+                h = new ViewHolder(convertView);
+                convertView.setTag(h);
+            }
+            AddressBalance a = getItem(position);
+            h.tvAddress.setText(a.address.getShortAddress());
+            h.tvBalance.setText(UnitUtilWrapper.formatValueWithBold(a.balance));
+            h.ivSymbol.setImageBitmap(UnitUtilWrapper.getBtcSlimSymbol(h.tvBalance));
+            if (a.address.isHDM()) {
+                h.ivType.setImageResource(R.drawable.address_type_hdm);
+            } else if (a.address.hasPrivKey()) {
+                h.ivType.setImageResource(R.drawable.address_type_private);
+            } else {
+                h.ivType.setImageResource(R.drawable.address_type_watchonly);
+            }
+            h.ibtnAddressFull.setOnClickListener(new AddressFullClick(a.address));
+            convertView.setOnClickListener(new ListItemClick(a.address));
+            return convertView;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public AddressBalance getItem(int position) {
+            return addresses.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return addresses.size();
+        }
+
+        class ViewHolder {
+            TextView tvAddress;
+            TextView tvBalance;
+            ImageView ivSymbol;
+            ImageView ivType;
+            ImageButton ibtnAddressFull;
+
+            public ViewHolder(View v) {
+                tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                tvBalance = (TextView) v.findViewById(R.id.tv_balance);
+                ivType = (ImageView) v.findViewById(R.id.iv_type);
+                ivSymbol = (ImageView) v.findViewById(R.id.iv_symbol);
+                ibtnAddressFull = (ImageButton) v.findViewById(R.id.ibtn_address_full);
+            }
+        }
+    };
+
+    private class ListItemClick implements OnClickListener {
+        private Address address;
+
+        public ListItemClick(Address address) {
+            this.address = address;
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position;
+            Class<?> target;
+            if (address.isHDM()) {
+                position = AddressManager.getInstance().getHdmKeychain().getAddresses().indexOf
+                        (address);
+                target = HdmSendActivity.class;
+            } else if (address.hasPrivKey()) {
+                position = AddressManager.getInstance().getPrivKeyAddresses().indexOf(address);
+                target = SendActivity.class;
+            } else {
+                position = AddressManager.getInstance().getWatchOnlyAddresses().indexOf(address);
+                target = GenerateUnsignedTxActivity.class;
+            }
+            Intent intent = new Intent(SelectAddressToSendActivity.this, target);
+            intent.putExtra(PrimerSetting.INTENT_REF.ADDRESS_POSITION_PASS_VALUE_TAG, position);
+            intent.putExtra(PrimerSetting.INTENT_REF.ADDRESS_IS_HDM_KEY_PASS_VALUE_TAG,
+                    address.isHDM());
+            intent.putExtra(INTENT_EXTRA_ADDRESS, receivingAddress);
+            intent.putExtra(INTENT_EXTRA_AMOUNT, btc);
+            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            startActivity(intent);
+            lv.postDelayed(finishRunnable, 800);
+        }
+    }
+
+    private class AddressFullClick implements OnClickListener {
+        private Address address;
+
+        public AddressFullClick(Address address) {
+            this.address = address;
+        }
+
+        @Override
+        public void onClick(View v) {
+            LinkedHashMap<String, Long> map = new LinkedHashMap<String, Long>();
+            map.put(address.getAddress(), 0L);
+            DialogAddressFull dialog = new DialogAddressFull(SelectAddressToSendActivity.this, map);
+            dialog.show(v);
+        }
+    }
+
+    private static final class AddressBalance implements Comparable<AddressBalance> {
+        public Address address;
+        public long balance;
+
+        public AddressBalance(Address address, long balance) {
+            this.address = address;
+            this.balance = balance;
+        }
+
+        @Override
+        public int compareTo(AddressBalance another) {
+            if (address.isHDM() && !another.address.isHDM()) {
+                return 1;
+            }
+            if (address.hasPrivKey() && !another.address.hasPrivKey()) {
+                return 1;
+            }
+            if (!address.hasPrivKey() && another.address.hasPrivKey()) {
+                return -1;
+            }
+            long gap = balance - another.balance;
+            return gap == 0 ? 0 : (int) (gap / Math.abs(gap));
+        }
+    }
+
+    public static void start(Context context, String address, long btc) {
+        Intent intent = new Intent(context, SelectAddressToSendActivity.class);
+        intent.putExtra(INTENT_EXTRA_ADDRESS, address);
+        intent.putExtra(INTENT_EXTRA_AMOUNT, btc);
+        if (context instanceof Activity) {
+            Activity a = (Activity) context;
+            a.startActivityForResult(intent, SEND_REQUEST_CODE);
+        } else {
+            context.startActivity(intent);
+        }
+    }
+
+    private boolean processIntent() {
+        Intent intent = getIntent();
+        if (Utils.compareString(intent.getScheme(), "bitcoin") && intent.getData() != null
+                && intent.getAction().equals(Intent.ACTION_VIEW)) {
+            isAppInternal = false;
+            try {
+                primecoinURI primecoinUri = new primecoinURI(intent.getDataString());
+                String address = primecoinUri.getAddress();
+                long amount = primecoinUri.getAmount();
+                if (address != null) {
+                    receivingAddress = address;
+                    btc = amount;
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            isAppInternal = true;
+            if (intent.getExtras().containsKey(INTENT_EXTRA_ADDRESS)) {
+                String address = intent.getExtras().getString(INTENT_EXTRA_ADDRESS);
+                if (address != null && Utils.validBicoinAddress(address)) {
+                    receivingAddress = address;
+                    btc = intent.getExtras().getLong(INTENT_EXTRA_AMOUNT, 0);
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lv.removeCallbacks(finishRunnable);
+    }
+
+    private Runnable finishRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            finish();
+        }
+    };
+}

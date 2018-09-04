@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             android:paddingLeft="@dimen/card_list_padding"
+             android:paddingRight="@dimen/card_list_padding">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <org.primer.ui.base.MarketListHeader
+            android:id="@+id/v_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:paddingTop="10dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="-8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/v_header"
+            android:layout_marginBottom="6dp"
+            android:layout_weight="1">
+
+            <org.primer.ui.base.OverScrollableListView
+                android:id="@+id/lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:divider="@color/list_cell_divider"
+                android:dividerHeight="1px"
+                android:drawSelectorOnTop="false"
+                android:cacheColorHint="@android:color/transparent"
+                android:listSelector="@android:color/transparent"
+                android:fadingEdgeLength="0dp"
+                android:scrollbars="none"/>
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_market_price_anim_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:visibility="invisible"
+        android:src="@drawable/market_price_alert_icon_light"/>
+
+    <include layout="@layout/layout_card_foreground_single"/>
+
+</FrameLayout>
