@@ -331,9 +331,9 @@ public class BlockchainService extends android.app.Service {
             if (peerCanNotRun) {
                 return;
             }
-            if (UpgradeUtil.needUpgrade()) {
+            /*if (UpgradeUtil.needUpgrade()) {
                 return;
-            }
+            }*/
             if (!AppSharedPreference.getInstance().getDownloadSpvFinish()) {
                 Block block = BlockUtil.dowloadSpvBlock();
                 if (block == null) {
