@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.primer"
     android:installLocation="internalOnly"
-    android:versionCode="182"
-    android:versionName="1.8.2">
+    android:versionCode="1"
+    android:versionName="0.0.1rc">
 
     <uses-sdk
         android:minSdkVersion="9"

@@ -11,6 +11,9 @@ local.properties
 .externalNativeBuild
 .idea
 .gradle
-bither-android/build
+/primer-android/build
 wheel/build
 android-charts/build
+/gradle
+/gradlew
+/gradlew.bat
