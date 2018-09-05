@@ -1,3 +1,4 @@
 [submodule "primerj"]
 	path = primerj
 	url = git@github.com:primecoin/primerj.git
+	branch = master
