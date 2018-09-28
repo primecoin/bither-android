@@ -30,13 +30,13 @@
 -dontwarn javax.inject.**
 -dontwarn sun.misc.Unsafe
 
-# bither.net
--keep class net.bither.ChooseModeActivity$ShowHideView { *; }
--keep class net.bither.ui.base.WrapLayoutParamsForAnimator { *; }
--keep class net.bither.ui.base.MarketListHeader$BgHolder { *; }
--keep class net.bither.BitherSetting { *; }
--keep public enum net.bither.** { *; }
--keep public enum net.bither.bitherj.factory.ImportHDSeed$ImportHDSeedType { *; }
+# org.primer
+-keep class org.primer.ChooseModeActivity$ShowHideView { *; }
+-keep class org.primer.ui.base.WrapLayoutParamsForAnimator { *; }
+-keep class org.primer.ui.base.MarketListHeader$BgHolder { *; }
+-keep class org.primer.PrimerSetting { *; }
+-keep public enum org.primer.** { *; }
+-keep public enum org.primer.primerj.factory.ImportHDSeed$ImportHDSeedType { *; }
 
 
 -keep class org.apache.http.** { *; }

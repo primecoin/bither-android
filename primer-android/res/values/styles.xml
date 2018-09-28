@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="BitherTheme" parent="android:Theme.NoTitleBar">
+    <style name="PrimerTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/bg</item>
         <item name="android:colorBackground">@color/bg</item>
     </style>
 
-    <style name="BitherTransparentBgTheme" parent="@style/BitherTheme">
+    <style name="PrimerTransparentBgTheme" parent="@style/PrimerTheme">
         <item name="android:windowBackground">@drawable/transparent</item>
         <item name="android:colorBackground">@color/transparent</item>
         <item name="android:windowIsFloating">false</item>
