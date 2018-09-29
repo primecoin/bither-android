@@ -1,29 +1,26 @@
-bither-android
+primer-android
 ==============
 
-Bither is a simple and secure Bitcoin wallet! You can find Bither on [Google Play](https://play.google.com/store/apps/details?id=net.bither).
+Primer is a simple and secure Primer wallet!
 
-There is also an [iOS version](https://github.com/bither/bither-ios).
+There is also an [iOS version](https://github.com/primecoin/primer-ios).
 
 ## Build
 
-Bither-android is easy to build base on gradle build system.
+primer-android is easy to build base on gradle build system.
 
-[How to build bither android](https://github.com/bither/bither-android/wiki/bulid-bither-android)
+[How to build primer android](https://github.com/primecoin/primer-android)
 
 ## Features
 
 * HOT and COLD wallet modes to ensure private key safety
 * Communication between hot and cold wallet via QR Codes
-* SPV bitcoin p2p client
+* SPV primer p2p client
 * Both android and iOS are supported
 * Nice designed UI
 * Private password keyboard to avoid using third party keyboard for password
 
-## Donation
-
-Donate : 1BitherUnNvB2NsfxMnbS35kS3DTPr7PW5
 
 ## Website
 
-[Bither.net](http://bither.net)
+[Primecoin](http://primecoin.io/)
