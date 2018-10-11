@@ -91,7 +91,7 @@
     <string name="add_address_coming_soon">Coming Soon…</string>
     <string name="add_address_scan">Scan</string>
     <string name="add_address_delete">Delete</string>
-    <string name="add_address_watch_only_hint">Bitcoin Address</string>
+    <string name="add_address_watch_only_hint">Primecoin Address</string>
     <string name="add_address_already_watched">This address is already monitored</string>
     <string name="addresses_already_monitored">This Primecoin Cold is already monitored.</string>
     <string name="add_address_generate_address_with_private_key">Generate</string>
@@ -242,8 +242,8 @@
     <string name="synchronous_interval_only_open_app">Only when openning</string>
     <!-- Input parser -->
     <string name="input_parser_cannot_classify">Cannot classify input:\n%s</string>
-    <string name="input_parser_invalid_bitcoin_uri">Invalid Bitcoin URI:\n%s</string>
-    <string name="input_parser_invalid_address">Got invalid bitcoin address!\n(Mixing up Mainnet/Testnet?)</string>
+    <string name="input_parser_invalid_bitcoin_uri">Invalid Primecoin URI:\n%s</string>
+    <string name="input_parser_invalid_address">Got invalid Primecoin address!\n(Mixing up Mainnet/Testnet?)</string>
     <string name="input_parser_invalid_transaction">Invalid transaction:\n%s</string>
 
     <!-- feed -->
@@ -289,7 +289,7 @@
     <string name="private_key_is_empty">You don\'t have any private key, please add some</string>
     <string name="next_page">Next page</string>
     <string name="can_not_find_private_key">Can not find private key </string>
-    <string name="scan_watch_only_address_error">QR Code contains no bitcoin address</string>
+    <string name="scan_watch_only_address_error">QR Code contains no primecoin address</string>
     <string name="sign_transaction">Sign Transaction</string>
     <string name="scan_qr_transport_init_label">Scan QR code No.1 provided by Primecoin</string>
     <string name="scan_qr_transport_page_label">Scan QR code No.%1$d, total %2$d</string>
