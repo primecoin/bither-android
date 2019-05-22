@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_height="match_parent">
 
-    <org.primer.ui.base.QrCodeImageView
+    <net.bither.ui.base.QrCodeImageView
         android:id="@+id/iv_qrcode"
         android:layout_width="match_parent"
         android:layout_height="0dp"

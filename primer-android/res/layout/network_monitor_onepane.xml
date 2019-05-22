@@ -9,7 +9,7 @@
         android:layout_marginTop="@dimen/title_bar_below_margin"
         android:orientation="vertical" >
 
-        <org.primer.ui.base.ViewPagerTabs
+        <net.bither.ui.base.ViewPagerTabs
             android:id="@+id/network_monitor_pager_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

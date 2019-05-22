@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <org.primer.ui.base.SwipeRightTouchView
+    <net.bither.ui.base.SwipeRightTouchView
         android:id="@+id/swipe_right_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/title_bar_below_margin">
 
-            <org.primer.ui.base.OverScrollableScrollView
+            <net.bither.ui.base.OverScrollableScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -54,22 +54,22 @@
 
                             <include layout="@layout/layout_vertical_seperator"/>
                             <!--PIN码-->
-                            <org.primer.ui.base.SettingSelectorView
+                            <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_pin_code"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                              <!--二维码精度-->
-                            <org.primer.ui.base.SettingSelectorView
+                            <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_qr_code_quality"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <!--导入BIP38私钥-->
-                            <org.primer.ui.base.SettingSelectorView
+                            <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_import_bip38_key"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <!--消息签名-->
-                            <org.primer.ui.base.SettingSelectorView
+                            <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_message_signing"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
@@ -95,7 +95,7 @@
                                 <include layout="@layout/layout_vertical_seperator" />
                             </LinearLayout>
 
-                            <org.primer.ui.base.SettingSelectorView
+                            <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_password_strength_check"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
@@ -161,7 +161,7 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </org.primer.ui.base.OverScrollableScrollView>
+            </net.bither.ui.base.OverScrollableScrollView>
 
             <include layout="@layout/layout_dropdown_message"/>
 
@@ -209,5 +209,5 @@
                     android:textStyle="bold"/>
             </LinearLayout>
         </FrameLayout>
-    </org.primer.ui.base.SwipeRightTouchView>
+    </net.bither.ui.base.SwipeRightTouchView>
 </FrameLayout>

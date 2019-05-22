@@ -54,7 +54,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <org.primer.ui.base.QrCodeImageView
+            <net.bither.ui.base.QrCodeImageView
                 android:id="@+id/iv_qrcode"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -103,7 +103,7 @@
                 android:textColor="@color/text_field_text_color"
                 android:textSize="16sp" />
 
-            <org.primer.ui.base.BalanceBtcToMoneyButton
+            <net.bither.ui.base.BalanceBtcToMoneyButton
                 android:id="@+id/btn_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

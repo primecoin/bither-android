@@ -43,7 +43,7 @@
             android:paddingRight="20dp"
             android:layout_gravity="center">
 
-            <org.primer.ui.base.HDMTriangleBgView
+            <net.bither.ui.base.HDMTriangleBgView
                 android:id="@+id/v_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

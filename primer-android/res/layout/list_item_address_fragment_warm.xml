@@ -95,7 +95,7 @@
                         android:layout_height="1dp"
                         android:layout_weight="1"/>
 
-                    <org.primer.ui.base.BtcToMoneyTextView
+                    <net.bither.ui.base.BtcToMoneyTextView
                         android:id="@+id/tv_balance_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                         android:textSize="14sp"
                         android:visibility="visible"/>
 
-                    <org.primer.ui.base.TransactionImmutureSummeryListItemView
+                    <net.bither.ui.base.TransactionImmutureSummeryListItemView
                         android:id="@+id/v_transaction_immuture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

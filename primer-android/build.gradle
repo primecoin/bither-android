@@ -19,7 +19,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "org.primecoin.wallet"
+        applicationId "net.bither.wallet"
        /* splits {
             abi {
                 enable true

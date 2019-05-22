@@ -12,7 +12,7 @@
         android:src="@drawable/no_address_image"
         android:visibility="gone" />
 
-    <org.primer.ui.base.PinnedHeaderAddressExpandableListView
+    <net.bither.ui.base.PinnedHeaderAddressExpandableListView
         android:id="@+id/lv"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

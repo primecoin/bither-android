@@ -35,13 +35,13 @@
         android:layout_marginTop="5dp"
         android:layout_gravity="center">
 
-        <org.primer.ui.base.PieChartView
+        <net.bither.ui.base.PieChartView
             android:id="@+id/pie"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"/>
 
-        <org.primer.ui.base.RotatableFrameLayout
+        <net.bither.ui.base.RotatableFrameLayout
             android:id="@+id/fl_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"/>
-        </org.primer.ui.base.RotatableFrameLayout>
+        </net.bither.ui.base.RotatableFrameLayout>
 
         <ImageView
             android:src="@drawable/pie_mask"
