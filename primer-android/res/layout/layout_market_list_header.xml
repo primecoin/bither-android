@@ -102,7 +102,7 @@
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
-                            <org.primer.ui.base.TrendingGraphicView
+                            <net.bither.ui.base.TrendingGraphicView
                                 android:id="@+id/v_trending"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"

@@ -22,7 +22,7 @@
             android:textStyle="bold"/>
     </FrameLayout>
 
-    <org.primer.ui.base.OverScrollableViewPager
+    <net.bither.ui.base.OverScrollableViewPager
         android:id="@+id/pager"
         android:layout_width="wrap_content"
         android:layout_height="30dp"

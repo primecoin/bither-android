@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <org.primer.ui.base.TransactionImmutureConfidenceIconView
+        <net.bither.ui.base.TransactionImmutureConfidenceIconView
             android:id="@+id/fl_confidence_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
             android:layout_marginBottom="3dp"
             android:layout_marginTop="3dp" />
 
-        <org.primer.ui.base.BtcToMoneyButton
+        <net.bither.ui.base.BtcToMoneyButton
             android:id="@+id/btn_btc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

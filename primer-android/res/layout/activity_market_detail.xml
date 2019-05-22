@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <org.primer.ui.base.SwipeRightTouchView
+    <net.bither.ui.base.SwipeRightTouchView
         android:id="@+id/swipe_right_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/title_bar_below_margin">
 
-            <org.primer.ui.base.OverScrollableScrollView
+            <net.bither.ui.base.OverScrollableScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none">
@@ -101,19 +101,19 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp">
 
-                            <org.primer.charts.view.MACandleStickChart
+                            <net.bither.charts.view.MACandleStickChart
                                 android:id="@+id/macandlestickchart"
                                 android:layout_width="fill_parent"
                                 android:layout_height="240dip"
                                 android:background="@drawable/transparent"/>
 
-                            <org.primer.ui.base.KlineDetailView
+                            <net.bither.ui.base.KlineDetailView
                                 android:id="@+id/klinedetailview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom|left"
                                 android:visibility="invisible">
-                            </org.primer.ui.base.KlineDetailView>
+                            </net.bither.ui.base.KlineDetailView>
 
                             <TextView
                                 android:id="@+id/tv_kline_error"
@@ -323,19 +323,19 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="5dp">
 
-                        <org.primer.charts.view.MarketDepthChart
+                        <net.bither.charts.view.MarketDepthChart
                             android:id="@+id/marketdepthchart"
                             android:layout_width="fill_parent"
                             android:layout_height="240dip"
                             android:background="@drawable/transparent"/>
 
-                        <org.primer.ui.base.MarketDepthDetailView
+                        <net.bither.ui.base.MarketDepthDetailView
                             android:id="@+id/market_depth_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|left"
                             android:visibility="invisible">
-                        </org.primer.ui.base.MarketDepthDetailView>
+                        </net.bither.ui.base.MarketDepthDetailView>
 
                         <TextView
                             android:id="@+id/tv_depth_error"
@@ -358,7 +358,7 @@
                             android:visibility="gone"/>
                     </FrameLayout>
                 </LinearLayout>
-            </org.primer.ui.base.OverScrollableScrollView>
+            </net.bither.ui.base.OverScrollableScrollView>
 
             <include layout="@layout/layout_dropdown_message"/>
         </FrameLayout>
@@ -421,6 +421,6 @@
                     android:src="@drawable/title_bar_option_icon"/>
             </LinearLayout>
         </FrameLayout>
-    </org.primer.ui.base.SwipeRightTouchView>
+    </net.bither.ui.base.SwipeRightTouchView>
 
 </FrameLayout>

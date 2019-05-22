@@ -43,13 +43,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <org.primer.pin.PinCodeDotsView
+                <net.bither.pin.PinCodeDotsView
                     android:id="@+id/dv"
                     android:layout_width="160dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"/>
 
-                <org.primer.pin.PinCodeDotsView
+                <net.bither.pin.PinCodeDotsView
                     android:id="@+id/dv_new"
                     android:layout_width="160dp"
                     android:layout_height="16dp"
@@ -59,7 +59,7 @@
         </LinearLayout>
     </FrameLayout>
 
-    <org.primer.ui.base.keyboard.pin.PinEntryKeyboardView
+    <net.bither.ui.base.keyboard.pin.PinEntryKeyboardView
         android:id="@+id/kv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

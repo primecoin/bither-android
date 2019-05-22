@@ -11,7 +11,7 @@
 
         <fragment
             android:id="@+id/fragment"
-            android:name="org.primer.fragment.hot.AddAddressPrivateKeyFragment"
+            android:name="net.bither.fragment.hot.AddAddressPrivateKeyFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

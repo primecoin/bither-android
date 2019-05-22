@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
-        <org.primer.ui.base.OverScrollableListView
+        <net.bither.ui.base.OverScrollableListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

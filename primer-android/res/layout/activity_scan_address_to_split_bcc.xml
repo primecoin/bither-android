@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <org.primer.ui.base.SwipeRightTouchView
+    <net.bither.ui.base.SwipeRightTouchView
         android:id="@+id/swipe_right_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -125,7 +125,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/global_shadow_up"/>
 
-                <org.primer.ui.base.keyboard.password.PasswordEntryKeyboardView
+                <net.bither.ui.base.keyboard.password.PasswordEntryKeyboardView
                     android:id="@+id/kv_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -210,6 +210,6 @@
             </LinearLayout>
         </LinearLayout>
 
-    </org.primer.ui.base.SwipeRightTouchView>
+    </net.bither.ui.base.SwipeRightTouchView>
 
 </FrameLayout>

@@ -20,7 +20,7 @@
                 android:background="@color/white"
                 android:orientation="vertical" >
 
-                <org.primer.ui.base.CheckHeaderView
+                <net.bither.ui.base.CheckHeaderView
                     android:id="@+id/v_check_header"
                     android:layout_width="match_parent"
                     android:layout_height="210dp"
@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp" >
 
-                    <org.primer.ui.base.OverScrollableListView
+                    <net.bither.ui.base.OverScrollableListView
                         android:id="@+id/lv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <org.primer.ui.base.SwipeRightTouchView
+    <net.bither.ui.base.SwipeRightTouchView
         android:id="@+id/swipe_right_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,7 +78,7 @@
                         android:layout_marginTop="2dp"
                         android:orientation="horizontal">
 
-                        <org.primer.ui.base.CurrencyAmountView
+                        <net.bither.ui.base.CurrencyAmountView
                             android:id="@+id/cav_btc"
                             android:layout_width="0px"
                             android:layout_height="wrap_content"
@@ -91,9 +91,9 @@
                                 android:background="@drawable/text_field_holo_light_background"
                                 android:imeOptions="flagNoExtractUi"
                                 android:textSize="18sp"/>
-                        </org.primer.ui.base.CurrencyAmountView>
+                        </net.bither.ui.base.CurrencyAmountView>
 
-                        <org.primer.ui.base.CurrencyAmountView
+                        <net.bither.ui.base.CurrencyAmountView
                             android:id="@+id/cav_local"
                             android:layout_width="0px"
                             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                                 android:background="@drawable/text_field_holo_light_background"
                                 android:imeOptions="flagNoExtractUi"
                                 android:textSize="18sp"/>
-                        </org.primer.ui.base.CurrencyAmountView>
+                        </net.bither.ui.base.CurrencyAmountView>
                     </LinearLayout>
 
                     <LinearLayout
@@ -151,7 +151,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/global_shadow_up"/>
 
-                <org.primer.ui.base.keyboard.amount.AmountEntryKeyboardView
+                <net.bither.ui.base.keyboard.amount.AmountEntryKeyboardView
                     android:id="@+id/kv_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -243,6 +243,6 @@
                 android:background="@drawable/tab_button_background"
                 android:src="@drawable/title_bar_option_icon"/>
         </LinearLayout>
-    </org.primer.ui.base.SwipeRightTouchView>
+    </net.bither.ui.base.SwipeRightTouchView>
 
 </FrameLayout>
