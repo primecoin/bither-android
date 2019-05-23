@@ -1,2 +1,2 @@
-include ':primerj', ':wheel', ':android-charts', ':primer-android'
-project(':primerj').projectDir = new File(rootDir,'/primerj/primerj')
+include ':bitherj', ':wheel', ':android-charts', ':primer-android'
+project(':bitherj').projectDir = new File(rootDir,'/primerj/bitherj')
