@@ -384,10 +384,9 @@ public class OptionHotFragment extends Fragment implements Selectable,
         }
 
         private String getFeeStr(PrimerjSettings.TransactionFeeMode transactionFeeMode) {
-            // Set unit to mXPM/b from satoshi/kb and adjust dividend accordingly by a factor of 10^8
-            float dividend = 100000000;
-            String unit = " mXPM/b";
-            float fee = (float) transactionFeeMode.getMinFeeSatoshi() / dividend;
+            // Unit conversion from Satoshi/KB to mXPM/B
+            String unit = " mXPM/B";
+            float fee = (float) transactionFeeMode.getFeeRateSatoshiPerKB() / 1000 / 100000;
             return String.valueOf(fee) + unit;
         }
 
