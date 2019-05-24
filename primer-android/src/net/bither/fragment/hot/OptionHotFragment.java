@@ -423,8 +423,8 @@ public class OptionHotFragment extends Fragment implements Selectable,
         }
 
         private String getFeeStr(PrimerjSettings.TransactionFeeMode transactionFeeMode) {
-            // Unit conversion from Satoshi/KB to mXPM/B
             String unit = " mXPM/B";
+            // Unit conversion of fee rate from Satoshi/kB to mXPM/B
             float fee = (float) transactionFeeMode.getFeeRateSatoshiPerKB() / 1000 / 100000;
             return String.valueOf(fee) + unit;
         }
