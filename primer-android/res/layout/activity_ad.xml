@@ -4,7 +4,7 @@
     android:id="@+id/activity_ad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.primer.AdActivity">
+    tools:context="net.bither.AdActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

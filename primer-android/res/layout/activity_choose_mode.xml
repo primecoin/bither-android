@@ -82,7 +82,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <org.primer.ui.base.ColdWalletInitCheckView
+                <net.bither.ui.base.ColdWalletInitCheckView
                     android:id="@+id/v_cold_wallet_init_check"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

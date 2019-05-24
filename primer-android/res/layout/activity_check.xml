@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <org.primer.ui.base.SwipeRightTouchView
+    <net.bither.ui.base.SwipeRightTouchView
         android:id="@+id/swipe_right_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,7 @@
 
         <fragment
             android:id="@+id/f_check"
-            android:name="org.primer.fragment.cold.CheckFragment"
+            android:name="net.bither.fragment.cold.CheckFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/title_bar_below_margin" />
@@ -63,6 +63,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>
-    </org.primer.ui.base.SwipeRightTouchView>
+    </net.bither.ui.base.SwipeRightTouchView>
 
 </FrameLayout>

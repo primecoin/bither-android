@@ -8,14 +8,14 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/title_bar_below_margin" >
 
-        <org.primer.ui.base.OverScrollableViewPager
+        <net.bither.ui.base.OverScrollableViewPager
             android:id="@+id/pager"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
 
         <include layout="@layout/layout_dropdown_message" />
 
-        <org.primer.ui.base.SyncProgressView
+        <net.bither.ui.base.SyncProgressView
             android:id="@+id/pb_sync"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:orientation="horizontal"
         android:paddingBottom="3dp" >
 
-        <org.primer.ui.base.TabButton
+        <net.bither.ui.base.TabButton
             android:id="@+id/tbtn_message"
             android:layout_width="93dp"
             android:layout_height="match_parent"
@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/title_bar_seperator" />
 
-        <org.primer.ui.base.TabButton
+        <net.bither.ui.base.TabButton
             android:id="@+id/tbtn_main"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -74,7 +74,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/title_bar_seperator" />
 
-        <org.primer.ui.base.TabButton
+        <net.bither.ui.base.TabButton
             android:id="@+id/tbtn_me"
             android:layout_width="93dp"
             android:layout_height="match_parent"

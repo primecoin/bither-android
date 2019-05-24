@@ -45,7 +45,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
 
-            <org.primer.ui.base.QrCodeImageView
+            <net.bither.ui.base.QrCodeImageView
                 android:id="@+id/iv_qrcode"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

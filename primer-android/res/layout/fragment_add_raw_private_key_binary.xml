@@ -14,7 +14,7 @@
         android:paddingTop="10dp"
         android:orientation="vertical">
 
-        <org.primer.rawprivatekey.RawDataBinaryView
+        <net.bither.rawprivatekey.RawDataBinaryView
             android:id="@+id/v_data"
             android:layout_width="match_parent"
             android:layout_height="100dp"

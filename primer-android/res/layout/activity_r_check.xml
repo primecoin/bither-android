@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <org.primer.ui.base.SwipeRightTouchView
+    <net.bither.ui.base.SwipeRightTouchView
         android:id="@+id/swipe_right_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +32,7 @@
                     android:background="@color/white"
                     android:orientation="vertical">
 
-                    <org.primer.ui.base.RCheckHeaderView
+                    <net.bither.ui.base.RCheckHeaderView
                         android:id="@+id/v_check_header"
                         android:layout_width="match_parent"
                         android:layout_height="210dp"
@@ -43,7 +43,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
 
-                        <org.primer.ui.base.OverScrollableListView
+                        <net.bither.ui.base.OverScrollableListView
                             android:id="@+id/lv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -110,6 +110,6 @@
                     android:textStyle="bold"/>
             </LinearLayout>
         </FrameLayout>
-    </org.primer.ui.base.SwipeRightTouchView>
+    </net.bither.ui.base.SwipeRightTouchView>
 
 </FrameLayout>

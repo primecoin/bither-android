@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <org.primer.ui.base.SwipeRightTouchView
+    <net.bither.ui.base.SwipeRightTouchView
         android:id="@+id/swipe_right_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
                     android:textColor="@color/white"
                     android:textSize="15sp"/>
 
-                <org.primer.ui.base.CountSelectionView
+                <net.bither.ui.base.CountSelectionView
                     android:id="@+id/csv_address_count"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"/>
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <org.primer.ui.base.CountSelectionView
+                    <net.bither.ui.base.CountSelectionView
                         android:id="@+id/csv_threshold"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
@@ -179,7 +179,7 @@
                         android:textColor="@color/white"
                         android:textSize="40sp"/>
 
-                    <org.primer.ui.base.CountSelectionView
+                    <net.bither.ui.base.CountSelectionView
                         android:id="@+id/csv_pub_count"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
@@ -247,6 +247,6 @@
                     android:textStyle="bold"/>
             </LinearLayout>
         </FrameLayout>
-    </org.primer.ui.base.SwipeRightTouchView>
+    </net.bither.ui.base.SwipeRightTouchView>
 
 </FrameLayout>
