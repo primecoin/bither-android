@@ -368,10 +368,6 @@ public class OptionHotFragment extends Fragment implements Selectable,
         public String getOptionName(int index) {
             PrimerjSettings.TransactionFeeMode transactionFeeMode = getModeByIndex(index);
             switch (transactionFeeMode) {
-                case TwentyX:
-                    return getString(R.string.setting_name_transaction_fee_20x);
-                case TenX:
-                    return getString(R.string.setting_name_transaction_fee_10x);
                 case Higher:
                     return getString(R.string.setting_name_transaction_fee_higher);
                 case High:
@@ -395,10 +391,6 @@ public class OptionHotFragment extends Fragment implements Selectable,
                     return 1;
                 case Higher:
                     return 2;
-                case TenX:
-                    return 3;
-                case TwentyX:
-                    return 4;
                 default:
                     return 0;
             }
@@ -413,10 +405,6 @@ public class OptionHotFragment extends Fragment implements Selectable,
                         return PrimerjSettings.TransactionFeeMode.High;
                     case 2:
                         return PrimerjSettings.TransactionFeeMode.Higher;
-                    case 3:
-                        return PrimerjSettings.TransactionFeeMode.TenX;
-                    case 4:
-                        return PrimerjSettings.TransactionFeeMode.TwentyX;
                 }
             }
             return PrimerjSettings.TransactionFeeMode.Normal;
@@ -425,10 +413,6 @@ public class OptionHotFragment extends Fragment implements Selectable,
         @Override
         public String getOptionNote(int index) {
             switch (getModeByIndex(index)) {
-                case TwentyX:
-                    return getFeeStr(PrimerjSettings.TransactionFeeMode.TwentyX);
-                case TenX:
-                    return getFeeStr(PrimerjSettings.TransactionFeeMode.TenX);
                 case Higher:
                     return getFeeStr(PrimerjSettings.TransactionFeeMode.Higher);
                 case High:
@@ -439,9 +423,9 @@ public class OptionHotFragment extends Fragment implements Selectable,
         }
 
         private String getFeeStr(PrimerjSettings.TransactionFeeMode transactionFeeMode) {
-            float dividend = 100000;
-            String unit = "mXPM/kb";
-            float fee = (float) transactionFeeMode.getMinFeeSatoshi() / dividend;
+            String unit = " mXPM/B";
+            // Unit conversion of fee rate from Satoshi/kB to mXPM/B
+            float fee = (float) transactionFeeMode.getFeeRateSatoshiPerKB() / 1000 / 100000;
             return String.valueOf(fee) + unit;
         }
 
