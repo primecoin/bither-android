@@ -160,6 +160,7 @@
     <string name="setting_name_wifi">网络设置</string>
     <string name="setting_name_wifi_yes">只在wifi下同步</string>
     <string name="setting_name_wifi_no">一直同步</string>
+    <string name="setting_name_transaction_fee_precision">手续费精度</string>
     <string name="setting_name_transaction_fee">默认手续费</string>
     <string name="setting_name_transaction_fee_normal">正常</string>
     <string name="setting_name_transaction_fee_higher">更高</string>

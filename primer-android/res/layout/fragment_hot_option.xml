@@ -56,11 +56,6 @@
                 <!--<include layout="@layout/layout_vertical_seperator"/>-->
 
                 <net.bither.ui.base.SettingSelectorView
-                    android:id="@+id/ssv_bitcoin_unit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <net.bither.ui.base.SettingSelectorView
                     android:id="@+id/ssv_currency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -72,6 +67,11 @@
 
                 <net.bither.ui.base.SettingSelectorView
                     android:id="@+id/ssv_transaction_fee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <net.bither.ui.base.SettingSelectorView
+                    android:id="@+id/ssv_transaction_fee_precision"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

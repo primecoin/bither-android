@@ -158,6 +158,7 @@
     <string name="setting_name_wifi">網絡設置</string>
     <string name="setting_name_wifi_yes">只在wifi下同步</string>
     <string name="setting_name_wifi_no">一直同步</string>
+    <string name="setting_name_transaction_fee_precision">手續費精度</string>
     <string name="setting_name_transaction_fee">默認手續費</string>
     <string name="setting_name_transaction_fee_normal">正常</string>
     <string name="setting_name_transaction_fee_higher">更高</string>

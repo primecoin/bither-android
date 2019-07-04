@@ -71,6 +71,7 @@ public class AppSharedPreference {
 
     private static final String APP_MODE = "app_mode";
     private static final String TRANSACTION_FEE_MODE = "transaction_fee_mode";
+    private static final String TRANSACTION_FEE_PRECISION = "transaction_fee_precision";
     private static final String BITHERJ_DONE_SYNC_FROM_SPV = "bitheri_done_sync_from_spv";
     private static final String SYNC_INTERVAL = "sync_interval";
 
@@ -135,6 +136,22 @@ public class AppSharedPreference {
 
     public void setBitherjDoneSyncFromSpv(boolean isDone) {
         mPreferences.edit().putBoolean(BITHERJ_DONE_SYNC_FROM_SPV, isDone).commit();
+
+    }
+
+    public PrimerjSettings.TransactionFeePrecision getTransactionFeePrecision() {
+        int ordinal = this.mPreferences.getInt(TRANSACTION_FEE_PRECISION, -1);
+        if (ordinal < PrimerjSettings.TransactionFeePrecision.values().length && ordinal >= 0) {
+            return PrimerjSettings.TransactionFeePrecision.values()[ordinal];
+        }
+        return PrimerjSettings.TransactionFeePrecision.P2;
+    }
+
+    public void setTransactionFeePrecision(PrimerjSettings.TransactionFeePrecision mode) {
+        if (mode == null) {
+            mode = PrimerjSettings.TransactionFeePrecision.P2;
+        }
+        this.mPreferences.edit().putInt(TRANSACTION_FEE_PRECISION, mode.ordinal()).commit();
 
     }
 
