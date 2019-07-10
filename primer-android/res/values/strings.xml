@@ -168,6 +168,7 @@
     <string name="setting_name_wifi">Network Setting</string>
     <string name="setting_name_wifi_yes">Sync over wifi only</string>
     <string name="setting_name_wifi_no">Sync always</string>
+    <string name="setting_name_transaction_fee_precision">Transaction Fee Precision</string>
     <string name="setting_name_transaction_fee">Default Transaction Fee</string>
     <string name="setting_name_transaction_fee_normal">Normal</string>
     <string name="setting_name_transaction_fee_higher">Higher</string>

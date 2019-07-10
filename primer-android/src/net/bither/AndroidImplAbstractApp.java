@@ -67,6 +67,11 @@ public class AndroidImplAbstractApp extends AbstractApp {
             }
 
             @Override
+            public PrimerjSettings.TransactionFeePrecision getTransactionFeePrecision() {
+                return AppSharedPreference.getInstance().getTransactionFeePrecision();
+            }
+
+            @Override
             public PrimerjSettings.ApiConfig getApiConfig() {
                 return AppSharedPreference.getInstance().getApiConfig();
             }

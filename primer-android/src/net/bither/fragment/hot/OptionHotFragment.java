@@ -163,7 +163,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
     private SettingSelectorView ssvCurrency;
     private SettingSelectorView ssvMarket;
     private SettingSelectorView ssvTransactionFee;
-    private SettingSelectorView ssvBitcoinUnit;
+    private SettingSelectorView ssvTransactionFeePrecision;
     private Button btnSwitchToCold;
     private Button btnAvatar;
     private Button btnCheck;
@@ -195,52 +195,80 @@ public class OptionHotFragment extends Fragment implements Selectable,
     };
 
     /*默认单位选择器*/
-    private SettingSelectorView.SettingSelector bitcoinUnitSelector = new SettingSelectorView.SettingSelector() {
+    private SettingSelectorView.SettingSelector transactionFeePrecisionSelector = new SettingSelectorView.SettingSelector() {
         @Override
-        public int getOptionCount() {
-            return UnitUtilWrapper.PrimecoinUnitWrapper.values().length;
+        public void onOptionIndexSelected(int index) {
+            AppSharedPreference.getInstance().setTransactionFeePrecision(getModeByIndex(index));
         }
 
         @Override
-        public CharSequence getOptionName(int index) {
-            UnitUtilWrapper.PrimecoinUnitWrapper unit = UnitUtilWrapper.PrimecoinUnitWrapper.values()
-                    [index];
-            SpannableString s = new SpannableString("  " + unit.name());
-            //TODO 修改图标
-            Bitmap bmp = UnitUtilWrapper.getBtcSlimSymbol(getResources().getColor(R.color.text_field_text_color),
-                    getResources().getDisplayMetrics().scaledDensity * 15.6f, unit);
-            s.setSpan(new ImageSpan(getActivity(), bmp, ImageSpan.ALIGN_BASELINE), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return s;
+        public String getSettingName() {
+            return getString(R.string.setting_name_transaction_fee_precision);
+        }
+
+        @Override
+        public String getOptionName(int index) {
+            switch (index) {
+                case 0:
+                    return "1 XPM";
+                case 1:
+                    return "0.1 XPM";
+                case 2:
+                    return "0.01 XPM";
+                case 3:
+                    return "0.001 XPM";
+                default:
+                    return "0.01 XPM";
+            }
+        }
+
+        @Override
+        public int getOptionCount() {
+            return PrimerjSettings.TransactionFeePrecision.values().length;
+        }
+
+        @Override
+        public int getCurrentOptionIndex() {
+            PrimerjSettings.TransactionFeePrecision mode = AppSharedPreference.getInstance()
+                    .getTransactionFeePrecision();
+            switch (mode) {
+                case P0:
+                    return 0;
+                case P1:
+                    return 1;
+                case P2:
+                    return 2;
+                case P3:
+                    return 3;
+                default:
+                    return 2;
+            }
+        }
+
+        private PrimerjSettings.TransactionFeePrecision getModeByIndex(int index) {
+            if (index >= 0 && index < PrimerjSettings.TransactionFeePrecision.values().length) {
+                switch (index) {
+                    case 0:
+                        return PrimerjSettings.TransactionFeePrecision.P0;
+                    case 1:
+                        return PrimerjSettings.TransactionFeePrecision.P1;
+                    case 2:
+                        return PrimerjSettings.TransactionFeePrecision.P2;
+                    case 3:
+                        return PrimerjSettings.TransactionFeePrecision.P3;
+                }
+            }
+            return PrimerjSettings.TransactionFeePrecision.P2;
         }
 
         @Override
         public String getOptionNote(int index) {
-            return null;
+            return "";
         }
 
         @Override
         public Drawable getOptionDrawable(int index) {
             return null;
-        }
-
-        @Override
-        public String getSettingName() {
-            return getString(R.string.setting_name_bitcoin_unit);
-        }
-
-        @Override
-        public int getCurrentOptionIndex() {
-            return AppSharedPreference.getInstance().getBitcoinUnit().ordinal();
-        }
-
-        @Override
-        public void onOptionIndexSelected(int index) {
-            if (index != getCurrentOptionIndex()) {
-                AppSharedPreference.getInstance().setBitcoinUnit(UnitUtilWrapper.PrimecoinUnitWrapper.values()[index]);
-                if (PrimerApplication.hotActivity != null) {
-                    PrimerApplication.hotActivity.refreshTotalBalance();
-                }
-            }
         }
     };
     /*默认货币选择器 （默认值为当前国家货币）*/
@@ -1067,7 +1095,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
         ssvCurrency = (SettingSelectorView) view.findViewById(R.id.ssv_currency);
         ssvMarket = (SettingSelectorView) view.findViewById(R.id.ssv_market);
         ssvTransactionFee = (SettingSelectorView) view.findViewById(R.id.ssv_transaction_fee);
-        ssvBitcoinUnit = (SettingSelectorView) view.findViewById(R.id.ssv_bitcoin_unit);
+        ssvTransactionFeePrecision = (SettingSelectorView) view.findViewById(R.id.ssv_transaction_fee_precision);
         tvVersion = (TextView) view.findViewById(R.id.tv_version);
         tvWebsite = (TextView) view.findViewById(R.id.tv_website);
         tvWebsite.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -1084,7 +1112,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
         ssvCurrency.setSelector(currencySelector);
         ssvMarket.setSelector(marketSelector);
         ssvTransactionFee.setSelector(transactionFeeModeSelector);
-        ssvBitcoinUnit.setSelector(bitcoinUnitSelector);
+        ssvTransactionFeePrecision.setSelector(transactionFeePrecisionSelector);
         dp = new DialogProgress(getActivity(), R.string.please_wait);
         dp.setCancelable(false);
         String version = null;
