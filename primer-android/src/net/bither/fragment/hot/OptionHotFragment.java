@@ -164,6 +164,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
     private SettingSelectorView ssvMarket;
     private SettingSelectorView ssvTransactionFee;
     private SettingSelectorView ssvTransactionFeePrecision;
+    private SettingSelectorView ssvChooseNet;
     private Button btnSwitchToCold;
     private Button btnAvatar;
     private Button btnCheck;
@@ -460,6 +461,82 @@ public class OptionHotFragment extends Fragment implements Selectable,
         @Override
         public Drawable getOptionDrawable(int index) {
             return null;
+        }
+    };
+
+    /*Select mainnet or testnet*/
+    private SettingSelectorView.SettingSelector chooseNetSelector = new SettingSelectorView.SettingSelector() {
+        private int length = PrimerjSettings.NetType.values().length;
+
+        @Override
+        public int getOptionCount() {
+            return length;
+        }
+
+        @Override
+        public void onOptionIndexSelected(int index) {
+            if (AddressManager.getInstance().getAllAddresses().size() > 0 || AddressManager
+                    .getInstance().getTrashAddresses().size() > 0 || AddressManager
+                    .getInstance().getHdmKeychain() != null || AddressManager.getInstance()
+                    .hasHDAccountHot() || AddressManager.getInstance().hasHDAccountMonitored()){
+                ;
+            } else {
+                AppSharedPreference.getInstance().setNetType(getModeByIndex(index));
+            }
+        }
+
+        @Override
+        public String getSettingName() {
+            return getString(R.string.choose_net);
+        }
+
+        @Override
+        public String getOptionName(int index) {
+            switch (index) {
+                case 0:
+                    return getString(R.string.choose_mainnet);
+                case 1:
+                    return getString(R.string.choose_testnet);
+                default:
+                    return getString(R.string.choose_mainnet);
+            }
+        }
+
+
+        @Override
+        public int getCurrentOptionIndex() {
+            PrimerjSettings.NetType mode = AppSharedPreference.getInstance()
+                    .getNetType();
+            switch (mode) {
+                case MAINNET:
+                    return 0;
+                case TESTNET:
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+
+        @Override
+        public String getOptionNote(int index) {
+            return null;
+        }
+
+        @Override
+        public Drawable getOptionDrawable(int index) {
+            return null;
+        }
+
+        private PrimerjSettings.NetType getModeByIndex(int index) {
+            if (index >= 0 && index < length) {
+                switch (index) {
+                    case 0:
+                        return PrimerjSettings.NetType.MAINNET;
+                    case 1:
+                        return PrimerjSettings.NetType.TESTNET;
+                }
+            }
+            return PrimerjSettings.NetType.MAINNET;
         }
     };
 
@@ -1096,6 +1173,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
         ssvMarket = (SettingSelectorView) view.findViewById(R.id.ssv_market);
         ssvTransactionFee = (SettingSelectorView) view.findViewById(R.id.ssv_transaction_fee);
         ssvTransactionFeePrecision = (SettingSelectorView) view.findViewById(R.id.ssv_transaction_fee_precision);
+        ssvChooseNet = (SettingSelectorView) view.findViewById(R.id.ssv_choose_net);
         tvVersion = (TextView) view.findViewById(R.id.tv_version);
         tvWebsite = (TextView) view.findViewById(R.id.tv_website);
         tvWebsite.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -1113,6 +1191,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
         ssvMarket.setSelector(marketSelector);
         ssvTransactionFee.setSelector(transactionFeeModeSelector);
         ssvTransactionFeePrecision.setSelector(transactionFeePrecisionSelector);
+        ssvChooseNet.setSelector(chooseNetSelector);
         dp = new DialogProgress(getActivity(), R.string.please_wait);
         dp.setCancelable(false);
         String version = null;

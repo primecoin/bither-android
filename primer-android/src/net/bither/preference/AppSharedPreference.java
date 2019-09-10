@@ -72,6 +72,7 @@ public class AppSharedPreference {
     private static final String APP_MODE = "app_mode";
     private static final String TRANSACTION_FEE_MODE = "transaction_fee_mode";
     private static final String TRANSACTION_FEE_PRECISION = "transaction_fee_precision";
+    private static final String NET_TYPE_MODE = "net_type_mode";
     private static final String BITHERJ_DONE_SYNC_FROM_SPV = "bitheri_done_sync_from_spv";
     private static final String SYNC_INTERVAL = "sync_interval";
 
@@ -169,6 +170,21 @@ public class AppSharedPreference {
         }
         this.mPreferences.edit().putInt(TRANSACTION_FEE_MODE, mode.ordinal()).commit();
 
+    }
+
+    public void setNetType(PrimerjSettings.NetType mode) {
+        if (mode == null) {
+            mode = PrimerjSettings.NetType.MAINNET;
+        }
+        this.mPreferences.edit().putInt(NET_TYPE_MODE, mode.ordinal()).commit();
+    }
+
+    public PrimerjSettings.NetType getNetType() {
+        int ordinal = this.mPreferences.getInt(NET_TYPE_MODE, -1);
+        if (ordinal < PrimerjSettings.NetType.values().length && ordinal >= 0) {
+            return PrimerjSettings.NetType.values()[ordinal];
+        }
+        return PrimerjSettings.NetType.MAINNET;
     }
 
     // TODO: set api mode

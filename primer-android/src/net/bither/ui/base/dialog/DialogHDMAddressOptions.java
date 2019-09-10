@@ -29,6 +29,7 @@ import net.bither.bitherj.api.http.PrimerUrl;
 import net.bither.bitherj.core.AddressManager;
 import net.bither.bitherj.core.HDMAddress;
 import net.bither.bitherj.crypto.SecureCharSequence;
+import net.bither.bitherj.utils.Utils;
 import net.bither.fragment.cold.ColdAddressFragment;
 import net.bither.fragment.hot.HotAddressFragment;
 import net.bither.preference.AppSharedPreference;
@@ -64,7 +65,7 @@ public class DialogHDMAddressOptions extends DialogWithActions {
         acitons.add(new Action(R.string.address_option_view_on_blockchain_info, new Runnable() {
             @Override
             public void run() {
-                UIUtil.gotoBrower(activity, PrimerUrl.BCHAIN_INFO_ADDRESS_URL + address
+                UIUtil.gotoBrower(activity, PrimerUrl.bChainInfoAddressUrl(Utils.isTestNet()) + address
                         .getAddress());
             }
         }));
