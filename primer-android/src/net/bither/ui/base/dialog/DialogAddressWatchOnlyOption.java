@@ -24,7 +24,6 @@ import net.bither.R;
 import net.bither.activity.hot.AddressDetailActivity;
 import net.bither.bitherj.api.http.PrimerUrl;
 import net.bither.bitherj.core.Address;
-import net.bither.bitherj.utils.Utils;
 import net.bither.fragment.hot.HotAddressFragment;
 import net.bither.runnable.ThreadNeedService;
 import net.bither.service.BlockchainService;
@@ -54,7 +53,7 @@ public class DialogAddressWatchOnlyOption extends DialogWithActions {
         actions.add(new Action(R.string.address_option_view_on_blockchain_info, new Runnable() {
             @Override
             public void run() {
-                UIUtil.gotoBrower(activity, PrimerUrl.bChainInfoAddressUrl(Utils.isTestNet()) + address
+                UIUtil.gotoBrower(activity, PrimerUrl.bChainInfoAddressUrl() + address
                         .getAddress());
             }
         }));

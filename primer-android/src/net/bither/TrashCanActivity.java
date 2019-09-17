@@ -231,7 +231,7 @@ public class TrashCanActivity extends SwipeRightFragmentActivity {
                             @Override
                             public void run() {
                                 UIUtil.gotoBrower(TrashCanActivity.this,
-                                        PrimerUrl.bChainInfoAddressUrl(Utils.isTestNet()) + address
+                                        PrimerUrl.bChainInfoAddressUrl() + address
                                                 .getAddress());
                             }
                         }));
