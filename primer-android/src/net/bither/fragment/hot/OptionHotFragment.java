@@ -54,6 +54,7 @@ import net.bither.activity.hot.CheckPrivateKeyActivity;
 import net.bither.activity.hot.HotActivity;
 import net.bither.activity.hot.HotAdvanceActivity;
 import net.bither.activity.hot.NetworkMonitorActivity;
+import net.bither.bitherj.db.AbstractDb;
 import net.bither.factory.ImportHDSeedAndroid;
 import net.bither.factory.ImportPrivateKeyAndroid;
 import net.bither.fragment.Refreshable;
@@ -482,6 +483,8 @@ public class OptionHotFragment extends Fragment implements Selectable,
                 ;
             } else {
                 AppSharedPreference.getInstance().setNetType(getModeByIndex(index));
+                AppSharedPreference.getInstance().setDownloadSpvFinish(false);
+                AbstractDb.blockProvider.cleanAllBlock();
             }
         }
 
