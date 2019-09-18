@@ -445,6 +445,7 @@
     <string name="choose_net">选择网络（空钱包可以用）</string>
     <string name="choose_mainnet">主网</string>
     <string name="choose_testnet">测试网</string>
+    <string name="choose_net_warn">为保证网络切换成功，建\n议8秒后重启一下钱包。</string>
 
 
     <!-- bitcoin unit -->

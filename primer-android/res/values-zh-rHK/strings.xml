@@ -445,6 +445,7 @@
     <string name="choose_net">選擇網絡（空錢包可以用）</string>
     <string name="choose_mainnet">主網</string>
     <string name="choose_testnet">測試網</string>
+    <string name="choose_net_warn">為保證網絡切換成功，建\n議8秒後重啟壹下錢包。</string>
 
     <!-- bitcoin unit -->
     <string name="setting_name_bitcoin_unit">默認單位</string>

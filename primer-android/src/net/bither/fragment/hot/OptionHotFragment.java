@@ -29,6 +29,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Spannable;
@@ -66,6 +67,7 @@ import net.bither.qrcode.ScanQRCodeTransportActivity;
 import net.bither.service.BlockchainService;
 import net.bither.ui.base.DropdownMessage;
 import net.bither.ui.base.SettingSelectorView;
+import net.bither.ui.base.dialog.DialogChooseNet;
 import net.bither.ui.base.dialog.DialogConfirmTask;
 import net.bither.ui.base.dialog.DialogDonate;
 import net.bither.ui.base.dialog.DialogHDMonitorFirstAddressValidation;
@@ -485,6 +487,16 @@ public class OptionHotFragment extends Fragment implements Selectable,
                 AppSharedPreference.getInstance().setNetType(getModeByIndex(index));
                 AppSharedPreference.getInstance().setDownloadSpvFinish(false);
                 AbstractDb.blockProvider.cleanAllBlock();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        AppSharedPreference.getInstance().setDownloadSpvFinish(false);
+                        AbstractDb.blockProvider.cleanAllBlock();
+                    }
+                }, 8000);
+                DialogChooseNet dialog = new DialogChooseNet(getActivity());
+                dialog.show();
             }
         }
 
