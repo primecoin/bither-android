@@ -459,6 +459,11 @@
     <string name="launch_sequence_switch_to_cold">Switch to Primecoin Cold</string>
     <string name="launch_sequence_switch_to_cold_warn">Set this phone as Primecoin Cold?\n\nPrimecoin Cold need to be run on a offline phone.\nYou can monitor Primecoin Cold by Primecoin Hot.\nOnce set you can\'t switch back.</string>
 
+    <string name="choose_net">choose net (empty wallet only)</string>
+    <string name="choose_mainnet">Main Net</string>
+    <string name="choose_testnet">Test Net</string>
+    <string name="choose_net_warn">To switch the net, it is sug-\ngested to close the Primer\nafter 8 second and reopen it.</string>
+
     <!-- bitcoin unit -->
     <string name="setting_name_bitcoin_unit">Default Unit</string>
 

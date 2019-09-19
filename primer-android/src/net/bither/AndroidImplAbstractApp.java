@@ -67,6 +67,11 @@ public class AndroidImplAbstractApp extends AbstractApp {
             }
 
             @Override
+            public boolean isTestNet() {
+                return (AppSharedPreference.getInstance().getNetType() == PrimerjSettings.NetType.TESTNET);
+            }
+
+            @Override
             public PrimerjSettings.TransactionFeePrecision getTransactionFeePrecision() {
                 return AppSharedPreference.getInstance().getTransactionFeePrecision();
             }

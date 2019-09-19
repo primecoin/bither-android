@@ -64,7 +64,7 @@ public class DialogHDMAddressOptions extends DialogWithActions {
         acitons.add(new Action(R.string.address_option_view_on_blockchain_info, new Runnable() {
             @Override
             public void run() {
-                UIUtil.gotoBrower(activity, PrimerUrl.BCHAIN_INFO_ADDRESS_URL + address
+                UIUtil.gotoBrower(activity, PrimerUrl.bChainInfoAddressUrl() + address
                         .getAddress());
             }
         }));
