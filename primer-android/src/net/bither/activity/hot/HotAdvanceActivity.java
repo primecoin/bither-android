@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,7 @@ import net.bither.ui.base.DropdownMessage;
 import net.bither.ui.base.SettingSelectorView;
 import net.bither.ui.base.SwipeRightFragmentActivity;
 import net.bither.ui.base.dialog.DialogAddressQrCopy;
+import net.bither.ui.base.dialog.DialogChooseNet;
 import net.bither.ui.base.dialog.DialogConfirmTask;
 import net.bither.ui.base.dialog.DialogEditPassword;
 import net.bither.ui.base.dialog.DialogEnterpriseHDMEnable;
@@ -124,6 +126,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HotAdvanceActivity extends SwipeRightFragmentActivity {
+    private SettingSelectorView ssvChooseNet;
     private SettingSelectorView ssvWifi;
     private Button btnEditPassword;
     private Button btnExportAddress;
@@ -160,6 +163,7 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
     private void initView() {
         findViewById(R.id.ibtn_back).setOnClickListener(new IBackClickListener());
         tvVserion = (TextView) findViewById(R.id.tv_version);
+        ssvChooseNet = (SettingSelectorView) findViewById(R.id.ssv_choose_net);
         ssvWifi = (SettingSelectorView) findViewById(R.id.ssv_wifi);
         ssvPinCode = (SettingSelectorView) findViewById(R.id.ssv_pin_code);
         btnEditPassword = (Button) findViewById(R.id.btn_edit_password);
@@ -175,6 +179,8 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
         ssvTotalBalanceHide = (SettingSelectorView) findViewById(R.id.ssv_total_balance_hide);
         ssvApiConfig = (SettingSelectorView) findViewById(R.id.ssv_api_config);
         ssvApiConfig.setSelector(apiConfigSelector);
+        ssvChooseNet.setAsCanBeDisabled();
+        ssvChooseNet.setSelector(chooseNetSelector);
         ssvWifi.setSelector(wifiSelector);
         ssvImprotBip38Key.setSelector(importBip38KeySelector);
         ssvSyncInterval.setSelector(syncIntervalSelector);
@@ -935,6 +941,93 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
         @Override
         public Drawable getOptionDrawable(int index) {
             return null;
+        }
+    };
+
+    /*Select mainnet or testnet*/
+    private SettingSelectorView.SettingSelector chooseNetSelector = new SettingSelectorView.SettingSelector() {
+        private int length = PrimerjSettings.NetType.values().length;
+
+        @Override
+        public int getOptionCount() {
+            return length;
+        }
+
+        @Override
+        public void onOptionIndexSelected(int index) {
+            if (AddressManager.getInstance().getAllAddresses().size() > 0 || AddressManager
+                    .getInstance().getTrashAddresses().size() > 0 || AddressManager
+                    .getInstance().getHdmKeychain() != null || AddressManager.getInstance()
+                    .hasHDAccountHot() || AddressManager.getInstance().hasHDAccountMonitored()){
+                ;
+            } else {
+                AppSharedPreference.getInstance().setNetType(getModeByIndex(index));
+                AppSharedPreference.getInstance().setDownloadSpvFinish(false);
+                AbstractDb.blockProvider.cleanAllBlock();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        AppSharedPreference.getInstance().setDownloadSpvFinish(false);
+                        AbstractDb.blockProvider.cleanAllBlock();
+                    }
+                }, 8000);
+                DialogChooseNet dialog = new DialogChooseNet(HotAdvanceActivity.this);
+                dialog.show();
+            }
+        }
+
+        @Override
+        public String getSettingName() {
+            return getString(R.string.choose_net);
+        }
+
+        @Override
+        public String getOptionName(int index) {
+            switch (index) {
+                case 0:
+                    return getString(R.string.choose_mainnet);
+                case 1:
+                    return getString(R.string.choose_testnet);
+                default:
+                    return getString(R.string.choose_mainnet);
+            }
+        }
+
+        @Override
+        public int getCurrentOptionIndex() {
+            PrimerjSettings.NetType mode = AppSharedPreference.getInstance()
+                    .getNetType();
+            switch (mode) {
+                case MAINNET:
+                    return 0;
+                case TESTNET:
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+
+        @Override
+        public String getOptionNote(int index) {
+            return null;
+        }
+
+        @Override
+        public Drawable getOptionDrawable(int index) {
+            return null;
+        }
+
+        private PrimerjSettings.NetType getModeByIndex(int index) {
+            if (index >= 0 && index < length) {
+                switch (index) {
+                    case 0:
+                        return PrimerjSettings.NetType.MAINNET;
+                    case 1:
+                        return PrimerjSettings.NetType.TESTNET;
+                }
+            }
+            return PrimerjSettings.NetType.MAINNET;
         }
     };
 

@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.bither.R;
+import net.bither.bitherj.core.AddressManager;
 
 public class SettingSelectorView extends FrameLayout implements OnClickListener {
     public static interface SettingSelector {
@@ -61,6 +62,8 @@ public class SettingSelectorView extends FrameLayout implements OnClickListener 
     private int preSettingBottomSpace;
     private int preOptionBottomSpace;
 
+    private boolean canBeDisabled;
+
     public SettingSelectorView(Context context) {
         super(context);
         initView();
@@ -68,6 +71,7 @@ public class SettingSelectorView extends FrameLayout implements OnClickListener 
 
     private void initView() {
         removeAllViews();
+        canBeDisabled = false;
         inflater = LayoutInflater.from(getContext());
         addView(inflater.inflate(R.layout.layout_setting_selector, null),
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -114,6 +118,10 @@ public class SettingSelectorView extends FrameLayout implements OnClickListener 
         return selector;
     }
 
+    public void setAsCanBeDisabled(){
+        canBeDisabled = true;
+    }
+
     public void setSelector(SettingSelector selector) {
         this.selector = selector;
         loadData();
@@ -140,6 +148,12 @@ public class SettingSelectorView extends FrameLayout implements OnClickListener 
                 TextView tvNote = (TextView) v.findViewById(R.id.tv_option_note);
                 ImageView iv = (ImageView) v.findViewById(R.id.iv_check);
                 tv.setText(selector.getOptionName(i));
+                if (canBeDisabled && (AddressManager.getInstance().getAllAddresses().size() > 0 || AddressManager
+                        .getInstance().getTrashAddresses().size() > 0 || AddressManager
+                        .getInstance().getHdmKeychain() != null || AddressManager.getInstance()
+                        .hasHDAccountHot() || AddressManager.getInstance().hasHDAccountMonitored())){
+                    tv.setTextColor(getResources().getColor(R.color.text_unselected_color));
+                }
                 CharSequence note = selector.getOptionNote(i);
                 if (note == null || note.length() == 0) {
                     tvNote.setText("");
