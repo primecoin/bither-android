@@ -37,6 +37,11 @@
                             android:orientation="vertical"
                             android:paddingBottom="6dp"
                             android:paddingTop="10dp">
+                            <!--主网测试网选择-->
+                            <net.bither.ui.base.SettingSelectorView
+                                android:id="@+id/ssv_choose_net"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
                              <!--网络设置-->
                             <net.bither.ui.base.SettingSelectorView
                                 android:id="@+id/ssv_wifi"
