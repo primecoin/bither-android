@@ -608,7 +608,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
             SettingSelectorView.SettingSelector() {
                 @Override
                 public int getOptionCount() {
-                    return 2;
+                    return 1;
                    /* if (AddressManager.getInstance().getHDAccountHot() != null) {
                         return 2;
                     } else {
@@ -620,9 +620,9 @@ public class OptionHotFragment extends Fragment implements Selectable,
                 public String getOptionName(int index) {
                     switch (index) {
                         case 0:
-                            return getString(R.string.import_private_key_qr_code);
-                        case 1:
                             return getString(R.string.import_private_key_text);
+                        case 1:
+                            return getString(R.string.import_private_key_qr_code);
                         case 2:
                             return getString(R.string.import_hd_account_seed_qr_code);
                         case 3:
@@ -640,10 +640,10 @@ public class OptionHotFragment extends Fragment implements Selectable,
                 @Override
                 public Drawable getOptionDrawable(int index) {
                     switch (index) {
-                        case 0:
+                        case 1:
                         case 2:
                             return getResources().getDrawable(R.drawable.scan_button_icon);
-                        case 1:
+                        case 0:
                         case 3:
                             return getResources().getDrawable(R.drawable.import_private_key_text_icon);
                         default:
@@ -664,10 +664,10 @@ public class OptionHotFragment extends Fragment implements Selectable,
                 @Override
                 public void onOptionIndexSelected(int index) {
                     switch (index) {
-                        case 0:
+                        case 1:
                             importPrivateKeyFromQrCode();
                             break;
-                        case 1:
+                        case 0:
                             DialogImportPrivateKeyText dialog= new DialogImportPrivateKeyText(getActivity());
                             dialog.show();
                             dialog.setOnBtnScanClickListener(new DialogImportPrivateKeyText.OnBtnScanClickListener() {

@@ -214,6 +214,7 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
         signHash.setOnClickListener(signHashClick);
         btnGenerateKey= (Button) findViewById(R.id.btn_generate_key);
         btnGenerateKey.setOnClickListener(generateKeyClick);
+        ssvImprotBip38Key.setVisibility(View.GONE);
     }
 
     @Override
