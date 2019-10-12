@@ -619,7 +619,9 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
                 service.stopAndUnregister();
                 for (Address address : AddressManager.getInstance().getAllAddresses()) {
                     address.setSyncComplete(false);
+                    address.setSyncedTxsCount(0);
                     address.updateSyncComplete();
+                    address.updateSyncedTxsCount();
                 }
                 AbstractDb.hdAccountAddressProvider.setSyncedNotComplete();
                 AbstractDb.txProvider.clearAllTx();
