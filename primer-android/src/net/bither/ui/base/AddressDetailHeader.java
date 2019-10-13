@@ -239,6 +239,11 @@ public class AddressDetailHeader extends FrameLayout implements DialogFragmentFa
     private OnClickListener sendClick = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(!address.isSyncComplete()) {
+                DropdownMessage.showDropdownMessage(activity,
+                        R.string.tx_cannot_send);
+                return;
+            }
             if (address != null) {
                 if (address.getBalance() <= 0) {
                     DropdownMessage.showDropdownMessage(activity,
