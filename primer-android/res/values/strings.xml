@@ -235,7 +235,7 @@
     <string name="reload_tx_failed">Reload transactions data failed , Please retry again. </string>
     <string name="reload_tx_success">Reload transactions data success </string>
     <string name="tx_cannot_reloding">You can only reload transactions data in a hour..</string>
-    <string name="tx_cannot_send">This address is not sync complete.</string>
+    <string name="tx_cannot_send">This address has not completed sync yet.</string>
     <string name="base_on_text">Based on </string>
     <string name="synchronous_interval">Sync Interval</string>
     <string name="synchronous_interval_fifteen_minute">15 Minutes</string>
