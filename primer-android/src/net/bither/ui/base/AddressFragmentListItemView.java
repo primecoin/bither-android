@@ -110,7 +110,7 @@ public class AddressFragmentListItemView extends FrameLayout implements AddressI
         ivBalanceSymbol.setVisibility(View.VISIBLE);
         llExtra.setVisibility(View.VISIBLE);
         llMonitorFailed.setVisibility(View.GONE);
-        tvTransactionCount.setVisibility(View.GONE);
+        tvTransactionCount.setVisibility(View.VISIBLE);
         ivBalanceSymbol.setImageBitmap(UnitUtilWrapper.getBtcSlimSymbol(tvBalance));
         if (address.isHDAccount()) {
             ivType.setImageResource(R.drawable.address_type_hd_selector);
@@ -121,7 +121,7 @@ public class AddressFragmentListItemView extends FrameLayout implements AddressI
         } else {
             ivType.setImageResource(R.drawable.address_type_watchonly_selector);
         }
-        if (this.address != null && this.address.isSyncComplete()) {
+        if (this.address != null) {
             tvBalance.setText(UnitUtilWrapper.formatValueWithBold(this.address.getBalance()));
             tvBalanceMoney.setBigInteger(BigInteger.valueOf(this.address.getBalance()));
             tvTransactionCount.setText(Integer.toString(this.address.txCount()));
