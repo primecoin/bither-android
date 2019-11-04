@@ -542,7 +542,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://bither.net/"))
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://primecoin.io"))
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             try {
                 startActivity(intent);
