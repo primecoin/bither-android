@@ -188,6 +188,7 @@ public class AddressDetailActivity extends SwipeRightFragmentActivity implements
                 item.onResume();
             }
         }
+        loadData();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
