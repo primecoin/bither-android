@@ -58,7 +58,7 @@ public class FileUtil {
     private static final String BTCCHINA_TICKER_NAME = "btcchina.ticker";
 
 
-    private static final String BITHER_BACKUP_SDCARD_DIR = "BitherBackup";
+    private static final String BITHER_BACKUP_SDCARD_DIR = "PrimerBackup";
     private static final String BITHER_BACKUP_ROM_DIR = "backup";
 
     private static final String BITHER_BACKUP_HOT_FILE_NAME = "keys";
