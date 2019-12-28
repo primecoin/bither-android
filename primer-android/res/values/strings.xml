@@ -91,7 +91,7 @@
     <string name="add_address_coming_soon">Coming Soon…</string>
     <string name="add_address_scan">Scan</string>
     <string name="add_address_delete">Delete</string>
-    <string name="add_address_watch_only_hint">Bitcoin Address</string>
+    <string name="add_address_watch_only_hint">Primecoin Address</string>
     <string name="add_address_already_watched">This address is already monitored</string>
     <string name="addresses_already_monitored">This Primecoin Cold is already monitored.</string>
     <string name="add_address_generate_address_with_private_key">Generate</string>
