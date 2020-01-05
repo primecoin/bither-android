@@ -597,7 +597,7 @@ public class HotActivity extends BaseFragmentActivity {
             if (intent == null || !Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_PEER_STATE)) {
                 return;
             }
-            int npeers = intent.getIntExtra(NotificationAndroidImpl.ACTION_PEER_STATE_NUM_PEERS, 1);
+            int npeers = intent.getIntExtra(NotificationAndroidImpl.ACTION_PEER_STATE_NUM_PEERS, 0);
             if (npeers == 0) {
                 if (!NetworkUtil.isConnected()) {
                     tvAlert.setText(R.string.tip_network_error);
