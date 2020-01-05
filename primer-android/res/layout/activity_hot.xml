@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:background="@color/dropdown_message_background_color"
+            android:visibility="gone"
             android:orientation="horizontal" >
 
             <ProgressBar
@@ -30,6 +31,7 @@
                 android:indeterminateDrawable="@drawable/check_progress_bar"
                 android:indeterminateDuration="600"
                 android:layout_marginRight="8dp"
+                android:visibility="gone"
                 android:indeterminateOnly="true" />
 
             <TextView

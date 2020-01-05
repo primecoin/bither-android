@@ -226,7 +226,6 @@
     <string name="reload_tx_failed">重载交易数据失败 , 请重试 . </string>
     <string name="reload_tx_success">重载交易数据成功 </string>
     <string name="tx_cannot_reloding">一个小时内只能重载交易数据一次.</string>
-    <string name="tx_cannot_send">该地址还未完成同步.</string>
     <string name="base_on_text">基于 </string>
     <string name="synchronous_interval">同步间隔</string>
     <string name="synchronous_interval_fifteen_minute">15 分钟</string>

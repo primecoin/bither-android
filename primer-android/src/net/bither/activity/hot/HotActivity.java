@@ -107,10 +107,12 @@ public class HotActivity extends BaseFragmentActivity {
     private final ProgressBroadcastReceiver broadcastReceiver = new ProgressBroadcastReceiver();
     private final AddressIsLoadedReceiver addressIsLoadedReceiver = new AddressIsLoadedReceiver();
     private final AddressTxLoadingReceiver addressIsLoadingReceiver = new AddressTxLoadingReceiver();
+    private final PeerReceiver peerReceiver = new PeerReceiver();
 
     protected void onCreate(Bundle savedInstanceState) {
         AbstractApp.notificationService.removeProgressState();
         AbstractApp.notificationService.removeAddressTxLoading();
+        AbstractApp.notificationService.removeBroadcastPeerState();
         initAppState();
         super.onCreate(savedInstanceState);
         PrimerApplication.hotActivity = this;
@@ -156,6 +158,7 @@ public class HotActivity extends BaseFragmentActivity {
         registerReceiver(addressIsLoadedReceiver,
                 new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_LOAD_COMPLETE_STATE));
         registerReceiver(addressIsLoadingReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE));
+        registerReceiver(peerReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_PEER_STATE));
     }
 
     @Override
@@ -164,6 +167,7 @@ public class HotActivity extends BaseFragmentActivity {
         unregisterReceiver(txAndBlockBroadcastReceiver);
         unregisterReceiver(addressIsLoadedReceiver);
         unregisterReceiver(addressIsLoadingReceiver);
+        unregisterReceiver(peerReceiver);
         super.onDestroy();
         PrimerApplication.hotActivity = null;
 
@@ -583,6 +587,33 @@ public class HotActivity extends BaseFragmentActivity {
             if (llAlert.getVisibility() == View.GONE) {
                 pbAlert.setVisibility(View.VISIBLE);
                 llAlert.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    private final class PeerReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent == null || !Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_PEER_STATE)) {
+                return;
+            }
+            int npeers = intent.getIntExtra(NotificationAndroidImpl.ACTION_PEER_STATE_NUM_PEERS, 1);
+            if (npeers == 0) {
+                if (!NetworkUtil.isConnected()) {
+                    tvAlert.setText(R.string.tip_network_error);
+                    pbAlert.setVisibility(View.GONE);
+                    llAlert.setVisibility(View.VISIBLE);
+                } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
+                    tvAlert.setText(R.string.tip_no_peers_connected_scan);
+                    pbAlert.setVisibility(View.VISIBLE);
+                    llAlert.setVisibility(View.VISIBLE);
+                }
+            } else if(llAlert.getVisibility() == View.VISIBLE){
+                String tvstring = tvAlert.getText().toString();
+                if (tvstring == getResources().getString(R.string.tip_network_error) || tvstring == getResources().getString(R.string.tip_no_peers_connected_scan)) {
+                    pbAlert.setVisibility(View.GONE);
+                    llAlert.setVisibility(View.GONE);
+                }
             }
         }
     }
