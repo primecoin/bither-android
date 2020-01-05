@@ -89,6 +89,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.bither.NotificationAndroidImpl.ACTION_UNSYNC_BLOCK_NUMBER_INFO;
+import static net.bither.bitherj.core.PeerManager.ConnectedChangeBroadcast;
 
 public class HotActivity extends BaseFragmentActivity {
     private TabButton tbtnMessage;
@@ -107,7 +108,7 @@ public class HotActivity extends BaseFragmentActivity {
     private final ProgressBroadcastReceiver broadcastReceiver = new ProgressBroadcastReceiver();
     private final AddressIsLoadedReceiver addressIsLoadedReceiver = new AddressIsLoadedReceiver();
     private final AddressTxLoadingReceiver addressIsLoadingReceiver = new AddressTxLoadingReceiver();
-    private final PeerReceiver peerReceiver = new PeerReceiver();
+    private final ConnectStatusReceiver connectStatusReceiver = new ConnectStatusReceiver();
 
     protected void onCreate(Bundle savedInstanceState) {
         AbstractApp.notificationService.removeProgressState();
@@ -145,6 +146,9 @@ public class HotActivity extends BaseFragmentActivity {
             tvAlert.setText(R.string.tip_no_peers_connected_scan);
             pbAlert.setVisibility(View.VISIBLE);
             llAlert.setVisibility(View.VISIBLE);
+        } else {
+            tvAlert.setText(R.string.no_tips);
+            llAlert.setVisibility(View.VISIBLE);
         }
     }
 
@@ -158,7 +162,10 @@ public class HotActivity extends BaseFragmentActivity {
         registerReceiver(addressIsLoadedReceiver,
                 new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_LOAD_COMPLETE_STATE));
         registerReceiver(addressIsLoadingReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE));
-        registerReceiver(peerReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_PEER_STATE));
+        IntentFilter connectStatusIntentFilter = new IntentFilter();
+        connectStatusIntentFilter.addAction(NotificationAndroidImpl.ACTION_PEER_STATE);
+        connectStatusIntentFilter.addAction(ConnectedChangeBroadcast);
+        registerReceiver(connectStatusReceiver, connectStatusIntentFilter);
     }
 
     @Override
@@ -167,7 +174,7 @@ public class HotActivity extends BaseFragmentActivity {
         unregisterReceiver(txAndBlockBroadcastReceiver);
         unregisterReceiver(addressIsLoadedReceiver);
         unregisterReceiver(addressIsLoadingReceiver);
-        unregisterReceiver(peerReceiver);
+        unregisterReceiver(connectStatusReceiver);
         super.onDestroy();
         PrimerApplication.hotActivity = null;
 
@@ -502,12 +509,10 @@ public class HotActivity extends BaseFragmentActivity {
                     long unsyncBlockNumber = intent.getLongExtra(ACTION_UNSYNC_BLOCK_NUMBER_INFO, 0);
                     if (unsyncBlockNumber > 0) {
                         tvAlert.setText(getString(R.string.tip_sync_block_height, unsyncBlockNumber));
-                        if (llAlert.getVisibility() == View.GONE) {
-                            pbAlert.setVisibility(View.VISIBLE);
-                            llAlert.setVisibility(View.VISIBLE);
-                        }
+                        pbAlert.setVisibility(View.VISIBLE);
                     } else {
-                        llAlert.setVisibility(View.GONE);
+                        pbAlert.setVisibility(View.GONE);
+                        tvAlert.setText(R.string.no_tips);
                     }
                 }
             }
@@ -580,40 +585,34 @@ public class HotActivity extends BaseFragmentActivity {
             }
             String address = intent.getStringExtra(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_INFO);
             if (Utils.isEmpty(address)) {
-                llAlert.setVisibility(View.GONE);
+                pbAlert.setVisibility(View.GONE);
+                tvAlert.setText(R.string.no_tips);
                 return;
             }
             tvAlert.setText(getString(R.string.tip_sync_address_tx, address));
-            if (llAlert.getVisibility() == View.GONE) {
-                pbAlert.setVisibility(View.VISIBLE);
-                llAlert.setVisibility(View.VISIBLE);
-            }
+            pbAlert.setVisibility(View.VISIBLE);
         }
     }
 
-    private final class PeerReceiver extends BroadcastReceiver {
+    private final class ConnectStatusReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent == null || !Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_PEER_STATE)) {
+            if (intent == null || (!Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_PEER_STATE) && !Utils.compareString(intent.getAction(), ConnectedChangeBroadcast))) {
                 return;
             }
-            int npeers = intent.getIntExtra(NotificationAndroidImpl.ACTION_PEER_STATE_NUM_PEERS, 0);
-            if (npeers == 0) {
-                if (!NetworkUtil.isConnected()) {
-                    tvAlert.setText(R.string.tip_network_error);
-                    pbAlert.setVisibility(View.GONE);
-                    llAlert.setVisibility(View.VISIBLE);
-                } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
-                    tvAlert.setText(R.string.tip_no_peers_connected_scan);
-                    pbAlert.setVisibility(View.VISIBLE);
-                    llAlert.setVisibility(View.VISIBLE);
-                }
-            } else if(llAlert.getVisibility() == View.VISIBLE){
-                String tvstring = tvAlert.getText().toString();
-                if (tvstring == getResources().getString(R.string.tip_network_error) || tvstring == getResources().getString(R.string.tip_no_peers_connected_scan)) {
-                    pbAlert.setVisibility(View.GONE);
-                    llAlert.setVisibility(View.GONE);
-                }
+            if (!NetworkUtil.isConnected()) {
+                tvAlert.setText(R.string.tip_network_error);
+                pbAlert.setVisibility(View.GONE);
+                return;
+            } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
+                tvAlert.setText(R.string.tip_no_peers_connected_scan);
+                pbAlert.setVisibility(View.VISIBLE);
+                return;
+            }
+            String tvstring = tvAlert.getText().toString();
+            if (tvstring == getResources().getString(R.string.tip_network_error) || tvstring == getResources().getString(R.string.tip_no_peers_connected_scan)) {
+                pbAlert.setVisibility(View.GONE);
+                tvAlert.setText(R.string.no_tips);
             }
         }
     }
