@@ -108,7 +108,7 @@ public class HotActivity extends BaseFragmentActivity {
     private final ProgressBroadcastReceiver broadcastReceiver = new ProgressBroadcastReceiver();
     private final AddressIsLoadedReceiver addressIsLoadedReceiver = new AddressIsLoadedReceiver();
     private final AddressTxLoadingReceiver addressIsLoadingReceiver = new AddressTxLoadingReceiver();
-    private final ConnectStatusReceiver connectStatusReceiver = new ConnectStatusReceiver();
+    private final ConnectionStatusReceiver connectionStatusReceiver = new ConnectionStatusReceiver();
 
     protected void onCreate(Bundle savedInstanceState) {
         AbstractApp.notificationService.removeProgressState();
@@ -162,10 +162,10 @@ public class HotActivity extends BaseFragmentActivity {
         registerReceiver(addressIsLoadedReceiver,
                 new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_LOAD_COMPLETE_STATE));
         registerReceiver(addressIsLoadingReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE));
-        IntentFilter connectStatusIntentFilter = new IntentFilter();
-        connectStatusIntentFilter.addAction(NotificationAndroidImpl.ACTION_PEER_STATE);
-        connectStatusIntentFilter.addAction(ConnectedChangeBroadcast);
-        registerReceiver(connectStatusReceiver, connectStatusIntentFilter);
+        IntentFilter connectionStatusIntentFilter = new IntentFilter();
+        connectionStatusIntentFilter.addAction(NotificationAndroidImpl.ACTION_PEER_STATE);
+        connectionStatusIntentFilter.addAction(ConnectedChangeBroadcast);
+        registerReceiver(connectionStatusReceiver, connectionStatusIntentFilter);
     }
 
     @Override
@@ -174,7 +174,7 @@ public class HotActivity extends BaseFragmentActivity {
         unregisterReceiver(txAndBlockBroadcastReceiver);
         unregisterReceiver(addressIsLoadedReceiver);
         unregisterReceiver(addressIsLoadingReceiver);
-        unregisterReceiver(connectStatusReceiver);
+        unregisterReceiver(connectionStatusReceiver);
         super.onDestroy();
         PrimerApplication.hotActivity = null;
 
@@ -594,7 +594,7 @@ public class HotActivity extends BaseFragmentActivity {
         }
     }
 
-    private final class ConnectStatusReceiver extends BroadcastReceiver {
+    private final class ConnectionStatusReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent == null || (!Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_PEER_STATE) && !Utils.compareString(intent.getAction(), ConnectedChangeBroadcast))) {
