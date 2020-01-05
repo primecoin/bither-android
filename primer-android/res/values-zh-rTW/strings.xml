@@ -740,4 +740,10 @@
 
     <string name="generate_secure_private_key">生成安全密鑰</string>
     <string name="error_play_small">發送失敗. 這樣小額(&#060;0.01)的交易會被忽略. </string>
+
+    <string name="tip_sync_address_tx">%s\n正在同步該地址交易數據</string>
+    <string name="tip_no_peers_connected_scan">正在搜索可連接的節點</string>
+    <string name="tip_sync_block_height">本地塊高度落後於區塊最新高度 %d 個塊，正在同步</string>
+    <string name="tip_network_error">網絡已斷開，請檢查網絡設置</string>
+    <string name="tip_no_peers_connected">暫無可連接的節點</string>
 </resources>

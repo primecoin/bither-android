@@ -778,4 +778,10 @@
     <string name="error_play_tip">Can\'t pay for yourself</string>
     <string name="error_play_small">Send failed. Sending coins(&#060;0.01) this few will be igored.</string>
     <string name="generate_secure_private_key">generate_secure_private_key</string>
+
+    <string name="tip_sync_address_tx">%s\nthe Tx data of this address is being synced</string>
+    <string name="tip_no_peers_connected_scan">Searching connectable nodes</string>
+    <string name="tip_sync_block_height">Local block height is %d blocks behind the latest block height. Now syncing…</string>
+    <string name="tip_network_error">Network is disconnected. Please check your network setting</string>
+    <string name="tip_no_peers_connected">No connectable node</string>
 </resources>
