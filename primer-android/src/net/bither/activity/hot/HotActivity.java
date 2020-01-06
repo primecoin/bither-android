@@ -108,6 +108,7 @@ public class HotActivity extends BaseFragmentActivity {
     private final ProgressBroadcastReceiver broadcastReceiver = new ProgressBroadcastReceiver();
     private final AddressIsLoadedReceiver addressIsLoadedReceiver = new AddressIsLoadedReceiver();
     private final AddressTxLoadingReceiver addressIsLoadingReceiver = new AddressTxLoadingReceiver();
+    private boolean isLoadingAddressTx = false;
     private final ConnectionStatusReceiver connectionStatusReceiver = new ConnectionStatusReceiver();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -577,6 +578,7 @@ public class HotActivity extends BaseFragmentActivity {
     private final class AddressTxLoadingReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            isLoadingAddressTx = false;
             if (intent == null || !Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE)) {
                 return;
             }
@@ -591,6 +593,7 @@ public class HotActivity extends BaseFragmentActivity {
             }
             tvAlert.setText(getString(R.string.tip_sync_address_tx, address));
             pbAlert.setVisibility(View.VISIBLE);
+            isLoadingAddressTx = true;
         }
     }
 
@@ -605,8 +608,10 @@ public class HotActivity extends BaseFragmentActivity {
                 pbAlert.setVisibility(View.GONE);
                 return;
             } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
-                tvAlert.setText(R.string.tip_no_peers_connected_scan);
-                pbAlert.setVisibility(View.VISIBLE);
+                if(!isLoadingAddressTx) {
+                    tvAlert.setText(R.string.tip_no_peers_connected_scan);
+                    pbAlert.setVisibility(View.VISIBLE);
+                }
                 return;
             }
             String tvstring = tvAlert.getText().toString();
