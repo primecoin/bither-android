@@ -743,9 +743,10 @@
     <string name="error_play_small">发送失败. 这样小额(&#060;0.01)的交易会被忽略. </string>
 
     <string name="tip_sync_address_tx">%s\n正在同步该地址交易数据</string>
+    <string name="tip_sync_address_tx_general">正在同步地址交易数据</string>
     <string name="tip_no_peers_connected_scan">正在搜索可连接的节点</string>
     <string name="tip_sync_block_height">本地块高度落后于区块最新高度 %d 个块，正在同步</string>
     <string name="tip_network_error">网络已断开，请检查网络设置</string>
     <string name="tip_no_peers_connected">暂无可连接的节点</string>
-    <string name="no_tips">空闲</string>
+    <string name="tip_block_height">最新区块高度%d，</string>
 </resources>

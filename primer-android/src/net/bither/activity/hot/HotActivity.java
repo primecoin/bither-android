@@ -27,6 +27,7 @@ import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
@@ -38,6 +39,8 @@ import net.bither.NotificationAndroidImpl;
 import net.bither.PrimerApplication;
 import net.bither.PrimerSetting;
 import net.bither.adapter.hot.HotFragmentPagerAdapter;
+import net.bither.bitherj.core.Block;
+import net.bither.bitherj.core.BlockChain;
 import net.bither.ui.base.BaseFragmentActivity;
 import net.bither.ui.base.DropdownMessage;
 import net.bither.ui.base.SyncProgressView;
@@ -108,7 +111,6 @@ public class HotActivity extends BaseFragmentActivity {
     private final ProgressBroadcastReceiver broadcastReceiver = new ProgressBroadcastReceiver();
     private final AddressIsLoadedReceiver addressIsLoadedReceiver = new AddressIsLoadedReceiver();
     private final AddressTxLoadingReceiver addressIsLoadingReceiver = new AddressTxLoadingReceiver();
-    private boolean isLoadingAddressTx = false;
     private final ConnectionStatusReceiver connectionStatusReceiver = new ConnectionStatusReceiver();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,13 +144,21 @@ public class HotActivity extends BaseFragmentActivity {
         DialogFirstRunWarning.show(this);
         if (!NetworkUtil.isConnected()) {
             tvAlert.setText(R.string.tip_network_error);
+            pbAlert.setVisibility(View.GONE);
             llAlert.setVisibility(View.VISIBLE);
         } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
-            tvAlert.setText(R.string.tip_no_peers_connected_scan);
+            if(!AddressManager.getInstance().addressIsSyncComplete()) {
+                tvAlert.setText(R.string.tip_sync_address_tx_general);
+            } else {
+                tvAlert.setText(R.string.tip_no_peers_connected_scan);
+            }
             pbAlert.setVisibility(View.VISIBLE);
             llAlert.setVisibility(View.VISIBLE);
         } else {
-            tvAlert.setText(R.string.no_tips);
+            Block block = BlockChain.getInstance().getLastBlock();
+            final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+            tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                    DateUtils.getRelativeDateTimeString(this, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
             llAlert.setVisibility(View.VISIBLE);
         }
     }
@@ -512,8 +522,11 @@ public class HotActivity extends BaseFragmentActivity {
                         tvAlert.setText(getString(R.string.tip_sync_block_height, unsyncBlockNumber));
                         pbAlert.setVisibility(View.VISIBLE);
                     } else {
+                        Block block = BlockChain.getInstance().getLastBlock();
+                        final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+                        tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                                DateUtils.getRelativeDateTimeString(context, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
                         pbAlert.setVisibility(View.GONE);
-                        tvAlert.setText(R.string.no_tips);
                     }
                 }
             }
@@ -578,7 +591,6 @@ public class HotActivity extends BaseFragmentActivity {
     private final class AddressTxLoadingReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            isLoadingAddressTx = false;
             if (intent == null || !Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE)) {
                 return;
             }
@@ -587,13 +599,15 @@ public class HotActivity extends BaseFragmentActivity {
             }
             String address = intent.getStringExtra(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_INFO);
             if (Utils.isEmpty(address)) {
+                Block block = BlockChain.getInstance().getLastBlock();
+                final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+                tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                        DateUtils.getRelativeDateTimeString(context, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
                 pbAlert.setVisibility(View.GONE);
-                tvAlert.setText(R.string.no_tips);
                 return;
             }
             tvAlert.setText(getString(R.string.tip_sync_address_tx, address));
             pbAlert.setVisibility(View.VISIBLE);
-            isLoadingAddressTx = true;
         }
     }
 
@@ -608,7 +622,7 @@ public class HotActivity extends BaseFragmentActivity {
                 pbAlert.setVisibility(View.GONE);
                 return;
             } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
-                if(!isLoadingAddressTx) {
+                if(AddressManager.getInstance().addressIsSyncComplete()) {
                     tvAlert.setText(R.string.tip_no_peers_connected_scan);
                     pbAlert.setVisibility(View.VISIBLE);
                 }
@@ -616,8 +630,11 @@ public class HotActivity extends BaseFragmentActivity {
             }
             String tvstring = tvAlert.getText().toString();
             if (tvstring == getResources().getString(R.string.tip_network_error) || tvstring == getResources().getString(R.string.tip_no_peers_connected_scan)) {
+                Block block = BlockChain.getInstance().getLastBlock();
+                final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+                tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                        DateUtils.getRelativeDateTimeString(context, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
                 pbAlert.setVisibility(View.GONE);
-                tvAlert.setText(R.string.no_tips);
             }
         }
     }
