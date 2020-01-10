@@ -27,14 +27,20 @@ import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import net.bither.NotificationAndroidImpl;
 import net.bither.PrimerApplication;
 import net.bither.PrimerSetting;
 import net.bither.adapter.hot.HotFragmentPagerAdapter;
+import net.bither.bitherj.core.Block;
+import net.bither.bitherj.core.BlockChain;
 import net.bither.ui.base.BaseFragmentActivity;
 import net.bither.ui.base.DropdownMessage;
 import net.bither.ui.base.SyncProgressView;
@@ -43,6 +49,7 @@ import net.bither.ui.base.dialog.DialogFirstRunWarning;
 import net.bither.ui.base.dialog.DialogGenerateAddressFinalConfirm;
 import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.util.LogUtil;
+import net.bither.util.NetworkUtil;
 import net.bither.util.StringUtil;
 import net.bither.util.UIUtil;
 import net.bither.util.WalletUtils;
@@ -75,7 +82,6 @@ import net.bither.ui.base.SyncProgressView;
 import net.bither.ui.base.TabButton;
 import net.bither.ui.base.dialog.DialogFirstRunWarning;
 import net.bither.ui.base.dialog.DialogGenerateAddressFinalConfirm;
-import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.util.LogUtil;
 import net.bither.util.StringUtil;
 import net.bither.util.UIUtil;
@@ -85,6 +91,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.bither.NotificationAndroidImpl.ACTION_UNSYNC_BLOCK_NUMBER_INFO;
+import static net.bither.bitherj.core.PeerManager.ConnectedChangeBroadcast;
+
 public class HotActivity extends BaseFragmentActivity {
     private TabButton tbtnMessage;
     private TabButton tbtnMain;
@@ -93,15 +102,21 @@ public class HotActivity extends BaseFragmentActivity {
     private HotFragmentPagerAdapter mAdapter;
     private ViewPager mPager;
     private SyncProgressView pbSync;
-    private DialogProgress dp;
+    private LinearLayout llAlert;
+    private TextView tvAlert;
+    private ProgressBar pbAlert;
 
     private final TxAndBlockBroadcastReceiver txAndBlockBroadcastReceiver = new
             TxAndBlockBroadcastReceiver();
     private final ProgressBroadcastReceiver broadcastReceiver = new ProgressBroadcastReceiver();
     private final AddressIsLoadedReceiver addressIsLoadedReceiver = new AddressIsLoadedReceiver();
+    private final AddressTxLoadingReceiver addressIsLoadingReceiver = new AddressTxLoadingReceiver();
+    private final ConnectionStatusReceiver connectionStatusReceiver = new ConnectionStatusReceiver();
 
     protected void onCreate(Bundle savedInstanceState) {
         AbstractApp.notificationService.removeProgressState();
+        AbstractApp.notificationService.removeAddressTxLoading();
+        AbstractApp.notificationService.removeBroadcastPeerState();
         initAppState();
         super.onCreate(savedInstanceState);
         PrimerApplication.hotActivity = this;
@@ -127,6 +142,25 @@ public class HotActivity extends BaseFragmentActivity {
             }
         }, 500);
         DialogFirstRunWarning.show(this);
+        if (!NetworkUtil.isConnected()) {
+            tvAlert.setText(R.string.tip_network_error);
+            pbAlert.setVisibility(View.GONE);
+            llAlert.setVisibility(View.VISIBLE);
+        } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
+            if(!AddressManager.getInstance().addressIsSyncComplete()) {
+                tvAlert.setText(R.string.tip_sync_address_tx_general);
+            } else {
+                tvAlert.setText(R.string.tip_no_peers_connected_scan);
+            }
+            pbAlert.setVisibility(View.VISIBLE);
+            llAlert.setVisibility(View.VISIBLE);
+        } else {
+            Block block = BlockChain.getInstance().getLastBlock();
+            final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+            tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                    DateUtils.getRelativeDateTimeString(this, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+            llAlert.setVisibility(View.VISIBLE);
+        }
     }
 
     private void registerReceiver() {
@@ -138,6 +172,11 @@ public class HotActivity extends BaseFragmentActivity {
         registerReceiver(txAndBlockBroadcastReceiver, intentFilter);
         registerReceiver(addressIsLoadedReceiver,
                 new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_LOAD_COMPLETE_STATE));
+        registerReceiver(addressIsLoadingReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE));
+        IntentFilter connectionStatusIntentFilter = new IntentFilter();
+        connectionStatusIntentFilter.addAction(NotificationAndroidImpl.ACTION_PEER_STATE);
+        connectionStatusIntentFilter.addAction(ConnectedChangeBroadcast);
+        registerReceiver(connectionStatusReceiver, connectionStatusIntentFilter);
     }
 
     @Override
@@ -145,6 +184,8 @@ public class HotActivity extends BaseFragmentActivity {
         unregisterReceiver(broadcastReceiver);
         unregisterReceiver(txAndBlockBroadcastReceiver);
         unregisterReceiver(addressIsLoadedReceiver);
+        unregisterReceiver(addressIsLoadingReceiver);
+        unregisterReceiver(connectionStatusReceiver);
         super.onDestroy();
         PrimerApplication.hotActivity = null;
 
@@ -199,6 +240,9 @@ public class HotActivity extends BaseFragmentActivity {
         tbtnMain = (TabButton) findViewById(R.id.tbtn_main);
         tbtnMessage = (TabButton) findViewById(R.id.tbtn_message);
         tbtnMe = (TabButton) findViewById(R.id.tbtn_me);
+        llAlert = (LinearLayout) findViewById(R.id.ll_alert);
+        tvAlert = (TextView) findViewById(R.id.tv_alert);
+        pbAlert = (ProgressBar) findViewById(R.id.pb_alert);
 
         configureTopBarSize();
         configureTabMainIcons();
@@ -466,10 +510,25 @@ public class HotActivity extends BaseFragmentActivity {
     private final class ProgressBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, final Intent intent) {
-            if (intent != null && intent.hasExtra(NotificationAndroidImpl.ACTION_PROGRESS_INFO)) {
-                double progress = intent.getDoubleExtra(NotificationAndroidImpl.ACTION_PROGRESS_INFO, 0);
-                LogUtil.d("progress", "BlockchainBroadcastReceiver" + progress);
-                pbSync.setProgress(progress);
+            if (intent != null) {
+                if (intent.hasExtra(NotificationAndroidImpl.ACTION_PROGRESS_INFO)) {
+                    double progress = intent.getDoubleExtra(NotificationAndroidImpl.ACTION_PROGRESS_INFO, 0);
+                    LogUtil.d("progress", "BlockchainBroadcastReceiver" + progress);
+                    pbSync.setProgress(progress);
+                }
+                if (intent.hasExtra(ACTION_UNSYNC_BLOCK_NUMBER_INFO)) {
+                    long unsyncBlockNumber = intent.getLongExtra(ACTION_UNSYNC_BLOCK_NUMBER_INFO, 0);
+                    if (unsyncBlockNumber > 0) {
+                        tvAlert.setText(getString(R.string.tip_sync_block_height, unsyncBlockNumber));
+                        pbAlert.setVisibility(View.VISIBLE);
+                    } else {
+                        Block block = BlockChain.getInstance().getLastBlock();
+                        final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+                        tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                                DateUtils.getRelativeDateTimeString(context, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+                        pbAlert.setVisibility(View.GONE);
+                    }
+                }
             }
         }
     }
@@ -483,7 +542,6 @@ public class HotActivity extends BaseFragmentActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-
             if (intent == null ||
                     (!Utils.compareString(NotificationAndroidImpl.ACTION_ADDRESS_BALANCE, intent.getAction())
                             && !Utils.compareString(NotificationAndroidImpl.ACTION_SYNC_LAST_BLOCK_CHANGE, intent.getAction()))) {
@@ -528,6 +586,57 @@ public class HotActivity extends BaseFragmentActivity {
     public void showImportSuccess() {
         if (showImportSuccessListener != null)
             showImportSuccessListener.showImportSuccess();
+    }
+
+    private final class AddressTxLoadingReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent == null || !Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE)) {
+                return;
+            }
+            if (!intent.hasExtra(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_INFO)) {
+                return;
+            }
+            String address = intent.getStringExtra(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_INFO);
+            if (Utils.isEmpty(address)) {
+                Block block = BlockChain.getInstance().getLastBlock();
+                final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+                tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                        DateUtils.getRelativeDateTimeString(context, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+                pbAlert.setVisibility(View.GONE);
+                return;
+            }
+            tvAlert.setText(getString(R.string.tip_sync_address_tx, address));
+            pbAlert.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private final class ConnectionStatusReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent == null || (!Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_PEER_STATE) && !Utils.compareString(intent.getAction(), ConnectedChangeBroadcast))) {
+                return;
+            }
+            if (!NetworkUtil.isConnected()) {
+                tvAlert.setText(R.string.tip_network_error);
+                pbAlert.setVisibility(View.GONE);
+                return;
+            } else if (PeerManager.instance().getConnectedPeers().size() == 0) {
+                if(AddressManager.getInstance().addressIsSyncComplete()) {
+                    tvAlert.setText(R.string.tip_no_peers_connected_scan);
+                    pbAlert.setVisibility(View.VISIBLE);
+                }
+                return;
+            }
+            String tvstring = tvAlert.getText().toString();
+            if (tvstring == getResources().getString(R.string.tip_network_error) || tvstring == getResources().getString(R.string.tip_no_peers_connected_scan)) {
+                Block block = BlockChain.getInstance().getLastBlock();
+                final long timeMs = block.getBlockTime() * DateUtils.SECOND_IN_MILLIS;
+                tvAlert.setText(getString(R.string.tip_block_height, block.getBlockNo()) +
+                        DateUtils.getRelativeDateTimeString(context, timeMs, DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
+                pbAlert.setVisibility(View.GONE);
+            }
+        }
     }
 
 //    private void addNewPrivateKey() {

@@ -51,6 +51,7 @@ import net.bither.ui.base.dialog.DialogBalanceDetail;
 import net.bither.ui.base.dialog.DialogFragmentFancyQrCodePager;
 import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.util.KeyUtil;
+import net.bither.util.SendUtil;
 import net.bither.util.StringUtil;
 import net.bither.util.UIUtil;
 import net.bither.util.WalletUtils;
@@ -239,12 +240,10 @@ public class AddressDetailHeader extends FrameLayout implements DialogFragmentFa
     private OnClickListener sendClick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(!address.isSyncComplete()) {
-                DropdownMessage.showDropdownMessage(activity,
-                        R.string.tx_cannot_send);
-                return;
-            }
             if (address != null) {
+                if (!SendUtil.isCanSend(activity, address.isSyncComplete())) {
+                    return;
+                }
                 if (address.getBalance() <= 0) {
                     DropdownMessage.showDropdownMessage(activity,
                             R.string.address_detail_send_balance_zero);
