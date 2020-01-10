@@ -19,11 +19,8 @@
 package net.bither.activity.hot;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -36,8 +33,6 @@ import android.widget.TextView;
 
 import net.bither.PrimerApplication;
 import net.bither.PrimerSetting;
-import net.bither.NotificationAndroidImpl;
-import net.bither.bitherj.AbstractApp;
 import net.bither.TrashCanActivity;
 import net.bither.VerifyMessageSignatureActivity;
 import net.bither.enums.TotalBalanceHide;
@@ -156,16 +151,13 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
     private AlertDialog.Builder selectedBuilder;
     public static final String SplitCoinKey = "SplitCoin";
     private Button btnGenerateKey;
-    private final AddressTxLoadingReceiver addressIsLoadingReceiver = new AddressTxLoadingReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_right, 0);
         setContentView(R.layout.activity_hot_advance_options);
-        AbstractApp.notificationService.removeAddressTxLoading();
         initView();
-        registerReceiver();
     }
 
     private void initView() {
@@ -224,17 +216,6 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
         btnGenerateKey.setOnClickListener(generateKeyClick);
     }
 
-    private void registerReceiver() {
-        registerReceiver(addressIsLoadingReceiver, new IntentFilter(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE));
-    }
-
-    @Override
-    protected void onDestroy() {
-        unregisterReceiver(addressIsLoadingReceiver);
-        super.onDestroy();
-        PrimerApplication.hotActivity = null;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -242,26 +223,6 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
         configureHDMRecovery();
         configureHDMServerPasswordReset();
     }
-
-    private final class AddressTxLoadingReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent == null || !Utils.compareString(intent.getAction(), NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_STATE)) {
-                return;
-            }
-            if (!intent.hasExtra(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_INFO)) {
-                return;
-            }
-            String address = intent.getStringExtra(NotificationAndroidImpl.ACTION_ADDRESS_TX_LOADING_INFO);
-            if (Utils.isEmpty(address)) {
-                return;
-            }
-            if (dp != null) {
-                dp.setMessage(getString(R.string.tip_sync_address_tx, address));
-            }
-        }
-    }
-
     /*生成安全私钥*/
     private View.OnClickListener generateKeyClick=new View.OnClickListener() {
         @Override
