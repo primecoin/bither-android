@@ -226,7 +226,6 @@
     <string name="reload_tx_failed">重载交易数据失败 , 请重试 . </string>
     <string name="reload_tx_success">重载交易数据成功 </string>
     <string name="tx_cannot_reloding">一个小时内只能重载交易数据一次.</string>
-    <string name="tx_cannot_send">该地址还未完成同步.</string>
     <string name="base_on_text">基于 </string>
     <string name="synchronous_interval">同步间隔</string>
     <string name="synchronous_interval_fifteen_minute">15 分钟</string>
@@ -742,4 +741,12 @@
 
     <string name="error_play_tip">不能付款給自己</string>
     <string name="error_play_small">发送失败. 这样小额(&#060;0.01)的交易会被忽略. </string>
+
+    <string name="tip_sync_address_tx">%s\n正在同步该地址交易数据</string>
+    <string name="tip_sync_address_tx_general">正在同步地址交易数据</string>
+    <string name="tip_no_peers_connected_scan">正在搜索可连接的节点</string>
+    <string name="tip_sync_block_height">本地块高度落后于区块最新高度 %d 个块，正在同步</string>
+    <string name="tip_network_error">网络已断开，请检查网络设置</string>
+    <string name="tip_no_peers_connected">暂无可连接的节点</string>
+    <string name="tip_block_height">最新区块高度%d，</string>
 </resources>
