@@ -625,6 +625,7 @@ public class HotActivity extends BaseFragmentActivity {
                 if(AddressManager.getInstance().addressIsSyncComplete()) {
                     tvAlert.setText(R.string.tip_no_peers_connected_scan);
                     pbAlert.setVisibility(View.VISIBLE);
+                    PeerManager.instance().start();
                 }
                 return;
             }
