@@ -96,7 +96,7 @@
     <string name="password_wrong">密碼錯誤</string>
     <string name="decrypt_failed">解密失敗</string>
     <string name="wallet_loading">錢包初始化中, 請稍後再試.</string>
-    <string name="add_address_watch_only_scanned_address_warning">比太只能監控冷錢包監控二維碼,\n不能監控其它地址</string>
+    <string name="add_address_watch_only_scanned_address_warning">Primer只能監控冷錢包監控二維碼,\n不能監控其它地址</string>
 
 
     <!-- send -->
@@ -171,7 +171,7 @@
     <string name="setting_api_config"> API 設定</string>
     <string name="setting_api_config_bither_net">Bither.net</string>
     <string name="setting_api_config_blockchain">Blockchain.info</string>
-    <string name="setting_name_api_config_bither">Bither</string>
+    <string name="setting_name_api_config_bither">Primer</string>
     <string name="setting_name_api_config_blockchain">Blockchain</string>
     <string name="donate_button">捐贈</string>
     <string name="donate_thanks">謝謝您的捐贈</string>
@@ -191,7 +191,7 @@
     <string name="export_address_success">地址已導出到 :</string>
     <string name="setting_name_import_private_key">導入私鑰</string>
     <string name="setting_name_import_bip38_key">導入BIP38私鑰</string>
-    <string name="import_private_key_qr_code">來自比太私鑰二維碼</string>
+    <string name="import_private_key_qr_code">來自質數幣私鑰二維碼</string>
     <string name="import_private_key_text">來自私鑰明文</string>
     <string name="import_hdm_cold_seed_qr_code">來自HDM冷種子二維碼</string>
     <string name="import_hdm_cold_seed_phrase">來自HDM密語(冷)</string>
@@ -281,7 +281,7 @@
     <string name="can_not_find_private_key">沒有找到對應的私鑰</string>
     <string name="scan_watch_only_address_error">二維碼不符合質數幣地址格式</string>
     <string name="sign_transaction">簽名交易</string>
-    <string name="scan_qr_transport_init_label">請掃描比太提供的第1張二維碼</string>
+    <string name="scan_qr_transport_init_label">請掃描Primer提供的第1張二維碼</string>
     <string name="scan_qr_transport_page_label">請掃描第%1$d張二維​​碼, 共%2$d張</string>
     <string name="signing_transaction">正在簽名</string>
     <string name="signed_transaction_qr_code_title">用熱錢包掃描以簽名交易</string>
@@ -505,7 +505,7 @@
     <!-- hdm cold add -->
     <string name="hdm_cold_seed_count_limit">您只能生成一個 HDM 賬戶</string>
     <string name="hdm_account_cold_address_list_label">HDM 冷</string>
-    <string name="hdm_seed_generation_notice">HDM 結合了分層確定性和多重簽名兩種技術.\n\nHDM 運用多重簽名技術來避免分層確定性錢包的缺陷.\n\n比太使用 2/3 的多重簽名來生成 HDM 地址.\n\n三個私鑰分別由熱錢包, 冷錢包和 HDM 服務器上的確定性種子生成.</string>
+    <string name="hdm_seed_generation_notice">HDM 結合了分層確定性和多重簽名兩種技術.\n\nHDM 運用多重簽名技術來避免分層確定性錢包的缺陷.\n\nPrimer使用 2/3 的多重簽名來生成 HDM 地址.\n\n三個私鑰分別由熱錢包, 冷錢包和 HDM 服務器上的確定性種子生成.</string>
     <string name="hdm_keychain_xrandom_final_confirm">您生成了一個極隨機 HDM 賬戶.</string>
     <string name="hdm_cold_pub_key_qr_code_name">HDM 冷帳號二維碼</string>
     <string name="hdm_server_qr_code_name">HDM 服務器二維碼</string>
