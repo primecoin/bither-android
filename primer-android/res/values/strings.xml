@@ -243,15 +243,15 @@
     <string name="synchronous_interval_only_open_app">Only when openning</string>
     <!-- Input parser -->
     <string name="input_parser_cannot_classify">Cannot classify input:\n%s</string>
-    <string name="input_parser_invalid_bitcoin_uri">Invalid Bitcoin URI:\n%s</string>
-    <string name="input_parser_invalid_address">Got invalid bitcoin address!\n(Mixing up Mainnet/Testnet?)</string>
+    <string name="input_parser_invalid_bitcoin_uri">Invalid primecoin URI:\n%s</string>
+    <string name="input_parser_invalid_address">Got invalid primecoin address!\n(Mixing up Mainnet/Testnet?)</string>
     <string name="input_parser_invalid_transaction">Invalid transaction:\n%s</string>
 
     <!-- feed -->
     <string name="feed_send_btc">Send:</string>
     <string name="feed_received_btc">Received:</string>
     <string name="freshnews_title">News</string>
-    <string name="btc_donate">Bitcoin Donate:</string>
+    <string name="btc_donate">Primecoin Donate:</string>
 
     <!-- mode -->
     <string name="choose_mode_cold_desctription">Primer Cold : Offline &amp; Secure.</string>
@@ -260,7 +260,7 @@
     <string name="choose_mode_warm_retry">Retry</string>
     <string name="choose_mode_warm_change_to_cold">Switch to Primer Cold</string>
     <string name="choose_mode_cold_confirm">Once mode is set, it can\'t be changed.\nPrimer Cold need to be run on a offline phone.\nSet this phone as Primer Cold?</string>
-    <string name="choose_mode_warm_confirm">Once mode is set, it can\'t be changed.\nPrimer Hot is an online bitcoin wallet.\nSet this phone as Primer Hot?</string>
+    <string name="choose_mode_warm_confirm">Once mode is set, it can\'t be changed.\nPrimer Hot is an online primecoin wallet.\nSet this phone as Primer Hot?</string>
 
     <!-- warning -->
     <string name="cold_warning">Warning</string>
@@ -290,7 +290,7 @@
     <string name="private_key_is_empty">You don\'t have any private key, please add some</string>
     <string name="next_page">Next page</string>
     <string name="can_not_find_private_key">Can not find private key </string>
-    <string name="scan_watch_only_address_error">QR Code contains no bitcoin address</string>
+    <string name="scan_watch_only_address_error">QR Code contains no primecoin address</string>
     <string name="sign_transaction">Sign Transaction</string>
     <string name="scan_qr_transport_init_label">Scan QR code No.1 provided by Primer</string>
     <string name="scan_qr_transport_page_label">Scan QR code No.%1$d, total %2$d</string>
@@ -341,11 +341,11 @@
 
     <!-- select address to send -->
     <string name="select_address_to_send">Select an address to send</string>
-    <string name="select_address_to_send_no_address_fount">You don\'t have any address with enough available bitcoin</string>
+    <string name="select_address_to_send_no_address_fount">You don\'t have any address with enough available primecoin</string>
 
     <!-- donate -->
     <string name="select_address_to_donate">Select an address to donate</string>
-    <string name="donate_no_address">No bitcoins available for donation.</string>
+    <string name="donate_no_address">No primecoins available for donation.</string>
     <string name="donate_receiving_address_label">Donate to developers</string>
     <string name="donate_sending_verb">Donate</string>
     <string name="donate_unsigned_transaction_verb">Donate</string>
@@ -433,7 +433,7 @@
 
     <!-- trash -->
     <string name="trash_private_key">Move to Trash Can</string>
-    <string name="trash_with_money_warn">This address still has some bitcoin.\nYou can\'t move it to trash can.</string>
+    <string name="trash_with_money_warn">This address still has some primecoins.\nYou can\'t move it to trash can.</string>
     <string name="trashing_private_key">Moving</string>
     <string name="trash_can">Trash Can</string>
     <string name="trash_can_empty">No address in trash can</string>
@@ -571,7 +571,7 @@
     <string name="hdm_keychain_recovery_setting_name">HDM Account Recovery</string>
     <string name="hdm_keychain_recovery_warn">HDM Account is in recovery</string>
     <string name="hdm_keychain_recovery_no_addresses">No HDM address to recover</string>
-    <string name="hdm_keychain_recovery_message">Send bitcoins from HDM recovery account to other addresses ASAP</string>
+    <string name="hdm_keychain_recovery_message">Send primecoins from HDM recovery account to other addresses ASAP</string>
     <string name="address_group_hdm_recovery">HDM Recovery</string>
     <string name="activity_name_hdm_import_word_list">Import HDM Phrase</string>
     <string name="hdm_import_word_list_input_hint">Next Word</string>
