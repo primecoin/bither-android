@@ -781,8 +781,8 @@
     <string name="tip_sync_address_tx">%s\nthe Tx data of this address is being synced</string>
     <string name="tip_sync_address_tx_general">Tx data is being synced</string>
     <string name="tip_no_peers_connected_scan">Searching connectable nodes</string>
-    <string name="tip_sync_block_height">Local block height is %d blocks behind the latest block height. Now syncing…</string>
+    <string name="tip_sync_block_height">Wallet is %d blocks behind, syncing</string>
     <string name="tip_network_error">Network is disconnected. Please check your network setting</string>
     <string name="tip_no_peers_connected">No connectable node</string>
-    <string name="tip_block_height">Latest block height %d, </string>
+    <string name="tip_block_height">Block height %d,&#032;</string>
 </resources>

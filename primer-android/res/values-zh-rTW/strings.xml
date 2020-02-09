@@ -743,8 +743,8 @@
     <string name="tip_sync_address_tx">%s\n正在同步該地址交易數據</string>
     <string name="tip_sync_address_tx_general">正在同步地址交易數據</string>
     <string name="tip_no_peers_connected_scan">正在搜索可連接的節點</string>
-    <string name="tip_sync_block_height">本地塊高度落後於區塊最新高度 %d 個塊，正在同步</string>
+    <string name="tip_sync_block_height">錢包落後%d個區塊，正在同步</string>
     <string name="tip_network_error">網絡已斷開，請檢查網絡設置</string>
     <string name="tip_no_peers_connected">暫無可連接的節點</string>
-    <string name="tip_block_height">最新區塊高度%d，</string>
+    <string name="tip_block_height">區塊高度%d，</string>
 </resources>
