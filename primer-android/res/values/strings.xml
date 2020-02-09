@@ -459,10 +459,10 @@
     <string name="launch_sequence_switch_to_cold">Switch to Primer Cold</string>
     <string name="launch_sequence_switch_to_cold_warn">Set this phone as Primer Cold?\n\nPrimer Cold need to be run on a offline phone.\nYou can monitor Primer Cold by Primer Hot.\nOnce set you can\'t switch back.</string>
 
-    <string name="choose_net">choose net</string>
-    <string name="choose_mainnet">Main Net</string>
-    <string name="choose_testnet">Test Net</string>
-    <string name="choose_net_warn">To switch the net, it is sug-\ngested to close the Primer\nafter 8 second and reopen it.</string>
+    <string name="choose_net">Network</string>
+    <string name="choose_mainnet">Main network</string>
+    <string name="choose_testnet">Test network</string>
+    <string name="choose_net_warn">To switch the network, it is\nrequired to close Primer\nand reopen it.</string>
 
     <!-- bitcoin unit -->
     <string name="setting_name_bitcoin_unit">Default Unit</string>
