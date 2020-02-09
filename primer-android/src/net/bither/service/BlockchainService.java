@@ -280,7 +280,7 @@ public class BlockchainService extends android.app.Service {
                     log.debug("acquiring wakelock");
                     callWekelock();
                     if (!PeerManager.instance().isRunning()) {
-                        LogUtil.d("PEER","开始");
+                        LogUtil.d("PEER","start");
                         startPeer();
                     }
                 } else {

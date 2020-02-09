@@ -97,7 +97,7 @@
     <string name="password_wrong">密码错误</string>
     <string name="decrypt_failed">解密失败</string>
     <string name="wallet_loading">钱包初始化中, 请稍后再试.</string>
-    <string name="add_address_watch_only_scanned_address_warning">比太只能监控冷钱包监控二维码,\n不能监控其它地址</string>
+    <string name="add_address_watch_only_scanned_address_warning">Primer只能监控冷钱包监控二维码,\n不能监控其它地址</string>
 
     <!-- send -->
     <string name="send_progress_dialog_message">发送中</string>
@@ -173,7 +173,7 @@
     <string name="setting_api_config">API 设置</string>
     <string name="setting_api_config_bither_net">Bither.net</string>
     <string name="setting_api_config_blockchain">Blockchain.info</string>
-    <string name="setting_name_api_config_bither">Bither</string>
+    <string name="setting_name_api_config_bither">Primer</string>
     <string name="setting_name_api_config_blockchain">Blockchain</string>
     <string name="donate_button">捐赠</string>
     <string name="donate_thanks">谢谢您的捐赠</string>
@@ -281,7 +281,7 @@
     <string name="can_not_find_private_key">没有找到对应的私钥</string>
     <string name="scan_watch_only_address_error">二维码不符合质数币地址格式</string>
     <string name="sign_transaction">签名交易</string>
-    <string name="scan_qr_transport_init_label">请扫描比太提供的第1张二维码</string>
+    <string name="scan_qr_transport_init_label">请扫描Primer提供的第1张二维码</string>
     <string name="scan_qr_transport_page_label">请扫描第%1$d张二维码, 共%2$d张</string>
     <string name="signing_transaction">正在签名</string>
     <string name="signed_transaction_qr_code_title">用热钱包扫描以签名交易</string>
@@ -506,7 +506,7 @@
     <!-- hdm cold add -->
     <string name="hdm_cold_seed_count_limit">您只能生成一个 HDM 账户</string>
     <string name="hdm_account_cold_address_list_label">HDM 冷</string>
-    <string name="hdm_seed_generation_notice">HDM 结合了分层确定性和多重签名两种技术.\n\nHDM 运用多重签名技术来避免分层确定性钱包的缺陷.\n\n比太使用 2/3 的多重签名来生成 HDM 地址.\n\n三个私钥分别由热钱包, 冷钱包和 HDM 服务器上的确定性种子生成.</string>
+    <string name="hdm_seed_generation_notice">HDM 结合了分层确定性和多重签名两种技术.\n\nHDM 运用多重签名技术来避免分层确定性钱包的缺陷.\n\nPrimer使用 2/3 的多重签名来生成 HDM 地址.\n\n三个私钥分别由热钱包, 冷钱包和 HDM 服务器上的确定性种子生成.</string>
     <string name="hdm_keychain_xrandom_final_confirm">您生成了一个极随机 HDM 账户.</string>
     <string name="hdm_cold_pub_key_qr_code_name">HDM 冷帐号二维码</string>
     <string name="hdm_server_qr_code_name">HDM 服务器二维码</string>

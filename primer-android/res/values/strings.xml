@@ -93,7 +93,7 @@
     <string name="add_address_delete">Delete</string>
     <string name="add_address_watch_only_hint">Primecoin Address</string>
     <string name="add_address_already_watched">This address is already monitored</string>
-    <string name="addresses_already_monitored">This Primecoin Cold is already monitored.</string>
+    <string name="addresses_already_monitored">This Primer Cold is already monitored.</string>
     <string name="add_address_generate_address_with_private_key">Generate</string>
     <string name="add_address_generate_address_password_label">Enter password of wallet</string>
     <string name="add_address_generate_address_password_lengh_note">Length: 6&#8211;43:Number/letter/symbol combination</string>
@@ -105,7 +105,7 @@
     <string name="password_wrong">Wrong Password</string>
     <string name="decrypt_failed">Decryption Failed</string>
     <string name="wallet_loading">Loading wallets, Please try again later.</string>
-    <string name="add_address_watch_only_scanned_address_warning">Primecoin can only monitor Primecoin Cold monitor QR code,\nnot other addresses.</string>
+    <string name="add_address_watch_only_scanned_address_warning">Primer can only monitor Primer Cold monitor QR code,\nnot other addresses.</string>
 
     <!-- send -->
     <string name="send_progress_dialog_message">Sending</string>
@@ -181,7 +181,7 @@
     <string name="setting_api_config">Api Config</string>
     <string name="setting_api_config_bither_net">Primecoin.net</string>
     <string name="setting_api_config_blockchain">Blockchain.info</string>
-    <string name="setting_name_api_config_bither">Primecoin</string>
+    <string name="setting_name_api_config_bither">Primer</string>
     <string name="setting_name_api_config_blockchain">Blockchain</string>
     <string name="donate_button">Donate</string>
     <string name="donate_thanks">Thank you for donating.</string>
@@ -224,7 +224,7 @@
     <string name="import_private_key_qr_code_password">Enter original password</string>
     <string name="import_private_key_qr_code_success">Import success.</string>
     <string name="import_private_key_qr_code_failed">Import failed.</string>
-    <string name="import_hd_account_failed_duplicated">Import failed. This account is already in Primecoin.</string>
+    <string name="import_hd_account_failed_duplicated">Import failed. This account is already in Primer.</string>
     <string name="import_private_key_qr_code_failed_monitored">Can\'t import Primecoin Cold private key.</string>
     <string name="import_private_key_qr_code_failed_duplicate">This private key already exists.</string>
     <string name="import_private_key_qr_code_importing">Importing…</string>
@@ -243,24 +243,24 @@
     <string name="synchronous_interval_only_open_app">Only when openning</string>
     <!-- Input parser -->
     <string name="input_parser_cannot_classify">Cannot classify input:\n%s</string>
-    <string name="input_parser_invalid_bitcoin_uri">Invalid Bitcoin URI:\n%s</string>
-    <string name="input_parser_invalid_address">Got invalid bitcoin address!\n(Mixing up Mainnet/Testnet?)</string>
+    <string name="input_parser_invalid_bitcoin_uri">Invalid primecoin URI:\n%s</string>
+    <string name="input_parser_invalid_address">Got invalid primecoin address!\n(Mixing up Mainnet/Testnet?)</string>
     <string name="input_parser_invalid_transaction">Invalid transaction:\n%s</string>
 
     <!-- feed -->
     <string name="feed_send_btc">Send:</string>
     <string name="feed_received_btc">Received:</string>
     <string name="freshnews_title">News</string>
-    <string name="btc_donate">Bitcoin Donate:</string>
+    <string name="btc_donate">Primecoin Donate:</string>
 
     <!-- mode -->
-    <string name="choose_mode_cold_desctription">Primecoin Cold : Offline &amp; Secure.</string>
-    <string name="choose_mode_warm_desctription">Primecoin Hot : Online &amp; Simple.</string>
+    <string name="choose_mode_cold_desctription">Primer Cold : Offline &amp; Secure.</string>
+    <string name="choose_mode_warm_desctription">Primer Hot : Online &amp; Simple.</string>
     <string name="choose_mode_warm_waiting">Loading…</string>
     <string name="choose_mode_warm_retry">Retry</string>
-    <string name="choose_mode_warm_change_to_cold">Switch to Primecoin Cold</string>
-    <string name="choose_mode_cold_confirm">Once mode is set, it can\'t be changed.\nPrimecoin Cold need to be run on a offline phone.\nSet this phone as Primecoin Cold?</string>
-    <string name="choose_mode_warm_confirm">Once mode is set, it can\'t be changed.\nPrimecoin Hot is an online bitcoin wallet.\nSet this phone as Primecoin Hot?</string>
+    <string name="choose_mode_warm_change_to_cold">Switch to Primer Cold</string>
+    <string name="choose_mode_cold_confirm">Once mode is set, it can\'t be changed.\nPrimer Cold need to be run on a offline phone.\nSet this phone as Primer Cold?</string>
+    <string name="choose_mode_warm_confirm">Once mode is set, it can\'t be changed.\nPrimer Hot is an online primecoin wallet.\nSet this phone as Primer Hot?</string>
 
     <!-- warning -->
     <string name="cold_warning">Warning</string>
@@ -290,25 +290,25 @@
     <string name="private_key_is_empty">You don\'t have any private key, please add some</string>
     <string name="next_page">Next page</string>
     <string name="can_not_find_private_key">Can not find private key </string>
-    <string name="scan_watch_only_address_error">QR Code contains no bitcoin address</string>
+    <string name="scan_watch_only_address_error">QR Code contains no primecoin address</string>
     <string name="sign_transaction">Sign Transaction</string>
-    <string name="scan_qr_transport_init_label">Scan QR code No.1 provided by Primecoin</string>
+    <string name="scan_qr_transport_init_label">Scan QR code No.1 provided by Primer</string>
     <string name="scan_qr_transport_page_label">Scan QR code No.%1$d, total %2$d</string>
     <string name="signing_transaction">Signing Transaction</string>
-    <string name="signed_transaction_qr_code_title">Scan with Primecoin Hot to sign transaction.</string>
+    <string name="signed_transaction_qr_code_title">Scan with Primer Hot to sign transaction.</string>
     <string name="qr_code_page">Page %1$d, Total %2$d</string>
     <string name="complete">Complete</string>
-    <string name="scan_unsigned_transaction_title">Scan QR Code on Primecoin Hot</string>
+    <string name="scan_unsigned_transaction_title">Scan QR Code on Primer Hot</string>
     <string name="clone_to_button">Cold Wallet Clone QR Code</string>
     <string name="clone_to_title">Scan by the clone destination to clone</string>
-    <string name="clone_from_button">Primecoin Cold Wallet Clone</string>
+    <string name="clone_from_button">Primer Cold Wallet Clone</string>
     <string name="clone_from_title">Scan from the clone source</string>
     <string name="clone_from_waiting">Cloning…</string>
     <string name="clone_from_success">Clone success</string>
     <string name="clone_from_failed">Clone failed</string>
     <string name="clone_from_password">Enter source password</string>
     <string name="qr_code_for_all_addresses">Watch Only QR Code</string>
-    <string name="qr_code_for_all_addresses_title">Scan with Primecoin Hot to watch Primecoin Cold</string>
+    <string name="qr_code_for_all_addresses_title">Scan with Primer Hot to watch Primer Cold</string>
     <string name="no_sd_card_of_back_up">SD card failure, Can not backup</string>
     <string name="backup_finish">Back Up Finish !</string>
     <string name="no_sd_card">SD card failure</string>
@@ -317,23 +317,23 @@
     <string name="private_key_count_limit">Reached private key count limit</string>
     <string name="watch_only_address_count_limit">Reached watch only address count limit</string>
     <string name="generate_address_count_label">How many private keys to generate?</string>
-    <string name="recover_from_backup_of_cold">Find previous back up of Primecoin Cold on SD card. Recover from it?</string>
+    <string name="recover_from_backup_of_cold">Find previous back up of Primer Cold on SD card. Recover from it?</string>
     <string name="first_add_private_key_check_suggest">Would you check your private keys now?</string>
 
     <!-- warm wallet -->
     <string name="prepare_tx">Init Transaction</string>
     <string name="generate_unsigned_tx_button">Unsigned TX QR Code</string>
     <string name="get_sign_hash">Get sign </string>
-    <string name="unsigned_transaction_qr_code_title">Scan with Primecoin Cold to sign transaction</string>
+    <string name="unsigned_transaction_qr_code_title">Scan with Primer Cold to sign transaction</string>
     <string name="unsigned_transaction_qr_code_complete">Scan to sign</string>
     <string name="unsigned_transaction_sign_failed">Sign failed</string>
-    <string name="scan_transaction_signature_title">Scan QR Code on Primecoin Cold</string>
+    <string name="scan_transaction_signature_title">Scan QR Code on Primer Cold</string>
     <string name="prompt_block_height">Block Height : %d</string>
     <string name="prompt_wallet_height">Wallet Height : %d</string>
-    <string name="scan_for_all_addresses_in_bither_cold">Monitor Primecoin Cold</string>
-    <string name="scan_for_all_addresses_in_bither_cold_title">Scan Qr Code to watch Primecoin Cold</string>
-    <string name="scan_for_all_addresses_in_bither_cold_success">Monitor Primecoin Cold Success</string>
-    <string name="scan_for_all_addresses_in_bither_cold_failed">Monitor Primecoin Cold Failed</string>
+    <string name="scan_for_all_addresses_in_bither_cold">Monitor Primer Cold</string>
+    <string name="scan_for_all_addresses_in_bither_cold_title">Scan Qr Code to watch Primer Cold</string>
+    <string name="scan_for_all_addresses_in_bither_cold_success">Monitor Primer Cold Success</string>
+    <string name="scan_for_all_addresses_in_bither_cold_failed">Monitor Primer Cold Failed</string>
     <string name="time_is_wrong">Current system time is wrong, please correct it.</string>
     <string name="only_supports_the_compressed_private_key">Only supports the compressed format of private key</string>
     <string name="old_version_no_support_change_adress">old version QR Code does not support change address selection</string>
@@ -341,11 +341,11 @@
 
     <!-- select address to send -->
     <string name="select_address_to_send">Select an address to send</string>
-    <string name="select_address_to_send_no_address_fount">You don\'t have any address with enough available bitcoin</string>
+    <string name="select_address_to_send_no_address_fount">You don\'t have any address with enough available primecoin</string>
 
     <!-- donate -->
     <string name="select_address_to_donate">Select an address to donate</string>
-    <string name="donate_no_address">No bitcoins available for donation.</string>
+    <string name="donate_no_address">No primecoins available for donation.</string>
     <string name="donate_receiving_address_label">Donate to developers</string>
     <string name="donate_sending_verb">Donate</string>
     <string name="donate_unsigned_transaction_verb">Donate</string>
@@ -390,12 +390,12 @@
 
     <!-- first run dialog -->
     <string name="first_run_dialog_title">To protect your primecoin:</string>
-    <string name="first_run_dialog_line_1">NEVER UNINSTALL Primecoin.</string>
-    <string name="first_run_dialog_line_2">NEVER CLEAR Primecoin\'s data.</string>
+    <string name="first_run_dialog_line_1">NEVER UNINSTALL Primer.</string>
+    <string name="first_run_dialog_line_2">NEVER CLEAR Primer\'s data.</string>
     <string name="first_run_dialog_line_3">NEVER FORGET your password.</string>
 
     <!-- upgrade -->
-    <string name="begin_upgrade">Upgrading...\n1.Do not exit Primecoin.\n2.Do not turn off the phone.\n3.Do not turn off the screen.</string>
+    <string name="begin_upgrade">Upgrading...\n1.Do not exit Primer.\n2.Do not turn off the phone.\n3.Do not turn off the screen.</string>
     <string name="upgrading">Upgrading...</string>
 
     <!-- xrandom -->
@@ -413,8 +413,8 @@
 
     <!-- qrcode-->
     <string name="switch_qrcode">Switch QRCode</string>
-    <string name="use_old_version_qrcode">Switched to old version QR Codes, sign with Primecoin Cold &lt;1.1.0</string>
-    <string name="use_new_version_qrcode">Switched to new version QR Codes, sign with Primecoin Cold ≧1.1.0</string>
+    <string name="use_old_version_qrcode">Switched to old version QR Codes, sign with Primer Cold &lt;1.1.0</string>
+    <string name="use_new_version_qrcode">Switched to new version QR Codes, sign with Primer Cold ≧1.1.0</string>
 
     <!-- rcheck -->
     <string name="rcheck_address_title">r-values of %s</string>
@@ -433,7 +433,7 @@
 
     <!-- trash -->
     <string name="trash_private_key">Move to Trash Can</string>
-    <string name="trash_with_money_warn">This address still has some bitcoin.\nYou can\'t move it to trash can.</string>
+    <string name="trash_with_money_warn">This address still has some primecoins.\nYou can\'t move it to trash can.</string>
     <string name="trashing_private_key">Moving</string>
     <string name="trash_can">Trash Can</string>
     <string name="trash_can_empty">No address in trash can</string>
@@ -456,8 +456,8 @@
     <string name="pin_code_setting_close_wrong">PIN code is wrong</string>
 
     <!-- launch sequence -->
-    <string name="launch_sequence_switch_to_cold">Switch to Primecoin Cold</string>
-    <string name="launch_sequence_switch_to_cold_warn">Set this phone as Primecoin Cold?\n\nPrimecoin Cold need to be run on a offline phone.\nYou can monitor Primecoin Cold by Primecoin Hot.\nOnce set you can\'t switch back.</string>
+    <string name="launch_sequence_switch_to_cold">Switch to Primer Cold</string>
+    <string name="launch_sequence_switch_to_cold_warn">Set this phone as Primer Cold?\n\nPrimer Cold need to be run on a offline phone.\nYou can monitor Primer Cold by Primer Hot.\nOnce set you can\'t switch back.</string>
 
     <string name="choose_net">choose net</string>
     <string name="choose_mainnet">Main Net</string>
@@ -523,7 +523,7 @@
     <string name="add_address_tab_hdm" translatable="false">HDM</string>
     <string name="hdm_cold_seed_count_limit">You can only have 1 HDM account</string>
     <string name="hdm_account_cold_address_list_label">HDM Cold</string>
-    <string name="hdm_seed_generation_notice">HDM is the hybrid of Hierarchical Deterministic &amp; Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nPrimecoin uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Primecoin Hot, Primecoin Cold &amp; HDM server.</string>
+    <string name="hdm_seed_generation_notice">HDM is the hybrid of Hierarchical Deterministic &amp; Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nPrimer uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Primer Hot, Primer Cold &amp; HDM server.</string>
     <string name="hdm_keychain_xrandom_final_confirm">You have generated 1 HDM account from XRandom.</string>
     <string name="hdm_cold_pub_key_qr_code_name">HDM Cold Account QR Code</string>
     <string name="hdm_server_qr_code_name">HDM Server QR Code</string>
@@ -542,7 +542,7 @@
     <string name="hdm_keychain_add_server">HDM Server</string>
     <string name="hdm_keychain_add_hot_confirm">Generate HDM Hot account</string>
     <string name="hdm_keychain_add_scan_cold">Scan HDM Cold Account QR Code</string>
-    <string name="hdm_keychain_add_unsigned_server_qr_code_title">Choose HDM Server QR Code on Primecoin Cold</string>
+    <string name="hdm_keychain_add_unsigned_server_qr_code_title">Choose HDM Server QR Code on Primer Cold</string>
     <string name="hdm_keychain_add_scan_signed_server_qr_code_action">Scan Signed Server QR Code</string>
     <string name="hdm_keychain_add_signed_server_qr_code_title">Signed Server QR Code</string>
     <string name="hdm_keychain_add_sign_server_qr_code_error">Signing server QR code is wrong</string>
@@ -571,7 +571,7 @@
     <string name="hdm_keychain_recovery_setting_name">HDM Account Recovery</string>
     <string name="hdm_keychain_recovery_warn">HDM Account is in recovery</string>
     <string name="hdm_keychain_recovery_no_addresses">No HDM address to recover</string>
-    <string name="hdm_keychain_recovery_message">Send bitcoins from HDM recovery account to other addresses ASAP</string>
+    <string name="hdm_keychain_recovery_message">Send primecoins from HDM recovery account to other addresses ASAP</string>
     <string name="address_group_hdm_recovery">HDM Recovery</string>
     <string name="activity_name_hdm_import_word_list">Import HDM Phrase</string>
     <string name="hdm_import_word_list_input_hint">Next Word</string>
@@ -594,7 +594,7 @@
     <string name="hdm_singular_cold_seed_remember_button">I have saved my HDM Cold seed.</string>
     <string name="hdm_singular_cold_seed_tab_words">Seed Phrase</string>
     <string name="hdm_singular_cold_seed_tab_qr">QR Code</string>
-    <string name="hdm_singular_mode_info">Singular Mode runs on one device.\nDo not need Primecoin Cold.\nBut you need to keep Cold seed safely.\nCold seed is the only way to recover.</string>
+    <string name="hdm_singular_mode_info">Singular Mode runs on one device.\nDo not need Primer Cold.\nBut you need to keep Cold seed safely.\nCold seed is the only way to recover.</string>
     <string name="hdm_singular_mode_cancel_warn">HDM singular mode can not be interrupted.</string>
 
     <!-- address alias -->
@@ -630,7 +630,7 @@
     <string name="add_hd_account_tab_other">Others</string>
     <string name="add_hd_account_other_hdm">Generate HDM Account</string>
     <string name="add_hd_account_other_private">Generate Normal Private Keys</string>
-    <string name="add_hd_account_monitor">Monitor Primecoin Cold</string>
+    <string name="add_hd_account_monitor">Monitor Primer Cold</string>
     <string name="add_hd_account_view_label">You already have an HD account.</string>
     <string name="add_hd_account_seed_qr_code">HD Account Seed QR Code</string>
     <string name="add_hd_account_seed_qr_phrase">HD Account Seed Phrase</string>
@@ -695,7 +695,7 @@
     <string name="monitor_cold_hd_account">Monitor Cold HD Account</string>
     <string name="monitor_cold_hd_account_limit">You can only monitor 1 cold HD account</string>
     <string name="monitor_cold_hd_account_failed">Monitor cold HD account failed</string>
-    <string name="monitor_cold_hd_account_failed_duplicated">Monitor failed. This account is already in Primecoin.</string>
+    <string name="monitor_cold_hd_account_failed_duplicated">Monitor failed. This account is already in Primer.</string>
     <string name="monitor_cold_hd_account_success">Monitor cold HD account success</string>
     <string name="address_group_hd_monitored">Cold HD Account</string>
     <string name="hd_account_old_addresses">Old Addresses</string>
@@ -730,7 +730,7 @@
 
     <!-- HD Account XPub -->
     <string name="hd_account_cold_first_address">Show First Address</string>
-    <string name="hd_account_monitor_xpub_need_to_upgrade">You need to upgrade Primecoin cold to v1.6.0</string>
+    <string name="hd_account_monitor_xpub_need_to_upgrade">You need to upgrade Primer Cold to v1.6.0</string>
     <string name="hd_account_show_xpub">Show XPub</string>
     <string name="hd_account_monitor_check_first_address">Check First Address</string>
     <string name="monitor_addresses_validation">Check Monitored Addresses</string>
