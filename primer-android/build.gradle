@@ -19,7 +19,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "net.bither.wallet"
+        applicationId "net.primecoin.primer"
        /* splits {
             abi {
                 enable true
@@ -67,7 +67,7 @@ dependencies {
     /*OkHttp*/
     compile 'com.squareup.okhttp3:okhttp:3.11.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.11.0'
-    compile project(':bitherj')
+    compile project(':primerj')
     compile project(':wheel')
     compile project(':android-charts')
 
