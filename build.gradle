@@ -23,7 +23,7 @@ project(':wheel') {
 project(':android-charts') {
     apply plugin: 'com.android.library'
 }
-project(':bitherj') {
+project(':primerj') {
     apply plugin: 'java'
 }
 subprojects {
