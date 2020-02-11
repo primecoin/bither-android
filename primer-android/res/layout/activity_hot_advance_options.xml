@@ -267,6 +267,7 @@
                                 android:id="@+id/btn_generate_key"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 android:background="@drawable/ui_touchable_bg"
                                 android:gravity="left"
                                 android:padding="10dp"
@@ -279,7 +280,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:visibility="gone"
                                 android:background="@drawable/ui_touchable_bg"
                                 android:paddingLeft="10dp">
 
