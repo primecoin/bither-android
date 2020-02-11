@@ -122,7 +122,6 @@
                         android:id="@+id/iv_logo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:src="@drawable/setting_footer_logo"/>
@@ -132,7 +131,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="3dp"
-                        android:visibility="gone"
                         android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
