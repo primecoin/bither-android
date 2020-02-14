@@ -39,7 +39,13 @@ $ gradle assembleDebug
 * SPV primecoin p2p client
 * Private password keyboard to avoid using third party keyboard for password
 
+## Acknowledgements
+
+Primer is based on [Bither](https://github.com/bither/bither-android), a Bitcoin modile wallet with cold wallet feature.
+
 ## Donation
 
-Donate : ANTqRE6wpE2psbJvvMLJLixfCFms1zp61y
+Primer developers (XPM): ANTqRE6wpE2psbJvvMLJLixfCFms1zp61y
+
+Bither developers (BTC): 1BitherUnNvB2NsfxMnbS35kS3DTPr7PW5
 
