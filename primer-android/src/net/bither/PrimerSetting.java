@@ -30,8 +30,8 @@ public class PrimerSetting {
 
     public static final long DONATE_AMOUNT = 100000;
 
-    public static final int NOTIFICATION_ID_COINS_RECEIVED = 201451;
-    public static final int NOTIFICATION_ID_NETWORK_ALERT = 201452;
+    public static final int NOTIFICATION_ID_COINS_RECEIVED = 2592901;
+    public static final int NOTIFICATION_ID_NETWORK_ALERT = 2908166;
 
     public static final double SYNC_PROGRESS_COMPLETE = 1.0;
     public static final double SYNC_TX_PROGRESS_BLOCK_HEIGHT = 0.1;
