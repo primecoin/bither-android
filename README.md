@@ -41,7 +41,7 @@ $ gradle assembleDebug
 
 ## Acknowledgements
 
-Primer is based on [Bither](https://github.com/bither/bither-android), a Bitcoin modile wallet with cold wallet feature.
+Primer is based on [Bither](https://github.com/bither/bither-android), a multi-platform Bitcoin wallet with cold wallet feature.
 
 ## Donation
 
