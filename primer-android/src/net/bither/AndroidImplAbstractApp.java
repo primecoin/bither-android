@@ -67,8 +67,8 @@ public class AndroidImplAbstractApp extends AbstractApp {
             }
 
             @Override
-            public boolean isTestNet() {
-                return (AppSharedPreference.getInstance().getNetType() == PrimerjSettings.NetType.TESTNET);
+            public PrimerjSettings.NetType getNetType() {
+                return AppSharedPreference.getInstance().getNetType();
             }
 
             @Override

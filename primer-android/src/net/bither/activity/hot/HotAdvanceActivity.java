@@ -1353,7 +1353,7 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
                     @Override
                     public boolean checkPassword(SecureCharSequence password) {
                         try {
-                            bip38DecodeString = Bip38.decrypt(bip38Content, password).toString();
+                            bip38DecodeString = Bip38.decrypt(bip38Content, password, Utils.getNetType()).toString();
                             return bip38DecodeString != null;
                         } catch (Exception e) {
                             e.printStackTrace();
