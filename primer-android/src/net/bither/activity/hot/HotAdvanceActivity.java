@@ -987,7 +987,7 @@ public class HotAdvanceActivity extends SwipeRightFragmentActivity {
 
     /*Select mainnet or testnet*/
     private SettingSelectorView.SettingSelector chooseNetSelector = new SettingSelectorView.SettingSelector() {
-        private int length = PrimerjSettings.NetType.values().length;
+        private int length = 2;
 
         @Override
         public int getOptionCount() {
