@@ -66,6 +66,7 @@ import net.bither.bitherj.crypto.SecureCharSequence;
 import net.bither.bitherj.crypto.bip38.Bip38;
 import net.bither.bitherj.factory.ImportPrivateKey;
 import net.bither.bitherj.qrcode.QRCodeUtil;
+import net.bither.bitherj.utils.Utils;
 import net.bither.factory.ImportPrivateKeyAndroid;
 import net.bither.fragment.Refreshable;
 import net.bither.pin.PinCodeChangeActivity;
@@ -532,7 +533,7 @@ public class ColdAdvanceActivity extends SwipeRightFragmentActivity {
                     @Override
                     public boolean checkPassword(SecureCharSequence password) {
                         try {
-                            bip38DecodeString = Bip38.decrypt(bip38Content, password).toString();
+                            bip38DecodeString = Bip38.decrypt(bip38Content, password, Utils.getNetType()).toString();
                             return bip38DecodeString != null;
                         } catch (Exception e) {
                             e.printStackTrace();
