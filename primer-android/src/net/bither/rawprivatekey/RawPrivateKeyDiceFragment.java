@@ -140,7 +140,7 @@ public class RawPrivateKeyDiceFragment extends Fragment implements IDialogPasswo
                 ECKey key = new ECKey(value, null, true);
                 final String address = Utils.toAddress(key.getPubKeyHash());
                 final SecureCharSequence privateKey = new DumpedPrivateKey(key.getPrivKeyBytes(),
-                        true).toSecureCharSequence();
+                        true, Utils.getNetType()).toSecureCharSequence();
                 Utils.wipeBytes(data);
                 key.clearPrivateKey();
                 ThreadUtil.runOnMainThread(new Runnable() {
