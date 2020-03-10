@@ -56,7 +56,7 @@
     <string name="address_detail_balance_detail_transaction_count">Transaction</string>
     <string name="address_total_transaction_count">tx:</string>
     <string name="address_first_seen_time">Birth Time</string>
-    <string name="input_coinbase">Minning</string>
+    <string name="input_coinbase">Mined</string>
     <string name="address_cannot_be_parsed">Unknown Address</string>
     <string name="address_mine">Me</string>
     <string name="copy_address">Copy</string>
