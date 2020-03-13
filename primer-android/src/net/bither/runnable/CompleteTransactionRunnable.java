@@ -195,8 +195,8 @@ public class CompleteTransactionRunnable extends BaseRunnable {
         try {
             Tx tx = wallet.buildTx(amount, toAddress, changeAddress, coin);
             if (tx == null) {
-                obtainMessage(HandlerMessage.MSG_FAILURE, PrimerApplication.mContext.getString(R
-                        .string.send_failed));
+                obtainMessage(HandlerMessage.MSG_FAILURE,
+                    PrimerApplication.mContext.getString(R.string.send_failed_build_tx));
                 return;
             }
             String outAddress = tx.getFirstOutAddressOtherThanChange(changeAddress);
@@ -223,7 +223,8 @@ public class CompleteTransactionRunnable extends BaseRunnable {
                     password.wipe();
                 }
                 if (!tx.verifySignatures()) {
-                    obtainMessage(HandlerMessage.MSG_FAILURE, getMessageFromException(null));
+                    obtainMessage(HandlerMessage.MSG_FAILURE,
+                        PrimerApplication.mContext.getString(R.string.send_failed_verify_tx));
                     return;
                 }
             }
