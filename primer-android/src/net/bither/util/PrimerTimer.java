@@ -71,6 +71,11 @@ public class PrimerTimer {
 
     private void getExchangeTicker() {
         try {
+            GetFiatPriceApi getFiatPriceApi = new GetFiatPriceApi();
+            getFiatPriceApi.handleHttpGet();
+            AppSharedPreference.getInstance().setCNYExchangeRate(getFiatPriceApi.getCurrencyCny());
+            AppSharedPreference.getInstance().setUSDExchangeRate(getFiatPriceApi.getCurrencyUsd());
+
             FileUtil.upgradeTickerFile();
             File file = FileUtil.getTickerFile();
             @SuppressWarnings("unchecked")
@@ -87,16 +92,7 @@ public class PrimerTimer {
                 comparePriceAlert(tickers);
                 FileUtil.serializeObject(file, tickers);
                 BroadcastUtil.sendBroadcastMarketState(tickers);
-            } else {
-                GetFiatPriceApi getFiatPriceApi = new GetFiatPriceApi();
-                getFiatPriceApi.handleHttpGet();
-                JSONObject response = new JSONObject(getExchangeTickerApi.getResult());
-                if(response != null) {
-                    AppSharedPreference.getInstance().setCNYExchangeRate(getFiatPriceApi.getCurrencyCny());
-                    AppSharedPreference.getInstance().setUSDExchangeRate(getFiatPriceApi.getCurrencyUsd());
-                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
