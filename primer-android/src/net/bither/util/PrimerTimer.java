@@ -93,6 +93,7 @@ public class PrimerTimer {
                 FileUtil.serializeObject(file, tickers);
                 BroadcastUtil.sendBroadcastMarketState(tickers);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
