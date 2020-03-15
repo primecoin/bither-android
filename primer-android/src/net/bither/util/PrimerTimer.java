@@ -25,6 +25,7 @@ import net.bither.R;
 import net.bither.activity.hot.MarketDetailActivity;
 import net.bither.bitherj.PrimerjSettings.MarketType;
 import net.bither.bitherj.api.GetExchangeTickerApi;
+import net.bither.bitherj.api.GetFiatPriceApi;
 import net.bither.bitherj.utils.Utils;
 import net.bither.model.PriceAlert;
 import net.bither.model.Ticker;
@@ -86,6 +87,14 @@ public class PrimerTimer {
                 comparePriceAlert(tickers);
                 FileUtil.serializeObject(file, tickers);
                 BroadcastUtil.sendBroadcastMarketState(tickers);
+            } else {
+                GetFiatPriceApi getFiatPriceApi = new GetFiatPriceApi();
+                getFiatPriceApi.handleHttpGet();
+                JSONObject response = new JSONObject(getExchangeTickerApi.getResult());
+                if(response != null) {
+                    AppSharedPreference.getInstance().setCNYExchangeRate(getFiatPriceApi.getCurrencyCny());
+                    AppSharedPreference.getInstance().setUSDExchangeRate(getFiatPriceApi.getCurrencyUsd());
+                }
             }
 
         } catch (Exception e) {
