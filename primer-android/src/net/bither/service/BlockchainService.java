@@ -220,7 +220,7 @@ public class BlockchainService extends android.app.Service {
     }
 
     private final BroadcastReceiver connectivityReceiver = new BroadcastReceiver() {
-        private boolean hasConnectivity;
+        private boolean hasConnectivity = true;
         private boolean hasStorage = true;
 
         @Override
@@ -270,7 +270,7 @@ public class BlockchainService extends android.app.Service {
             if (mode == PrimerjSettings.AppMode.COLD) {
                 return;
             }
-            final boolean hasEverything = hasStorage;
+            final boolean hasEverything = hasConnectivity && hasStorage;
             NetworkUtil.NetworkType networkType = NetworkUtil.isConnectedType();
             boolean networkIsAvailadble = (!AppSharedPreference.getInstance().getSyncBlockOnlyWifi())
                     || (networkType == NetworkUtil.NetworkType.Wifi);
