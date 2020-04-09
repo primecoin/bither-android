@@ -270,7 +270,7 @@ public class BlockchainService extends android.app.Service {
             if (mode == PrimerjSettings.AppMode.COLD) {
                 return;
             }
-            final boolean hasEverything = hasConnectivity && hasStorage;
+            final boolean hasEverything = hasStorage;
             NetworkUtil.NetworkType networkType = NetworkUtil.isConnectedType();
             boolean networkIsAvailadble = (!AppSharedPreference.getInstance().getSyncBlockOnlyWifi())
                     || (networkType == NetworkUtil.NetworkType.Wifi);
