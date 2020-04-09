@@ -220,7 +220,7 @@ public class BlockchainService extends android.app.Service {
     }
 
     private final BroadcastReceiver connectivityReceiver = new BroadcastReceiver() {
-        private boolean hasConnectivity;
+        private boolean hasConnectivity = true;
         private boolean hasStorage = true;
 
         @Override

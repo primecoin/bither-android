@@ -21,11 +21,6 @@ public class SendUtil {
             DropdownMessage.showDropdownMessage(activity, R.string.tip_no_peers_connected);
             return false;
         }
-        long displayLastBlockHeight = PeerManager.instance().getConnectedPeers().get(0).getDisplayLastBlockHeight();
-        if (PeerManager.instance().getLastBlockHeight() < displayLastBlockHeight) {
-            DropdownMessage.showDropdownMessage(activity, activity.getString(R.string.tip_sync_block_height, displayLastBlockHeight - PeerManager.instance().getLastBlockHeight()));
-            return false;
-        }
         return true;
     }
 }
