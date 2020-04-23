@@ -8,13 +8,13 @@ android {
         debug {
             keyAlias 'primecoin_debug'
             keyPassword 'pcdxzb'
-            storeFile file('../primecoin.keystore')
+            storeFile file('../debug.keystore')
             storePassword 'pcdxzb'
         }
         release {
             keyAlias 'primecoin_release'
             keyPassword 'pcdxzb'
-            storeFile file('../primecoin.keystore')
+            storeFile file('../debug.keystore')
             storePassword 'pcdxzb'
         }
     }

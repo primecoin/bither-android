@@ -14,22 +14,34 @@ Primer Android build is based on gradle build system.
 $ export ANDROID_HOME="/home/ubuntu/Android/Sdk"
 $ sudo apt install openjdk-8-jdk
 $ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-$ sudo apt install gradle
-$ gradle --version
+$ ./gradlew --version
+
 ------------------------------------------------------------
-Gradle 4.4.1
+Gradle 4.9
 ------------------------------------------------------------
 
-Build time:   2012-12-21 00:00:00 UTC
-Revision:     none
+Build time:   2018-07-16 08:14:03 UTC
+Revision:     efcf8c1cf533b03c70f394f270f46a174c738efc
 
-Groovy:       2.4.16
-Ant:          Apache Ant(TM) version 1.10.5 compiled on March 28 2019
+Kotlin DSL:   0.18.4
+Kotlin:       1.2.41
+Groovy:       2.4.12
+Ant:          Apache Ant(TM) version 1.9.11 compiled on March 23 2018
 JVM:          1.8.0_242 (Private Build 25.242-b08)
 OS:           Linux 5.3.0-28-generic amd64
 
-$ gradle clean
-$ gradle assembleDebug
+$ ./gradlew clean
+$ ./gradlew assembleDebug
+```
+
+## Release Build
+
+```
+$ ./gradlew assembleRelease \
+    -Pandroid.injected.signing.store.file=/<pathTo>/primer.jks \
+    -Pandroid.injected.signing.store.password=<storePassword> \
+    -Pandroid.injected.signing.key.alias=primer_release \
+    -Pandroid.injected.signing.key.password=<keyPassword>
 ```
 
 ## Features
