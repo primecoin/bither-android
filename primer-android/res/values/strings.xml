@@ -787,4 +787,6 @@
     <string name="tip_network_error">Network is disconnected. Please check your network setting</string>
     <string name="tip_no_peers_connected">No connectable node</string>
     <string name="tip_block_height">Block height %d &#064;</string>
+
+    <string name="permissions_no_grant">Please go to Phone Setting->Apps->Primer->Permission to switch on relevant permissions, otherwise the function cannot be used.</string>
 </resources>

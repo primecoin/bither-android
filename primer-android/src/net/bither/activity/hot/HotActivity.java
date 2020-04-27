@@ -21,9 +21,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -45,11 +48,13 @@ import net.bither.ui.base.BaseFragmentActivity;
 import net.bither.ui.base.DropdownMessage;
 import net.bither.ui.base.SyncProgressView;
 import net.bither.ui.base.TabButton;
+import net.bither.ui.base.dialog.DialogConfirmTask;
 import net.bither.ui.base.dialog.DialogFirstRunWarning;
 import net.bither.ui.base.dialog.DialogGenerateAddressFinalConfirm;
 import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.util.LogUtil;
 import net.bither.util.NetworkUtil;
+import net.bither.util.PermissionUtil;
 import net.bither.util.StringUtil;
 import net.bither.util.UIUtil;
 import net.bither.util.WalletUtils;
@@ -282,13 +287,43 @@ public class HotActivity extends BaseFragmentActivity {
                 }
                 //直接跳转到生成热钱包界面
 //                Intent intent = new Intent(HotActivity.this, AddHotAddressActivity.class);
-                Intent intent = new Intent(HotActivity.this, AddHotAddressPrivateKeyActivity.class);
-                startActivityForResult(intent, PrimerSetting.INTENT_REF.SCAN_REQUEST_CODE);
-                overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
-
+                if (PermissionUtil.isCameraPermission(HotActivity.this, PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA)) {
+                    Intent intent = new Intent(HotActivity.this, AddHotAddressPrivateKeyActivity.class);
+                    startActivityForResult(intent, PrimerSetting.INTENT_REF.SCAN_REQUEST_CODE);
+                    overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
+                }
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA:
+                if (grantResults != null && grantResults.length > 0) {
+                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                        DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(
+                                this, getString(R.string.permissions_no_grant), new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            }
+                        });
+                        dialogConfirmTask.show();
+                    } else {
+                        Intent intent = new Intent(HotActivity.this, AddHotAddressPrivateKeyActivity.class);
+                        startActivityForResult(intent, PrimerSetting.INTENT_REF.SCAN_REQUEST_CODE);
+                        overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
+                    }
+                }
+            default:
+                break;
+        }
     }
 
     @Override

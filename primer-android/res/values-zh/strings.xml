@@ -749,4 +749,6 @@
     <string name="tip_network_error">网络已断开，请检查网络设置</string>
     <string name="tip_no_peers_connected">暂无可连接的节点</string>
     <string name="tip_block_height">区块高度%d，</string>
+
+    <string name="permissions_no_grant">请前往设置->应用->Primer->权限管理中打开相关权限，否则功能无法正常使用！</string>
 </resources>

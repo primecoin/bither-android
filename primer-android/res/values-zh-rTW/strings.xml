@@ -747,4 +747,6 @@
     <string name="tip_network_error">網絡已斷開，請檢查網絡設置</string>
     <string name="tip_no_peers_connected">暫無可連接的節點</string>
     <string name="tip_block_height">區塊高度%d，</string>
+
+    <string name="permissions_no_grant">請前往設置->應用->Primer->權限管理中打開相關權限，否則功能無法正常使用！</string>
 </resources>
