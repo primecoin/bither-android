@@ -726,7 +726,7 @@ public class OptionHotFragment extends Fragment implements Selectable,
     public void avatarFromCamera() {
         if (FileUtil.existSdCardMounted()) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            File file = ImageFileUtil.getImageForGallery(System.currentTimeMillis());
+            File file = ImageFileUtil.getImageForCamera(System.currentTimeMillis());
             imageUri = FileProvider.getUriForFile(hotActivity,
                     BuildConfig.APPLICATION_ID + ".provider", file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -768,14 +768,11 @@ public class OptionHotFragment extends Fragment implements Selectable,
                 }
                 break;
             case PrimerSetting.REQUEST_CODE_CAMERA:
-                if (data != null) {
-                    Intent intent = new Intent(getActivity(), CropImageGlActivity.class);
-
-                    intent.putExtra("android.intent.extra.STREAM", imageUri);
-                    intent.setAction(Intent.ACTION_SEND);
-                    LogUtil.d("fragment", "REQUEST_CODE_CAMERA");
-                    startActivityForResult(intent, PrimerSetting.REQUEST_CODE_CROP_IMAGE);
-                }
+                Intent intent = new Intent(getActivity(), CropImageGlActivity.class);
+                intent.putExtra("android.intent.extra.STREAM", imageUri);
+                intent.setAction(Intent.ACTION_SEND);
+                LogUtil.d("fragment", "REQUEST_CODE_CAMERA");
+                startActivityForResult(intent, PrimerSetting.REQUEST_CODE_CROP_IMAGE);
                 break;
             case PrimerSetting.REQUEST_CODE_CROP_IMAGE:
                 if (resultCode == Activity.RESULT_OK) {

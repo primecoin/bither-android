@@ -468,9 +468,9 @@ public class FileUtil {
             @SuppressWarnings("deprecation")
             Cursor actualimagecursor = activity.managedQuery(uri, proj, null,
                     null, null);
-            if (actualimagecursor != null) {
-                int actual_image_column_index = actualimagecursor
-                        .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            int actual_image_column_index = actualimagecursor
+                    .getColumnIndex(MediaStore.Images.Media.DATA);
+            if (actual_image_column_index != -1) {
                 actualimagecursor.moveToFirst();
                 String img_path = actualimagecursor
                         .getString(actual_image_column_index);
@@ -479,7 +479,7 @@ public class FileUtil {
                 }
             } else {
 
-                file = new File(new URI(uri.toString()));
+                file = ImageFileUtil.getImageForCamera();
                 if (file.exists()) {
                     return file;
                 }
