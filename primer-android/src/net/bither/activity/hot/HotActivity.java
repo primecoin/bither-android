@@ -321,6 +321,22 @@ public class HotActivity extends BaseFragmentActivity {
                         overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
                     }
                 }
+            case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_AVATAR:
+                if (grantResults != null && grantResults.length > 0) {
+                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                        DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(
+                                this, getString(R.string.permissions_no_grant), new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            }
+                        });
+                        dialogConfirmTask.show();
+                    }
+                }
             default:
                 break;
         }
