@@ -51,6 +51,8 @@ public class PrimerSetting {
     public static final int REQUEST_CODE_CROP_IMAGE = 1009;
     public static final int REQUEST_CODE_PERMISSION_CAMERA = 1010;
     public static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 1011;
+    public static final int REQUEST_CODE_PERMISSION_CAMERA_ADDKEY = 1012;
+    public static final int REQUEST_CODE_PERMISSION_CAMERA_AVATAR = 1013;
 
     public static final long LAST_USAGE_THRESHOLD_JUST_MS = DateUtils.HOUR_IN_MILLIS;
     public static final long LAST_USAGE_THRESHOLD_RECENTLY_MS = 2 * DateUtils.DAY_IN_MILLIS;

@@ -218,7 +218,7 @@ public class ColdActivity extends BaseFragmentActivity {
                             .private_key_count_limit);
                     return;
                 }
-                if (PermissionUtil.isCameraPermission(ColdActivity.this, PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA)) {
+                if (PermissionUtil.isCameraPermission(ColdActivity.this, PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_ADDKEY)) {
                     Intent intent = new Intent(ColdActivity.this, AddHotAddressPrivateKeyActivity.class);
                     startActivityForResult(intent, PrimerSetting.INTENT_REF.SCAN_REQUEST_CODE);
                     overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
@@ -232,7 +232,7 @@ public class ColdActivity extends BaseFragmentActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA:
+            case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_ADDKEY:
                 if (grantResults != null && grantResults.length > 0) {
                     if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                         DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(
