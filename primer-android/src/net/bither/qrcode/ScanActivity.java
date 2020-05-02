@@ -156,7 +156,7 @@ public class ScanActivity extends BaseActivity implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(final SurfaceHolder holder) {
-    	if (PermissionUtil.isCameraPermission(this, PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA)) {
+    	if (PermissionUtil.isCameraPermission(this, PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_SCAN)) {
     		cameraHandler.post(openRunnable);
     	}
     }
@@ -165,7 +165,7 @@ public class ScanActivity extends BaseActivity implements SurfaceHolder.Callback
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		switch (requestCode) {
-			case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA:
+			case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_SCAN:
 				if (grantResults != null && grantResults.length > 0) {
 					if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 						DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(

@@ -49,7 +49,7 @@ public class PrimerSetting {
     public static final int REQUEST_CODE_IMAGE = 1007;
     public static final int REQUEST_CODE_CAMERA = 1008;
     public static final int REQUEST_CODE_CROP_IMAGE = 1009;
-    public static final int REQUEST_CODE_PERMISSION_CAMERA = 1010;
+    public static final int REQUEST_CODE_PERMISSION_CAMERA_SCAN = 1010;
     public static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 1011;
     public static final int REQUEST_CODE_PERMISSION_CAMERA_ADDKEY = 1012;
     public static final int REQUEST_CODE_PERMISSION_CAMERA_AVATAR = 1013;
