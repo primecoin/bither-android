@@ -321,6 +321,7 @@ public class HotActivity extends BaseFragmentActivity {
                         overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
                     }
                 }
+                break;
             case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_AVATAR:
                 if (grantResults != null && grantResults.length > 0) {
                     if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
@@ -337,6 +338,7 @@ public class HotActivity extends BaseFragmentActivity {
                         dialogConfirmTask.show();
                     }
                 }
+                break;
             default:
                 break;
         }
