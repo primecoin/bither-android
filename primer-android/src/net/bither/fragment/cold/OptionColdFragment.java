@@ -67,6 +67,7 @@ import net.bither.util.DateTimeUtil;
 import net.bither.util.FileUtil;
 import net.bither.util.KeyUtil;
 import net.bither.util.LogUtil;
+import net.bither.util.PermissionUtil;
 import net.bither.util.ThreadUtil;
 import net.bither.util.UnitUtilWrapper;
 
@@ -120,6 +121,7 @@ import net.bither.util.LogUtil;
 import net.bither.util.ThreadUtil;
 import net.bither.util.UnitUtilWrapper;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -270,6 +272,9 @@ public class OptionColdFragment extends Fragment implements Selectable {
         @Override
         public void onClick(View v) {
             if (FileUtil.existSdCardMounted()) {
+                if (!PermissionUtil.isWriteExternalStoragePermission(getActivity(), PrimerSetting.REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE)) {
+                    return;
+                }
                 long backupTime = AppSharedPreference.getInstance().getLastBackupkeyTime().getTime();
                 if (backupTime + ONE_HOUR < System.currentTimeMillis()) {
                     backupPrivateKey();
@@ -776,9 +781,13 @@ public class OptionColdFragment extends Fragment implements Selectable {
                 flBackTime.setVisibility(View.GONE);
             } else {
                 flBackTime.setVisibility(View.VISIBLE);
-                String relativeDate = DateTimeUtil.getRelativeDate(getActivity(), date).toString();
-                tvBackupTime.setText(Utils.format(getString(R.string.last_time_of_back_up)
-                        + " ", relativeDate));
+                final List<File> files = FileUtil.getBackupFileListOfCold();
+                if (files != null && files.size() > 0) {
+                    String relativeDate = DateTimeUtil.getRelativeDate(getActivity(), date).toString();
+                    tvBackupTime.setText(Utils.format(getString(R.string.last_time_of_back_up) + " ", relativeDate));
+                } else {
+                    tvBackupTime.setText(R.string.no_backup);
+                }
                 tvBackupPath.setText(FileUtil.getBackupSdCardDir().getAbsolutePath());
             }
         } else {
@@ -800,7 +809,12 @@ public class OptionColdFragment extends Fragment implements Selectable {
 
     private void backupFinish() {
         pbBackTime.setVisibility(View.INVISIBLE);
-        tvBackupTime.setText(R.string.backup_finish);
+        final List<File> files = FileUtil.getBackupFileListOfCold();
+        if (files != null && files.size() > 0) {
+            tvBackupTime.setText(R.string.backup_finish);
+        } else {
+            tvBackupTime.setText(R.string.backup_failed);
+        }
         AnimationUtil.fadeOut(tvBackupTime, new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

@@ -18,6 +18,7 @@ package net.bither.qrcode;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -33,6 +34,7 @@ import android.os.HandlerThread;
 import android.os.Process;
 import android.os.Vibrator;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -65,14 +67,17 @@ import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.util.FileUtil;
 import net.bither.util.ImageManageUtil;
 
+import net.bither.PrimerSetting;
 import net.bither.R;
 import net.bither.camera.CameraManager;
 import net.bither.ui.base.BaseActivity;
+import net.bither.ui.base.dialog.DialogConfirmTask;
 import net.bither.ui.base.DropdownMessage;
 import net.bither.ui.base.ScannerView;
 import net.bither.ui.base.dialog.DialogProgress;
 import net.bither.util.FileUtil;
 import net.bither.util.ImageManageUtil;
+import net.bither.util.PermissionUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -151,8 +156,37 @@ public class ScanActivity extends BaseActivity implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(final SurfaceHolder holder) {
-        cameraHandler.post(openRunnable);
+    	if (PermissionUtil.isCameraPermission(this, PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_SCAN)) {
+    		cameraHandler.post(openRunnable);
+    	}
     }
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		switch (requestCode) {
+			case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_SCAN:
+				if (grantResults != null && grantResults.length > 0) {
+					if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+						DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(
+								this, getString(R.string.permissions_no_grant), new Runnable() {
+							@Override
+							public void run() {
+								Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+								Uri uri = Uri.fromParts("package", getPackageName(), null);
+								intent.setData(uri);
+								startActivity(intent);
+							}
+						});
+						dialogConfirmTask.show();
+					} else {
+						openRunnable.run();
+					}
+				}
+			default:
+				break;
+		}
+	}
 
     @Override
     public void surfaceDestroyed(final SurfaceHolder holder) {

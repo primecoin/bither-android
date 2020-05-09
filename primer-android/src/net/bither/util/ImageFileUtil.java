@@ -34,6 +34,7 @@ public class ImageFileUtil {
     private static final String FILE_TYPE_KEY = ".jpg";
     private static final String DCIM_FILE_NAME = "IMG_%s";
     private static final String AVATAR_FILE_NAME = "a%d.jpg";
+    private static long avatarCameraTime;
 
     public static File getImageForGallery(long timeMillis) {
         String pictureName = getImageNameForGallery(
@@ -45,6 +46,15 @@ public class ImageFileUtil {
         }
         File file = new File(dcimFile, formatFileName(pictureName));
         return file;
+    }
+
+    public static File getImageForCamera(long timeMillis) {
+        avatarCameraTime = timeMillis;
+        return getImageForGallery(timeMillis);
+    }
+
+    public static File getImageForCamera() {
+        return getImageForGallery(avatarCameraTime);
     }
 
     public static String getImageNameForGallery(

@@ -20,7 +20,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -47,6 +50,7 @@ import net.bither.util.BackupUtil;
 import net.bither.util.FileUtil;
 import net.bither.util.KeyUtil;
 import net.bither.util.LogUtil;
+import net.bither.util.PermissionUtil;
 import net.bither.util.StringUtil;
 import net.bither.util.ThreadUtil;
 import net.bither.util.UIUtil;
@@ -116,6 +120,7 @@ public class ColdActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
+        PermissionUtil.isWriteExternalStoragePermission(this, PrimerSetting.REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE);
         PrimerApplication.coldActivity = this;
         setContentView(R.layout.activity_cold);
         initView();
@@ -214,13 +219,63 @@ public class ColdActivity extends BaseFragmentActivity {
                             .private_key_count_limit);
                     return;
                 }
-                Intent intent = new Intent(ColdActivity.this, AddHotAddressPrivateKeyActivity.class);
-
-                startActivityForResult(intent, PrimerSetting.INTENT_REF.SCAN_REQUEST_CODE);
-                overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
+                if (PermissionUtil.isCameraPermission(ColdActivity.this, PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_ADDKEY)) {
+                    Intent intent = new Intent(ColdActivity.this, AddHotAddressPrivateKeyActivity.class);
+                    startActivityForResult(intent, PrimerSetting.INTENT_REF.SCAN_REQUEST_CODE);
+                    overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
+                }
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PrimerSetting.REQUEST_CODE_PERMISSION_CAMERA_ADDKEY:
+                if (grantResults != null && grantResults.length > 0) {
+                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                        DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(
+                                this, getString(R.string.permissions_no_grant), new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            }
+                        });
+                        dialogConfirmTask.show();
+                    } else {
+                        Intent intent = new Intent(ColdActivity.this, AddHotAddressPrivateKeyActivity.class);
+                        startActivityForResult(intent, PrimerSetting.INTENT_REF.SCAN_REQUEST_CODE);
+                        overridePendingTransition(R.anim.activity_in_drop, R.anim.activity_out_back);
+                    }
+                }
+                break;
+            case PrimerSetting.REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE:
+                if (grantResults != null && grantResults.length > 0) {
+                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                        DialogConfirmTask dialogConfirmTask = new DialogConfirmTask(
+                                this, getString(R.string.permissions_no_grant), new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            }
+                        });
+                        dialogConfirmTask.show();
+                    } else {
+                        checkBackup();
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     private void initView() {
