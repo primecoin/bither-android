@@ -41,6 +41,7 @@ public class UEntropySensor implements SensorEventListener, IUEntropySource {
     private SensorManager sensorManager;
     private List<Sensor> sensors;
     private SensorVisualizerView visualizer;
+    private static final double ACCEPTANCEPROBABILITY = 0.01;
 
     private boolean paused = true;
 
@@ -91,6 +92,9 @@ public class UEntropySensor implements SensorEventListener, IUEntropySource {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        if (Math.random() > ACCEPTANCEPROBABILITY) {
+            return;
+        }
         if (paused) {
             return;
         }
