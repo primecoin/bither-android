@@ -159,7 +159,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
     }
 
     public enum UEntropySource {
-        Unknown, Camera(16), Mic(16), Sensor;
+        Unknown, Camera(8), Mic(16), Sensor;
 
         private int bytesInOneBatch;
 
@@ -175,7 +175,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
             if (data.length <= bytesInOneBatch) {
                 return data;
             }
-            byte[] result = new byte[bytesInOneBatch];
+            byte[] result = new byte[bytesInOneBatch + 1];
             byte[] locatorBytes;
             for (int i = 0;
                  i < bytesInOneBatch;
@@ -192,13 +192,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
                 result[i] = data[position];
             }
             byte[] timestampBytes = Longs.toByteArray(System.currentTimeMillis());
-            locatorBytes = URandom.nextBytes(Ints.BYTES);
-            int value = Math.abs(Ints.fromByteArray(locatorBytes));
-            int position = (int) (((float) value / (float) Integer.MAX_VALUE) * result.length);
-            position = Math.min(Math.max(position, 0), result.length - 1);
-            result[position] = (byte) (result[position] ^ timestampBytes[timestampBytes.length - 1]);
-            locatorBytes = URandom.nextBytes(1);
-            result[position] = (byte) (result[position] ^ locatorBytes[0]);
+            result[bytesInOneBatch] = timestampBytes[timestampBytes.length - 1];
             return result;
         }
     }
