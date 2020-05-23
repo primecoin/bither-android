@@ -215,7 +215,7 @@ public abstract class UEntropyActivity extends BaseFragmentActivity implements U
                 vOverlayTop.startAnimation(topAnim);
                 vOverlayBottom.startAnimation(bottomAnim);
             }
-        }, 10);
+        }, 0);
     }
 
     private void stopAnimation(final Runnable finishRun) {
