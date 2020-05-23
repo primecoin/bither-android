@@ -41,7 +41,7 @@ public class UEntropySensor implements SensorEventListener, IUEntropySource {
     private SensorManager sensorManager;
     private List<Sensor> sensors;
     private SensorVisualizerView visualizer;
-    private static final double ACCEPTANCEPROBABILITY = 0.1;
+    private static final double ACCEPTANCEPROBABILITY = 0.03;
 
     private boolean paused = true;
 
