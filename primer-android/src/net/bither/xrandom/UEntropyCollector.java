@@ -197,7 +197,8 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
             int position = (int) (((float) value / (float) Integer.MAX_VALUE) * result.length);
             position = Math.min(Math.max(position, 0), result.length - 1);
             result[position] = (byte) (result[position] ^ timestampBytes[timestampBytes.length - 1]);
-            result[position] = (byte) (result[position] ^ locatorBytes[Ints.BYTES-1]);
+            locatorBytes = URandom.nextBytes(1);
+            result[position] = (byte) (result[position] ^ locatorBytes[0]);
             return result;
         }
     }
