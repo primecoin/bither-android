@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 
 public class UEntropyCollector implements IUEntropy, IUEntropySource {
     public static final int POOL_SIZE = 32 * 200;
-    private static final int ENTROPY_XOR_MULTIPLIER = (int) Math.pow(2, 6);
+    private static final int ENTROPY_XOR_MULTIPLIER = (int) Math.pow(2, 5);
 
     public static interface UEntropyCollectorListener {
         public void onUEntropySourceError(Exception e, IUEntropySource source);
