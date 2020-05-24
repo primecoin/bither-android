@@ -27,13 +27,16 @@ import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class UEntropyCollector implements IUEntropy, IUEntropySource {
     public static final int POOL_SIZE = 32 * 200;
-    private static final int ENTROPY_XOR_MULTIPLIER = (int) Math.pow(2, 5);
+    private static final int ENTROPY_XOR_MULTIPLIER = (int) Math.pow(2, 4);
+    private final HashMap<UEntropySource, Long> sampleTime;
+    private final HashMap<UEntropySource, Long> lastUpdateTime;
 
     public static interface UEntropyCollectorListener {
         public void onUEntropySourceError(Exception e, IUEntropySource source);
@@ -54,6 +57,12 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
         this.listener = listener;
         paused = true;
         sources = new HashSet<IUEntropySource>();
+        lastUpdateTime = new HashMap<UEntropySource, Long>();
+        sampleTime = new HashMap<UEntropySource, Long>();
+        sampleTime.put(UEntropySource.Unknown, Long.MAX_VALUE);
+        sampleTime.put(UEntropySource.Camera, 300L);
+        sampleTime.put(UEntropySource.Mic, 200L);
+        sampleTime.put(UEntropySource.Sensor, 50L);
         executor = Executors.newSingleThreadExecutor();
     }
 
@@ -61,6 +70,11 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
         if (!shouldCollectData()) {
             return;
         }
+        Long currentyTime = System.currentTimeMillis();
+        if (lastUpdateTime.containsKey(source) && currentyTime - lastUpdateTime.get(source) < sampleTime.get(source)) {
+            return;
+        }
+        lastUpdateTime.put(source, currentyTime);
         executor.submit(new Runnable() {
             @Override
             public void run() {
@@ -159,7 +173,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
     }
 
     public enum UEntropySource {
-        Unknown, Camera(8), Mic(16), Sensor;
+        Unknown, Camera(20), Mic(16), Sensor;
 
         private int bytesInOneBatch;
 
@@ -175,7 +189,11 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
             if (data.length <= bytesInOneBatch) {
                 return data;
             }
-            byte[] result = new byte[bytesInOneBatch + 1];
+            int timeByte = 0;
+            if(bytesInOneBatch>1) {
+                timeByte = 1;
+            }
+            byte[] result = new byte[bytesInOneBatch + timeByte];
             byte[] locatorBytes;
             for (int i = 0;
                  i < bytesInOneBatch;
@@ -191,8 +209,10 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
                 position = Math.min(Math.max(position, 0), data.length - 1);
                 result[i] = data[position];
             }
-            byte[] timestampBytes = Longs.toByteArray(System.currentTimeMillis());
-            result[bytesInOneBatch] = timestampBytes[timestampBytes.length - 1];
+            if(timeByte>0) {
+                byte[] timestampBytes = Longs.toByteArray(System.currentTimeMillis());
+                result[bytesInOneBatch] = timestampBytes[timestampBytes.length - 1];
+            }
             return result;
         }
     }
