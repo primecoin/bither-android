@@ -62,7 +62,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
         sampleTime.put(UEntropySource.Unknown, Long.MAX_VALUE);
         sampleTime.put(UEntropySource.Camera, 300L);
         sampleTime.put(UEntropySource.Mic, 200L);
-        sampleTime.put(UEntropySource.Sensor, 50L);
+        sampleTime.put(UEntropySource.Sensor, 80L);
         executor = Executors.newSingleThreadExecutor();
     }
 
@@ -173,7 +173,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
     }
 
     public enum UEntropySource {
-        Unknown, Camera(20), Mic(16), Sensor;
+        Unknown, Camera(24), Mic(16), Sensor;
 
         private int bytesInOneBatch;
 
