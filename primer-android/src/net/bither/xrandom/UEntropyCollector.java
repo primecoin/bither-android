@@ -36,7 +36,8 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
     public static final int POOL_SIZE = 32 * 200;
     private static final int ENTROPY_XOR_MULTIPLIER = (int) Math.pow(2, 4);
     private final HashMap<UEntropySource, Long> sampleTime;
-    private final HashMap<UEntropySource, Long> lastUpdateTime;
+    private final HashMap<UEntropySource, Long> startTime;
+    private final HashMap<UEntropySource, Integer> sampleCount;
 
     public static interface UEntropyCollectorListener {
         public void onUEntropySourceError(Exception e, IUEntropySource source);
@@ -57,12 +58,13 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
         this.listener = listener;
         paused = true;
         sources = new HashSet<IUEntropySource>();
-        lastUpdateTime = new HashMap<UEntropySource, Long>();
+        sampleCount = new HashMap<UEntropySource, Integer>();
+        startTime = new HashMap<UEntropySource, Long>();
         sampleTime = new HashMap<UEntropySource, Long>();
         sampleTime.put(UEntropySource.Unknown, Long.MAX_VALUE);
-        sampleTime.put(UEntropySource.Camera, 300L);
-        sampleTime.put(UEntropySource.Mic, 200L);
-        sampleTime.put(UEntropySource.Sensor, 80L);
+        sampleTime.put(UEntropySource.Camera, 360L);
+        sampleTime.put(UEntropySource.Mic, 360L);
+        sampleTime.put(UEntropySource.Sensor, 90L);
         executor = Executors.newSingleThreadExecutor();
     }
 
@@ -71,10 +73,14 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
             return;
         }
         Long currentyTime = System.currentTimeMillis();
-        if (lastUpdateTime.containsKey(source) && currentyTime - lastUpdateTime.get(source) < sampleTime.get(source)) {
+        if (!startTime.containsKey(source)) {
+            startTime.put(source, currentyTime);
+            sampleCount.put(source, 0);
+        } else if ((currentyTime - startTime.get(source)) / sampleTime.get(source) < sampleCount.get(source)) {
             return;
         }
-        lastUpdateTime.put(source, currentyTime);
+        int count = sampleCount.get(source);
+        sampleCount.put(source, 1 + count);
         executor.submit(new Runnable() {
             @Override
             public void run() {
