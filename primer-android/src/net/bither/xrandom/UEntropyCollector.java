@@ -190,7 +190,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
                 return data;
             }
             int timeByte = 0;
-            if(bytesInOneBatch>1) {
+            if (bytesInOneBatch > 1) {
                 timeByte = 1;
             }
             byte[] result = new byte[bytesInOneBatch + timeByte];
