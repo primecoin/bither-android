@@ -209,7 +209,7 @@ public class UEntropyCollector implements IUEntropy, IUEntropySource {
                 position = Math.min(Math.max(position, 0), data.length - 1);
                 result[i] = data[position];
             }
-            if(timeByte>0) {
+            if (timeByte == 1) {
                 byte[] timestampBytes = Longs.toByteArray(System.currentTimeMillis());
                 result[bytesInOneBatch] = timestampBytes[timestampBytes.length - 1];
             }
