@@ -47,7 +47,6 @@ import java.util.List;
  */
 public class PrivateKeyUEntropyActivity extends UEntropyActivity {
     public static final String PrivateKeyCountKey = UEntropyActivity.class.getName() + ".private_key_count_key";
-    private static final int MinGeneratingTime = 5000;
     private int targetCount;
     private GenerateThread generateThread;
 
@@ -106,8 +105,6 @@ public class PrivateKeyUEntropyActivity extends UEntropyActivity {
         private double progressKeyRate = 0.5;
         private double progressEntryptRate = 0.5;
 
-        private long startGeneratingTime;
-
         private SecureCharSequence password;
         private Runnable cancelRunnable;
         private UEntropyCollector entropyCollector;
@@ -123,7 +120,6 @@ public class PrivateKeyUEntropyActivity extends UEntropyActivity {
             if (password == null) {
                 throw new IllegalStateException("GenerateThread does not have password");
             }
-            startGeneratingTime = System.currentTimeMillis();
             super.start();
             onProgress(startProgress);
         }
@@ -211,9 +207,6 @@ public class PrivateKeyUEntropyActivity extends UEntropyActivity {
 
             finishGenerate(service);
             if (success) {
-                while (System.currentTimeMillis() - startGeneratingTime < MinGeneratingTime) {
-
-                }
                 onProgress(1);
                 onSuccess(addressStrs);
             } else {
