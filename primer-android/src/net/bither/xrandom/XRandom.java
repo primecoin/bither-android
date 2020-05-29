@@ -25,9 +25,11 @@ import java.security.SecureRandom;
 public class XRandom extends SecureRandom {
 
     private IUEntropy uEntropy;
+    private SecureRandom secureRandom;
 
     public XRandom(IUEntropy uEntropy) {
         this.uEntropy = uEntropy;
+        secureRandom = new SecureRandom();
     }
 
     private byte[] getRandomBytes(int byteLength) {
@@ -46,7 +48,9 @@ public class XRandom extends SecureRandom {
     }
 
     private byte[] getURandomBytes(int length) {
-        return URandom.nextBytes(length);
+        byte[] bytes = new byte[length];
+        secureRandom.nextBytes(bytes);
+        return bytes;
     }
 
     private byte[] getUEntropyBytes(int length) {
