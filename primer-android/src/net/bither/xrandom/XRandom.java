@@ -32,8 +32,7 @@ public class XRandom extends SecureRandom {
 
     private byte[] getRandomBytes(int byteLength) {
         LogUtil.d(XRandom.class.getSimpleName(), "Request " + byteLength + " bytes from XRandom");
-        byte[] uRandomBytes = new byte[byteLength];
-        super.nextBytes(uRandomBytes);
+        byte[] uRandomBytes = getURandomBytes(byteLength);
         if (this.uEntropy == null) {
             return uRandomBytes;
         } else {
