@@ -25,16 +25,15 @@ import java.security.SecureRandom;
 public class XRandom extends SecureRandom {
 
     private IUEntropy uEntropy;
-    private SecureRandom secureRandom;
 
     public XRandom(IUEntropy uEntropy) {
         this.uEntropy = uEntropy;
-        secureRandom = new SecureRandom();
     }
 
     private byte[] getRandomBytes(int byteLength) {
         LogUtil.d(XRandom.class.getSimpleName(), "Request " + byteLength + " bytes from XRandom");
-        byte[] uRandomBytes = getURandomBytes(byteLength);
+        byte[] uRandomBytes = new byte[byteLength];
+        super.nextBytes(uRandomBytes);
         if (this.uEntropy == null) {
             return uRandomBytes;
         } else {
@@ -48,9 +47,7 @@ public class XRandom extends SecureRandom {
     }
 
     private byte[] getURandomBytes(int length) {
-        byte[] bytes = new byte[length];
-        secureRandom.nextBytes(bytes);
-        return bytes;
+        return URandom.nextBytes(length);
     }
 
     private byte[] getUEntropyBytes(int length) {
