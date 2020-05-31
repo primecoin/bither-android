@@ -110,9 +110,7 @@ public abstract class UEntropyActivity extends BaseFragmentActivity implements U
         entropyCollector = new UEntropyCollector(this);
 
         entropyCollector.addSources(new UEntropyCamera((SurfaceView) findViewById(R.id.v_camera),
-                entropyCollector), new UEntropyMic(entropyCollector,
-                (AudioVisualizerView) findViewById(R.id.v_mic)), new UEntropySensor(this,
-                entropyCollector, (SensorVisualizerView) findViewById(R.id.v_sensor)));
+                entropyCollector));
 
         vOverlay.postDelayed(new Runnable() {
             @Override
@@ -216,7 +214,7 @@ public abstract class UEntropyActivity extends BaseFragmentActivity implements U
                 vOverlayTop.startAnimation(topAnim);
                 vOverlayBottom.startAnimation(bottomAnim);
             }
-        }, 1200);
+        }, 0);
     }
 
     private void stopAnimation(final Runnable finishRun) {
