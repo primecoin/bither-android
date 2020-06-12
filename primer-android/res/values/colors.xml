@@ -42,6 +42,7 @@
     <color name="market_color_bitfinex">#ffa3bd0b</color>
     <color name="market_color_btctrade">#ffa85800</color>
     <color name="market_color_coinbase">#ff1567b1</color>
+    <color name="market_color_coingecko">#98c255</color>
 
     <!-- scanner -->
     <color name="scan_mask">#60000000</color>

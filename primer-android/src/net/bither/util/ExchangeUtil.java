@@ -160,7 +160,7 @@ public class ExchangeUtil {
 
     public static Currency getExchangeType(PrimerjSettings.MarketType marketType) {
         switch (marketType) {
-            case COINMARKETCAP:
+            case COINHECKO:
                 return Currency.USD;
             default:
                 break;

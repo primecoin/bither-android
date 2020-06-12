@@ -110,6 +110,9 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
             if (marketTicket.getData().getQuotes().getUSD() != null){
                 usdPrice=String.format("%.2f", marketTicket.getData().getQuotes().getUSD().getPrice());
             }
+        } else {
+            cnyPrice=String.format("%.2f", AppSharedPreference.getInstance().getCNYExchangeRate());
+            usdPrice=String.format("%.2f", AppSharedPreference.getInstance().getUSDExchangeRate());
         }
         String symbol = "";
         ExchangeUtil.Currency currency=  AppSharedPreference.getInstance().getDefaultExchangeType();
@@ -143,7 +146,7 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
         if (marketTicket != null && marketTicket.getData() != null) {
             tvPrice.setText(String.format("%.2f", marketTicket.getData().getTotal_supply()));
         } else {
-            tvPrice.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+            tvPrice.setText(String.format("%d", AppSharedPreference.getInstance().getTotalSupply()));
         }
 
     }

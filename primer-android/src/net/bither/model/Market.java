@@ -56,8 +56,8 @@ public class Market {
     public int getMarketColor() {
         int resource = -1;
         switch (getMarketType()) {
-            case COINMARKETCAP:
-                resource = R.color.market_color_bitstamp;
+            case COINHECKO:
+                resource = R.color.market_color_coingecko;
                 break;
             default:
                 resource = R.color.text_field_text_color;
@@ -89,7 +89,7 @@ public class Market {
 
     public String getDomainName() {
         switch (getMarketType()) {
-            case COINMARKETCAP:
+            case COINHECKO:
                 return "bitstamp.net";
             default:
                 return null;

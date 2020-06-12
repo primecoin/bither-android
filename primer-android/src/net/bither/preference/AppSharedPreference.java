@@ -102,6 +102,7 @@ public class AppSharedPreference {
 
     private static final String CNY_EXCHANGE_RATE="cny_exchange_rate";
     private static final String USD_EXCHANGE_RATE="usd_exchange_rate";
+    private static final String TOTAL_SUPPLY="total_supply";
 
     public static AppSharedPreference getInstance() {
         return mInstance;
@@ -243,6 +244,12 @@ public class AppSharedPreference {
     public float getUSDExchangeRate(){
         return this.mPreferences.getFloat(USD_EXCHANGE_RATE,0.0f);
     }
+    public void setTotalSupply(long supply){
+        this.mPreferences.edit().putLong(TOTAL_SUPPLY,supply).commit();
+    }
+    public long getTotalSupply(){
+        return this.mPreferences.getLong(TOTAL_SUPPLY,0l);
+    }
 
     //marketType  begin 0
     public void setMarketType(MarketType marketType) {
@@ -254,9 +261,9 @@ public class AppSharedPreference {
         String defaultCountry = Locale.getDefault().getCountry();
         if (Utils.compareString(defaultCountry, "CN") || Utils.compareString
                 (defaultCountry, "cn")) {
-            setMarketType(MarketType.COINMARKETCAP);
+            setMarketType(MarketType.COINHECKO);
         } else {
-            setMarketType(MarketType.COINMARKETCAP);
+            setMarketType(MarketType.COINHECKO);
         }
         String currencyCode = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
         if (Utils.compareString(currencyCode, "CNY")) {

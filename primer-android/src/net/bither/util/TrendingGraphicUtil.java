@@ -23,9 +23,11 @@ import net.bither.bitherj.PrimerjSettings;
 import net.bither.bitherj.PrimerjSettings.MarketType;
 import net.bither.bitherj.api.GetExchangeTrendApiNew;
 import net.bither.model.TrendingGraphicData;
+import net.bither.preference.AppSharedPreference;
 import net.bither.runnable.BaseRunnable;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TrendingGraphicUtil {
@@ -61,7 +63,8 @@ public class TrendingGraphicUtil {
 
                     getExchangeTrendApi.handleHttpGet();
                     JSONObject jsonObject = new JSONObject(getExchangeTrendApi.getResult());
-                    String name = "market_cap_by_available_supply";
+                    setTotalSupply(jsonObject);
+                    String name = "prices";
                     if (PrimerjSettings.getMarketValue(marketType) == 2) {
                         name = "price_btc";
                     } else if (PrimerjSettings.getMarketValue(marketType) == 3) {
@@ -101,6 +104,16 @@ public class TrendingGraphicUtil {
         new Thread(baseRunnable).start();
 
         return null;
+    }
+
+    private static void setTotalSupply(JSONObject jsonObject) throws JSONException {
+        JSONArray pricearray = jsonObject.getJSONArray("prices");
+        double price = (double) ((JSONArray) pricearray.get(pricearray.length()-1)).get(1);
+        if (price==0.f) {
+            price = 1.f;
+        }
+        double capital = (double) ((JSONArray) jsonObject.getJSONArray("market_caps").get(pricearray.length()-1)).get(1);
+        AppSharedPreference.getInstance().setTotalSupply(Math.round(capital/price));
     }
 
 }
