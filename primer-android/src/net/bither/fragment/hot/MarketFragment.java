@@ -103,7 +103,6 @@ public class MarketFragment extends Fragment implements Refreshable,
         super.onCreate(savedInstanceState);
         markets = new ArrayList<Market>(MarketUtil.getMarkets());
         mAdaper = new MarketFragmentListAdapter(getActivity(), markets);
-        getExchangeMarketTicker();
     }
     //TODO 获取新的ticket
     private void getExchangeMarketTicker(){
@@ -144,7 +143,6 @@ public class MarketFragment extends Fragment implements Refreshable,
                 av.onResume();
             }
         }
-        getActivity().registerReceiver(broadcastReceiver, broadcastIntentFilter);
     }
 
     @Override
@@ -160,7 +158,6 @@ public class MarketFragment extends Fragment implements Refreshable,
                 av.onPause();
             }
         }
-        getActivity().unregisterReceiver(broadcastReceiver);
         super.onPause();
     }
     @Override
