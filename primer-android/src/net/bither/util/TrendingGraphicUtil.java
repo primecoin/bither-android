@@ -104,4 +104,5 @@ public class TrendingGraphicUtil {
 
         return null;
     }
+
 }
