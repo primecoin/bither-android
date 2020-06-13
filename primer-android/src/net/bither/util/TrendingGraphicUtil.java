@@ -23,11 +23,9 @@ import net.bither.bitherj.PrimerjSettings;
 import net.bither.bitherj.PrimerjSettings.MarketType;
 import net.bither.bitherj.api.GetExchangeTrendApiNew;
 import net.bither.model.TrendingGraphicData;
-import net.bither.preference.AppSharedPreference;
 import net.bither.runnable.BaseRunnable;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TrendingGraphicUtil {
