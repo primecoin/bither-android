@@ -54,7 +54,7 @@ public class PrimerTimer {
                     while (!isStop) {
                         getExchangeTicker();
                         try {
-                            Thread.sleep(1 * 60 * 1000);
+                            Thread.sleep(60 * 60 * 1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
