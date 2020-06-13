@@ -244,11 +244,11 @@ public class AppSharedPreference {
     public float getUSDExchangeRate(){
         return this.mPreferences.getFloat(USD_EXCHANGE_RATE,0.0f);
     }
-    public void setTotalSupply(long supply){
-        this.mPreferences.edit().putLong(TOTAL_SUPPLY,supply).commit();
+    public void setTotalSupply(String supply){
+        this.mPreferences.edit().putString(TOTAL_SUPPLY,supply).commit();
     }
-    public long getTotalSupply(){
-        return this.mPreferences.getLong(TOTAL_SUPPLY,0l);
+    public String getTotalSupply(){
+        return this.mPreferences.getString(TOTAL_SUPPLY,PrimerSetting.UNKONW_ADDRESS_STRING);
     }
 
     //marketType  begin 0
@@ -261,9 +261,9 @@ public class AppSharedPreference {
         String defaultCountry = Locale.getDefault().getCountry();
         if (Utils.compareString(defaultCountry, "CN") || Utils.compareString
                 (defaultCountry, "cn")) {
-            setMarketType(MarketType.COINHECKO);
+            setMarketType(MarketType.COINGECKO);
         } else {
-            setMarketType(MarketType.COINHECKO);
+            setMarketType(MarketType.COINGECKO);
         }
         String currencyCode = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
         if (Utils.compareString(currencyCode, "CNY")) {

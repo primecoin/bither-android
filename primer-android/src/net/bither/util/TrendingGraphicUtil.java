@@ -63,7 +63,6 @@ public class TrendingGraphicUtil {
 
                     getExchangeTrendApi.handleHttpGet();
                     JSONObject jsonObject = new JSONObject(getExchangeTrendApi.getResult());
-                    setTotalSupply(jsonObject);
                     String name = "prices";
                     if (PrimerjSettings.getMarketValue(marketType) == 2) {
                         name = "price_btc";
@@ -105,15 +104,4 @@ public class TrendingGraphicUtil {
 
         return null;
     }
-
-    private static void setTotalSupply(JSONObject jsonObject) throws JSONException {
-        JSONArray pricearray = jsonObject.getJSONArray("prices");
-        double price = (double) ((JSONArray) pricearray.get(pricearray.length()-1)).get(1);
-        if (price==0.f) {
-            price = 1.f;
-        }
-        double capital = (double) ((JSONArray) jsonObject.getJSONArray("market_caps").get(pricearray.length()-1)).get(1);
-        AppSharedPreference.getInstance().setTotalSupply(Math.round(capital/price));
-    }
-
 }

@@ -135,7 +135,7 @@ public class PrimerSetting {
     public static String getMarketName(PrimerjSettings.MarketType marketType) {
         String name = "";
         switch (marketType) {
-            case COINHECKO:
+            case COINGECKO:
                 name = PrimerApplication.mContext
                         .getString(R.string.market_name_coingecko);
                 break;

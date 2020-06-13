@@ -93,7 +93,7 @@ public class MarketUtil {
         if (marketTicket != null) {
             synchronized (markets) {
                 for (Market market : markets) {
-                    if (market.getMarketType() == MarketType.COINHECKO) {
+                    if (market.getMarketType() == MarketType.COINGECKO) {
                         market.setMarketTicket(marketTicket);
 
                         if (marketTicket.getData() != null && marketTicket.getData().getQuotes().getCNY() != null) {

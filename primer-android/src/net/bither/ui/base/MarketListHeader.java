@@ -146,7 +146,7 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
         if (marketTicket != null && marketTicket.getData() != null) {
             tvPrice.setText(String.format("%.2f", marketTicket.getData().getTotal_supply()));
         } else {
-            tvPrice.setText(String.format("%d", AppSharedPreference.getInstance().getTotalSupply()));
+            tvPrice.setText(AppSharedPreference.getInstance().getTotalSupply());
         }
 
     }

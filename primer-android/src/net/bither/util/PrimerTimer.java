@@ -26,6 +26,7 @@ import net.bither.activity.hot.MarketDetailActivity;
 import net.bither.bitherj.PrimerjSettings.MarketType;
 import net.bither.bitherj.api.GetExchangeTickerApi;
 import net.bither.bitherj.api.GetFiatPriceApi;
+import net.bither.bitherj.api.GetFiatSupplyApi;
 import net.bither.bitherj.utils.Utils;
 import net.bither.model.PriceAlert;
 import net.bither.model.Ticker;
@@ -75,6 +76,9 @@ public class PrimerTimer {
             getFiatPriceApi.handleHttpGet();
             AppSharedPreference.getInstance().setCNYExchangeRate(getFiatPriceApi.getCurrencyCny());
             AppSharedPreference.getInstance().setUSDExchangeRate(getFiatPriceApi.getCurrencyUsd());
+            GetFiatSupplyApi getFiatSupplyApi = new GetFiatSupplyApi();
+            getFiatSupplyApi.handleHttpGet();
+            AppSharedPreference.getInstance().setTotalSupply(getFiatSupplyApi.getSupply());
 
             FileUtil.upgradeTickerFile();
             File file = FileUtil.getTickerFile();
