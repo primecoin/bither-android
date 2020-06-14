@@ -74,7 +74,7 @@ public class BtcToMoneyTextView extends TextView implements
 		getPrice();
 		if (btc != null) {
 			if (price == 0) {
-				setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+				setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
 			} else {
 				double money = btc.doubleValue() / 100000000.0 * price;
 				setText(AppSharedPreference.getInstance()
@@ -82,7 +82,7 @@ public class BtcToMoneyTextView extends TextView implements
 						+ Utils.formatDoubleToMoneyString(money));
 			}
 		} else {
-			setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+			setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
 		}
 	}
 
@@ -90,7 +90,7 @@ public class BtcToMoneyTextView extends TextView implements
 		getPrice();
 		if (btc != null) {
 			if (price == 0) {
-				setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+				setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
 			} else {
 				double money = btc.doubleValue() / 100000000.0 * price;
 				setText(AppSharedPreference.getInstance()
@@ -98,7 +98,7 @@ public class BtcToMoneyTextView extends TextView implements
 						+ Utils.formatDoubleToMoneyString(money));
 			}
 		} else {
-			setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+			setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
 		}
 	}
 

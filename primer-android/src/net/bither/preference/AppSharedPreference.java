@@ -248,7 +248,7 @@ public class AppSharedPreference {
         this.mPreferences.edit().putString(TOTAL_SUPPLY,supply).commit();
     }
     public String getTotalSupply(){
-        return this.mPreferences.getString(TOTAL_SUPPLY,PrimerSetting.UNKONW_ADDRESS_STRING);
+        return this.mPreferences.getString(TOTAL_SUPPLY,PrimerSetting.UNKNOW_ADDRESS_STRING);
     }
 
     //marketType  begin 0

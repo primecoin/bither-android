@@ -120,13 +120,13 @@ public class TransactionListItem extends FrameLayout implements MarketTickerChan
                 try {
                     String subAddress = transaction.getFromAddress();
                     if (Utils.isEmpty(subAddress)) {
-                        tvTransactionAddress.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                        tvTransactionAddress.setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
                     } else {
                         tvTransactionAddress.setText(Utils.shortenAddress(subAddress));
                     }
                 } catch (ScriptException e) {
                     e.printStackTrace();
-                    tvTransactionAddress.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                    tvTransactionAddress.setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
                 }
             }
         } else {
@@ -134,7 +134,7 @@ public class TransactionListItem extends FrameLayout implements MarketTickerChan
             if (subAddress != null) {
                 tvTransactionAddress.setText(Utils.shortenAddress(subAddress));
             } else {
-                tvTransactionAddress.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                tvTransactionAddress.setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
             }
         }
     }
