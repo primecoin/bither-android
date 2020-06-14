@@ -37,7 +37,7 @@ public class PrimerSetting {
     public static final double SYNC_TX_PROGRESS_BLOCK_HEIGHT = 0.1;
     public static final double SYNC_TX_PROGRESS_STEP1 = 0.6;
     public static final double SYNC_TX_PROGRESS_STEP2 = 0.1;
-    public static final String UNKNOW_ADDRESS_STRING = "---";
+    public static final String UNKNOWN_ADDRESS_STRING = "---";
     public static final char CHAR_THIN_SPACE = '\u2009';
     public static final String CURRENCY_PLUS_SIGN = "+" + CHAR_THIN_SPACE;
     public static final String CURRENCY_MINUS_SIGN = "-" + CHAR_THIN_SPACE;

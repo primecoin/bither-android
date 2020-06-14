@@ -107,7 +107,7 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
                 if (!TextUtils.isEmpty(cnyPrice)){
                     tvSymbol.setText(symbol + cnyPrice);
                 } else {
-                    tvSymbol.setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
+                    tvSymbol.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
                 }
                 break;
             case USD:
@@ -115,7 +115,7 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
                 if (!TextUtils.isEmpty(usdPrice)) {
                     tvSymbol.setText(symbol + usdPrice);
                 } else {
-                    tvSymbol.setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
+                    tvSymbol.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
                 }
                 break;
         }

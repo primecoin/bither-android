@@ -60,8 +60,8 @@ public class BtcAndMoneyAmountVerticalView extends FrameLayout {
 
 	public void setAmount(BigInteger btc) {
 		if (btc == null) {
-			tvBtc.setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
-			tvMoney.setText(PrimerSetting.UNKNOW_ADDRESS_STRING);
+			tvBtc.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
+			tvMoney.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
 			return;
 		}
 		if (btc.compareTo(BigInteger.ZERO) >= 0) {
