@@ -36,7 +36,6 @@ import net.bither.fragment.Refreshable;
 import net.bither.fragment.Selectable;
 import net.bither.fragment.Unselectable;
 import net.bither.model.Market;
-import net.bither.model.MarketTicket;
 import net.bither.net.OkHttpHelper;
 import net.bither.net.RequestCallback;
 import net.bither.net.UrlManager;
@@ -53,7 +52,6 @@ import net.bither.fragment.Refreshable;
 import net.bither.fragment.Selectable;
 import net.bither.fragment.Unselectable;
 import net.bither.model.Market;
-import net.bither.model.MarketTicket;
 import net.bither.net.OkHttpHelper;
 import net.bither.net.RequestCallback;
 import net.bither.net.UrlManager;
@@ -85,8 +83,7 @@ public class MarketFragment extends Fragment implements Refreshable,
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            //刷新频率 1分钟
-            getExchangeMarketTicker();
+            header.onMarketTickerChanged();
             int itemCount = lv.getChildCount();
             for (int i = 0; i < itemCount; i++) {
                 View v = lv.getChildAt(i);
@@ -104,20 +101,7 @@ public class MarketFragment extends Fragment implements Refreshable,
         markets = new ArrayList<Market>(MarketUtil.getMarkets());
         mAdaper = new MarketFragmentListAdapter(getActivity(), markets);
     }
-    //TODO 获取新的ticket
-    private void getExchangeMarketTicker(){
-        // 获取ticket
-        OkHttpHelper.getInstance().get(UrlManager.TICKER_CNY_URL, new RequestCallback<MarketTicket>(getActivity()) {
 
-            @Override
-            public void onSuccess(Response response, MarketTicket marketTicket) {
-                MarketUtil.setMarketTicket(marketTicket);
-
-                mAdaper.notifyDataSetChanged();
-                header.onMarketTickerChanged();
-            }
-        });
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -143,6 +127,8 @@ public class MarketFragment extends Fragment implements Refreshable,
                 av.onResume();
             }
         }
+        getActivity()
+                .registerReceiver(broadcastReceiver, broadcastIntentFilter);
     }
 
     @Override
@@ -158,6 +144,7 @@ public class MarketFragment extends Fragment implements Refreshable,
                 av.onPause();
             }
         }
+        getActivity().unregisterReceiver(broadcastReceiver);
         super.onPause();
     }
     @Override

@@ -29,7 +29,6 @@ import android.widget.TextView;
 import net.bither.PrimerSetting;
 import net.bither.R;
 import net.bither.model.Market;
-import net.bither.model.MarketTicket;
 import net.bither.preference.AppSharedPreference;
 import net.bither.util.ExchangeUtil;
 
@@ -76,48 +75,6 @@ public class MarketFragmentListItemView extends FrameLayout implements MarketTic
         }
         if (market.getTicker() == null) {
             return;
-        }
-       /* Ticker ticker = market.getTicker();
-        if (ExchangeUtil.getCurrenciesRate() != null) {
-            tvPrice.setText(AppSharedPreference.getInstance()
-                    .getDefaultExchangeType().getSymbol()
-                    + Utils.formatDoubleToMoneyString(ticker
-                    .getDefaultExchangePrice()));
-        } else {
-            tvPrice.setText(ExchangeUtil
-                    .getExchangeType(market.getMarketType()).getSymbol()
-                    + Utils.formatDoubleToMoneyString(ticker.getPrice()));
-        }*/
-        MarketTicket marketTicket = market.getMarketTicket();
-        String cnyPrice = "";
-        String usdPrice = "";
-        if (marketTicket != null && marketTicket.getData() != null) {
-            if (marketTicket.getData().getQuotes().getCNY() != null) {
-                cnyPrice = String.format("%.2f", marketTicket.getData().getQuotes().getCNY().getPrice());
-            }
-            if (marketTicket.getData().getQuotes().getUSD() != null) {
-                usdPrice = String.format("%.2f", marketTicket.getData().getQuotes().getUSD().getPrice());
-            }
-        }
-        String symbol = "";
-        ExchangeUtil.Currency currency = AppSharedPreference.getInstance().getDefaultExchangeType();
-        switch (currency) {
-            case CNY:
-                symbol = "\u00a5";
-                if (!TextUtils.isEmpty(cnyPrice)) {
-                    tvPrice.setText(symbol + cnyPrice);
-                } else {
-                    tvPrice.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
-                }
-                break;
-            case USD:
-                symbol = "$";
-                if (!TextUtils.isEmpty(usdPrice)) {
-                    tvPrice.setText(symbol + usdPrice);
-                } else {
-                    tvPrice.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
-                }
-                break;
         }
         if (market.getPriceAlert() == null) {
             ivPriceAlert.setVisibility(View.INVISIBLE);

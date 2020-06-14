@@ -27,7 +27,6 @@ import net.bither.bitherj.PrimerjSettings.MarketType;
 public class Market {
 
     private Ticker mTicker;
-    private MarketTicket marketTicket;
     private MarketType marketType;
     private boolean showDetail;
 
@@ -90,7 +89,7 @@ public class Market {
     public String getDomainName() {
         switch (getMarketType()) {
             case COINGECKO:
-                return "bitstamp.net";
+                return "southxchange.com";
             default:
                 return null;
         }
@@ -104,11 +103,4 @@ public class Market {
         this.mTicker = mTicker;
     }
 
-    public MarketTicket getMarketTicket() {
-        return marketTicket;
-    }
-
-    public void setMarketTicket(MarketTicket marketTicket) {
-        this.marketTicket = marketTicket;
-    }
 }
