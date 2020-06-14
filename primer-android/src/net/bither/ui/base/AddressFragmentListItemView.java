@@ -144,7 +144,7 @@ public class AddressFragmentListItemView extends FrameLayout implements AddressI
             }
         } else {
             ivBalanceSymbol.setVisibility(View.GONE);
-            tvBalance.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+            tvBalance.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
             tvBalanceMoney.setBigInteger(null);
             vTransactionImmuture.setVisibility(View.GONE);
         }

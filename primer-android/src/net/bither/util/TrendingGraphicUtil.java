@@ -61,7 +61,7 @@ public class TrendingGraphicUtil {
 
                     getExchangeTrendApi.handleHttpGet();
                     JSONObject jsonObject = new JSONObject(getExchangeTrendApi.getResult());
-                    String name = "market_cap_by_available_supply";
+                    String name = "prices";
                     if (PrimerjSettings.getMarketValue(marketType) == 2) {
                         name = "price_btc";
                     } else if (PrimerjSettings.getMarketValue(marketType) == 3) {

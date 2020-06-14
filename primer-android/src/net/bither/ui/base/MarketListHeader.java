@@ -38,7 +38,6 @@ import net.bither.PrimerSetting;
 import net.bither.R;
 import net.bither.activity.hot.MarketDetailActivity;
 import net.bither.model.Market;
-import net.bither.model.MarketTicket;
 import net.bither.preference.AppSharedPreference;
 import net.bither.util.ExchangeUtil;
 import net.bither.util.MarketUtil;
@@ -97,20 +96,9 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
             return;
         }
         bg.setEndColor(mMarket.getMarketColor());
-        MarketTicket marketTicket = mMarket.getMarketTicket();
-        if (marketTicket != null && marketTicket.getData() != null && marketTicket.getData().getName() != null)
-            tvName.setText(marketTicket.getData().getName());
 
-        String cnyPrice="";
-        String usdPrice="";
-        if (marketTicket != null && marketTicket.getData() != null ){
-            if ( marketTicket.getData().getQuotes().getCNY() != null){
-                cnyPrice=String.format("%.2f", marketTicket.getData().getQuotes().getCNY().getPrice());
-            }
-            if (marketTicket.getData().getQuotes().getUSD() != null){
-                usdPrice=String.format("%.2f", marketTicket.getData().getQuotes().getUSD().getPrice());
-            }
-        }
+        String cnyPrice=String.format("%.2f", AppSharedPreference.getInstance().getCNYExchangeRate());
+        String usdPrice=String.format("%.2f", AppSharedPreference.getInstance().getUSDExchangeRate());
         String symbol = "";
         ExchangeUtil.Currency currency=  AppSharedPreference.getInstance().getDefaultExchangeType();
         switch (currency){
@@ -119,7 +107,7 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
                 if (!TextUtils.isEmpty(cnyPrice)){
                     tvSymbol.setText(symbol + cnyPrice);
                 } else {
-                    tvSymbol.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                    tvSymbol.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
                 }
                 break;
             case USD:
@@ -127,25 +115,14 @@ public class MarketListHeader extends FrameLayout implements MarketTickerChanged
                 if (!TextUtils.isEmpty(usdPrice)) {
                     tvSymbol.setText(symbol + usdPrice);
                 } else {
-                    tvSymbol.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                    tvSymbol.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
                 }
                 break;
         }
         if (mMarket != null) {
             vTrending.setMarketType(mMarket.getMarketType());
         }
-        /*Ticker ticker = mMarket.getTicker();
-        if (ticker == null) {
-            tvPrice.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
-        } else {
-            tvPrice.setText(Utils.formatDoubleToMoneyString(ticker.getDefaultExchangePrice()));
-        }*/
-        if (marketTicket != null && marketTicket.getData() != null) {
-            tvPrice.setText(String.format("%.2f", marketTicket.getData().getTotal_supply()));
-        } else {
-            tvPrice.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
-        }
-
+        tvPrice.setText(AppSharedPreference.getInstance().getTotalSupply());
     }
 
 

@@ -127,7 +127,7 @@ public class TrendingGraphicData {
 		double high = 0;
 		double low = Double.MAX_VALUE;
 		double rate = ExchangeUtil.getCurrentRate();
-		double k = 0.000001;
+		double k = 1.;
 		if (type == 2) {
 			k = 1000;
 		} else if (type == 3) {
@@ -137,7 +137,7 @@ public class TrendingGraphicData {
 		for (int i = jsonArray.length() - TrendingGraphicUtil.TRENDING_GRAPIC_COUNT; i < jsonArray.length(); i++) {
 			double price;
 			if (type == 1) {
-				price = ((int) ((JSONArray) jsonArray.get(i)).get(1) * k) * rate;
+				price = (double) ((JSONArray) jsonArray.get(i)).get(1) * k;
 			} else {
 				price = ((double) ((JSONArray) jsonArray.get(i)).get(1) * k) * rate;
 			}

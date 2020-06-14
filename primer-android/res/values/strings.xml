@@ -6,6 +6,7 @@
     <string name="bitcoin_balance_label">XPM</string>
     <string name="bitcoin_symbol">XPM</string>
     <string name="market_name_coinmarketcap">CoinMarketCap</string>
+    <string name="market_name_coingecko">CoinGecko</string>
     <string name="market_trading_amount">Volume</string>
     <string name="market_price_high">High</string>
     <string name="market_price_low">Low</string>

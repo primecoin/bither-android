@@ -26,6 +26,7 @@ import net.bither.activity.hot.MarketDetailActivity;
 import net.bither.bitherj.PrimerjSettings.MarketType;
 import net.bither.bitherj.api.GetExchangeTickerApi;
 import net.bither.bitherj.api.GetFiatPriceApi;
+import net.bither.bitherj.api.GetPrimecoinSupplyApi;
 import net.bither.bitherj.utils.Utils;
 import net.bither.model.PriceAlert;
 import net.bither.model.Ticker;
@@ -53,7 +54,7 @@ public class PrimerTimer {
                     while (!isStop) {
                         getExchangeTicker();
                         try {
-                            Thread.sleep(1 * 60 * 1000);
+                            Thread.sleep(60 * 60 * 1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -75,25 +76,10 @@ public class PrimerTimer {
             getFiatPriceApi.handleHttpGet();
             AppSharedPreference.getInstance().setCNYExchangeRate(getFiatPriceApi.getCurrencyCny());
             AppSharedPreference.getInstance().setUSDExchangeRate(getFiatPriceApi.getCurrencyUsd());
-
-            FileUtil.upgradeTickerFile();
-            File file = FileUtil.getTickerFile();
-            @SuppressWarnings("unchecked")
-            List<Ticker> cacheList = (List<Ticker>) FileUtil.deserialize(file);
-            if (cacheList != null) {
-                BroadcastUtil.sendBroadcastMarketState(cacheList);
-            }
-            GetExchangeTickerApi getExchangeTickerApi = new GetExchangeTickerApi();
-            getExchangeTickerApi.handleHttpGet();
-            ExchangeUtil.setCurrenciesRate(getExchangeTickerApi.getCurrenciesRate());
-            JSONObject json = new JSONObject(getExchangeTickerApi.getResult());
-            List<Ticker> tickers = Ticker.formatList(json);
-            if (tickers != null && tickers.size() > 0) {
-                comparePriceAlert(tickers);
-                FileUtil.serializeObject(file, tickers);
-                BroadcastUtil.sendBroadcastMarketState(tickers);
-            }
-
+            GetPrimecoinSupplyApi getPrimecoinSupplyApi = new GetPrimecoinSupplyApi();
+            getPrimecoinSupplyApi.handleHttpGet();
+            AppSharedPreference.getInstance().setTotalSupply(getPrimecoinSupplyApi.getSupply());
+            BroadcastUtil.sendBroadcastMarketState(null);
         } catch (Exception e) {
             e.printStackTrace();
         }

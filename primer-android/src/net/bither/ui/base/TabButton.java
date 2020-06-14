@@ -217,7 +217,7 @@ public class TabButton extends FrameLayout implements OnShowListener, OnDismissL
         if (AppSharedPreference.getInstance().getTotalBalanceHide().shouldShowBalance()) {
             tvText.setVisibility(View.VISIBLE);
             if (btc == null) {
-                tvText.setText(PrimerSetting.UNKONW_ADDRESS_STRING);
+                tvText.setText(PrimerSetting.UNKNOWN_ADDRESS_STRING);
             } else {
                 tvText.setText(UnitUtilWrapper.formatValue(btc.longValue()));
             }
