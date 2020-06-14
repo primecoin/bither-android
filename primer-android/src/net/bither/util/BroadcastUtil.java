@@ -43,11 +43,8 @@ public class BroadcastUtil {
 
 
     public static void sendBroadcastMarketState(List<Ticker> tickers) {
-        if (tickers != null && tickers.size() > 0) {
-            MarketUtil.setTickerList(tickers);
             final Intent broadcast = new Intent(ACTION_MARKET);
             PrimerApplication.mContext.sendBroadcast(broadcast);
-        }
     }
 
     public static void removeMarketState() {

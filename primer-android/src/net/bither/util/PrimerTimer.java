@@ -79,25 +79,7 @@ public class PrimerTimer {
             GetPrimecoinSupplyApi getPrimecoinSupplyApi = new GetPrimecoinSupplyApi();
             getPrimecoinSupplyApi.handleHttpGet();
             AppSharedPreference.getInstance().setTotalSupply(getPrimecoinSupplyApi.getSupply());
-
-            FileUtil.upgradeTickerFile();
-            File file = FileUtil.getTickerFile();
-            @SuppressWarnings("unchecked")
-            List<Ticker> cacheList = (List<Ticker>) FileUtil.deserialize(file);
-            if (cacheList != null) {
-                BroadcastUtil.sendBroadcastMarketState(cacheList);
-            }
-            GetExchangeTickerApi getExchangeTickerApi = new GetExchangeTickerApi();
-            getExchangeTickerApi.handleHttpGet();
-            ExchangeUtil.setCurrenciesRate(getExchangeTickerApi.getCurrenciesRate());
-            JSONObject json = new JSONObject(getExchangeTickerApi.getResult());
-            List<Ticker> tickers = Ticker.formatList(json);
-            if (tickers != null && tickers.size() > 0) {
-                comparePriceAlert(tickers);
-                FileUtil.serializeObject(file, tickers);
-                BroadcastUtil.sendBroadcastMarketState(tickers);
-            }
-
+            BroadcastUtil.sendBroadcastMarketState(null);
         } catch (Exception e) {
             e.printStackTrace();
         }
