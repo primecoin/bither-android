@@ -228,9 +228,9 @@ public class CompleteTransactionRunnable extends BaseRunnable {
                     return;
                 }
             }
-            long extraFee = (Utils.getFeeBase() / 1000) * tx.length - tx.getFee();
-            if (extraFee > 0) {
-                throw new TxBuilderException.TxBuilderNotEnoughMoneyException(extraFee);
+            long shortfall = (Utils.getFeeBase() / 1000) * tx.length - tx.getFee();
+            if (shortfall > 0) {
+                throw new TxBuilderException.TxBuilderNotEnoughMoneyException(shortfall);
             } else {
                 obtainMessage(HandlerMessage.MSG_SUCCESS, tx);
             }
