@@ -17,6 +17,7 @@
 package net.bither.runnable;
 
 import net.bither.PrimerApplication;
+import net.bither.bitherj.PrimerjSettings.TransactionFeeMode;
 import net.bither.util.UnitUtilWrapper;
 
 import net.bither.PrimerApplication;
@@ -228,9 +229,9 @@ public class CompleteTransactionRunnable extends BaseRunnable {
                     return;
                 }
             }
-            long shortfall = (Utils.getFeeBase() / 1000) * tx.length - tx.getFee();
-            if (shortfall > 0) {
-                throw new TxBuilderException.TxBuilderNotEnoughMoneyException(shortfall);
+            long feeShortfall = (TransactionFeeMode.Normal.getFeeRateSatoshiPerKB() / 1000) * tx.length - tx.getFee();
+            if (feeShortfall > 0) {
+                throw new TxBuilderException.TxBuilderNotEnoughMoneyException(feeShortfall);
             } else {
                 obtainMessage(HandlerMessage.MSG_SUCCESS, tx);
             }
