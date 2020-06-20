@@ -228,7 +228,12 @@ public class CompleteTransactionRunnable extends BaseRunnable {
                     return;
                 }
             }
-            obtainMessage(HandlerMessage.MSG_SUCCESS, tx);
+            long extraFee = (Utils.getFeeBase() / 1000) * tx.length - tx.getFee();
+            if (extraFee > 0) {
+                throw new TxBuilderException.TxBuilderNotEnoughMoneyException(extraFee);
+            } else {
+                obtainMessage(HandlerMessage.MSG_SUCCESS, tx);
+            }
         } catch (Exception e) {
             if (password != null) {
                 password.wipe();
