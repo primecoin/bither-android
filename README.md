@@ -36,12 +36,10 @@ $ ./gradlew assembleDebug
 
 ## Release Build
 
+To make release build, release key store and passwords are required.
+
 ```
-$ ./gradlew assembleRelease \
-    -Pandroid.injected.signing.store.file=/<pathTo>/primer.jks \
-    -Pandroid.injected.signing.store.password=<storePassword> \
-    -Pandroid.injected.signing.key.alias=primer_release \
-    -Pandroid.injected.signing.key.password=<keyPassword>
+$ ./gradlew assembleRelease -PstorePassword=<storePassword> -PkeyPassword=<keyPassword>
 ```
 
 ## Features
