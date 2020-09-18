@@ -34,7 +34,7 @@ subprojects {
 
         defaultConfig {
             minSdkVersion 9
-            targetSdkVersion 28
+            targetSdkVersion 29
             multiDexEnabled true
         }
 
