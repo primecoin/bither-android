@@ -3,6 +3,16 @@
 //    mavenCentral()
 //}
 
+def getStorePassword = { ->
+    def result = project.hasProperty('storePassword') ? storePassword : ""
+    return result
+}
+
+def getKeyPassword = { ->
+    def result = project.hasProperty('keyPassword') ? keyPassword : ""
+    return result
+}
+
 android {
     signingConfigs {
         debug {
@@ -12,10 +22,10 @@ android {
             storePassword 'pcdxzb'
         }
         release {
-            keyAlias 'primecoin_release'
-            keyPassword 'pcdxzb'
-            storeFile file('../debug.keystore')
-            storePassword 'pcdxzb'
+            keyAlias 'primer_release'
+            keyPassword getKeyPassword()
+            storeFile file("../primer.jks")
+            storePassword getStorePassword()
         }
     }
     defaultConfig {
