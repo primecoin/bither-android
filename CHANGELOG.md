@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## Version 0.2.1alpha
+_2020-09-18_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.2.0alpha...0.2.1alpha)
+ * Fix camera permission
+ * Improve xrandom key generation
+ * Fix market trend display
+ * Misc fixes
+
 ## Version 0.2.0alpha
 _2020-04-23_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.1.8alpha...0.2.0alpha)
  * Not compatible to version 0.1, will install as separate apps
