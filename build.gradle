@@ -83,6 +83,20 @@ subprojects {
             targetCompatibility JavaVersion.VERSION_1_7
         }
     }
+
+    afterEvaluate { project ->
+        tasks.withType(Test) {
+            testLogging {
+                events "passed", "skipped", "failed"
+            }
+            afterSuite { desc, result ->
+                if (!desc.parent) { // will match the outermost suite
+                    println ""
+                    println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                }
+            }
+        }
+    }
 }
 //repositories {
 //    maven {
