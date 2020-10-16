@@ -22,7 +22,6 @@
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 
 
@@ -51,9 +50,6 @@
         android:required="false" />
     <uses-feature
         android:name="android.hardware.bluetooth"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.microphone"
         android:required="false" />
 
     <supports-screens
