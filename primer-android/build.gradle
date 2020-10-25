@@ -3,11 +3,6 @@
 //    mavenCentral()
 //}
 
-def getKeystore = { ->
-    def result = project.hasProperty('keystore') ? keystore : ""
-    return result
-}
-
 def getStorePassword = { ->
     def result = project.hasProperty('storepasswd') ? storepasswd : ""
     return result
@@ -29,7 +24,7 @@ android {
         release {
             keyAlias 'primer_release'
             keyPassword getKeyPassword()
-            storeFile file(getKeystore())
+            storeFile file('../primer.jks')
             storePassword getStorePassword()
         }
     }
