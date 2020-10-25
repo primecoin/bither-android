@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## Version 0.2.2alpha
+_2020-10-25_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.2.1alpha...0.2.2alpha)
+ * Throw small change to transaction fee
+ * Not ask for microphone permission in manifest
+ * Support 64-bit build for Google Play requirement
+
 ## Version 0.2.1alpha
 _2020-09-18_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.2.0alpha...0.2.1alpha)
  * Fix camera permission
