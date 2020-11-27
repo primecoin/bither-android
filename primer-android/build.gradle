@@ -13,6 +13,11 @@ def getKeyPassword = { ->
     return result
 }
 
+def getKeyStore = { ->
+    def result = project.hasProperty('keystore') ? keystore : "../debug.keystore"
+    return result
+}
+
 android {
     signingConfigs {
         debug {
@@ -22,14 +27,14 @@ android {
             storePassword 'pcdxzb'
         }
         release {
-            keyAlias 'primer_release'
+            keyAlias 'primer'
             keyPassword getKeyPassword()
-            storeFile file('../primer.jks')
+            storeFile file(getKeyStore())
             storePassword getStorePassword()
         }
     }
     defaultConfig {
-        applicationId "net.primecoin.primer"
+        applicationId "net.primecoin.app.primer"
        /* splits {
             abi {
                 enable true
@@ -38,6 +43,7 @@ android {
                 universalApk true
             }
         }*/
+        // setProperty("archivesBaseName", "primer-" + versionName)
     }
     useLibrary 'org.apache.http.legacy'
     buildTypes {

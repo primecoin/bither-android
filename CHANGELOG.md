@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## Version 0.3.0alpha
+_2020-11-27_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.2.2alpha...0.3.0alpha)
+
+ * Change app id to net.primecoin.app.primer
+ * Change primer release signing key
+ * Opt out Google Play app signing
+
 ## Version 0.2.2alpha
 _2020-10-25_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.2.1alpha...0.2.2alpha)
  * Throw small change to transaction fee
