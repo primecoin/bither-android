@@ -39,7 +39,7 @@ $ ./gradlew assembleDebug
 To make release build, release key store and passwords are required.
 
 ```
-$ ./gradlew assembleRelease -Pstorepasswd=<storePassword> -Pkeypasswd=<keyPassword>
+$ ./gradlew assembleRelease -Pstorepasswd=<storePassword> -Pkeypasswd=<keyPassword> -Pkeystore=<keyStoreFilePath>
 ```
 
 ## Features
