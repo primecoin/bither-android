@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.3.1beta
+_2020-12-13_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.3.0alpha...0.3.1beta)
+
+ * Fix an issue where bitcoin address is accepted as valid recipient
+
 ## Version 0.3.0alpha
 _2020-11-27_ [Github Diff](https://github.com/primecoin/primer-android/compare/0.2.2alpha...0.3.0alpha)
 
